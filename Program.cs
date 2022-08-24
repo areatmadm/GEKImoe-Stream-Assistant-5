@@ -29,8 +29,8 @@ namespace AreaTM_acbas
         }
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.7_A";
-        public static long acbas_build = 202208120123;
+        public static string acbas_ver = "5.8_A";
+        public static long acbas_build = 202208250113;
         public static string acbas_partnum = "v5_1";
 
         public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도
