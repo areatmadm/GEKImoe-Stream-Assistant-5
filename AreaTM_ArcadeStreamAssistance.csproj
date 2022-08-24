@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\CefSharp.Common.104.4.180\build\CefSharp.Common.props" Condition="Exists('packages\CefSharp.Common.104.4.180\build\CefSharp.Common.props')" />
+  <Import Project="packages\cef.redist.x86.104.4.18\build\cef.redist.x86.props" Condition="Exists('packages\cef.redist.x86.104.4.18\build\cef.redist.x86.props')" />
+  <Import Project="packages\cef.redist.x64.104.4.18\build\cef.redist.x64.props" Condition="Exists('packages\cef.redist.x64.104.4.18\build\cef.redist.x64.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3D0790D5-9FBE-4FE3-8D68-AFC342DA207D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AreaTM_acbas</RootNamespace>
+    <AssemblyName>AreaTM_acbas</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>areatm_arcade_stream_new_icon_250.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>A2894FD3F4380F87C4238724EC29CBA4418BDAF5</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>NoljaBroadcast_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>AreaTM_acbas.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CefSharp, Version=104.4.180.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>packages\CefSharp.Common.104.4.180\lib\net452\CefSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=104.4.180.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>packages\CefSharp.Common.104.4.180\lib\net452\CefSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="CefSharp.WinForms, Version=104.4.180.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=MSIL">
+      <HintPath>packages\CefSharp.WinForms.104.4.180\lib\net462\CefSharp.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Geckofx-Core, Version=60.0.50.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>packages\Geckofx60.64.60.0.50\lib\net45\Geckofx-Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Geckofx-Winforms, Version=60.0.50.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>packages\Geckofx60.64.60.0.50\lib\net45\Geckofx-Winforms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="nolja_game_set">
+      <HintPath>.\nolja_game_set.dll</HintPath>
+    </Reference>
+    <Reference Include="obs-websocket-dotnet, Version=4.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\obs-websocket-dotnet.4.9.0\lib\netstandard2.0\obs-websocket-dotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SevenZipSharp, Version=1.0.19.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
+      <HintPath>packages\SevenZipSharp.Net45.1.0.19\lib\net45\SevenZipSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Authorize_acbas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Authorize_acbas.Designer.cs">
+      <DependentUpon>Authorize_acbas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="camchange_maimai2p.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="camchange_maimai2p.Designer.cs">
+      <DependentUpon>camchange_maimai2p.cs</DependentUpon>
+    </Compile>
+    <Compile Include="check_stream.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="check_stream.Designer.cs">
+      <DependentUpon>check_stream.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomMenuHandler.cs" />
+    <Compile Include="drumwin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="drumwin.Designer.cs">
+      <DependentUpon>drumwin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="getuse_GEKImoe_Stream_safe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="getuse_GEKImoe_Stream_safe.Designer.cs">
+      <DependentUpon>getuse_GEKImoe_Stream_safe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="language_.cs" />
+    <Compile Include="NOLJA_ReStream.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NOLJA_ReStream.Designer.cs">
+      <DependentUpon>NOLJA_ReStream.cs</DependentUpon>
+    </Compile>
+    <Compile Include="whatform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="whatform.Designer.cs">
+      <DependentUpon>whatform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LifespanHandler2.cs" />
+    <Compile Include="LifespanHandler.cs" />
+    <Compile Include="movefile_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="movefile_form.Designer.cs">
+      <DependentUpon>movefile_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nolja_restartinform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nolja_restartinform.Designer.cs">
+      <DependentUpon>nolja_restartinform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="plv_settings_toonat_win.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include=".Designer.cs">
+      <DependentUpon>plv_settings_toonat_win.cs</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdvx_camoff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdvx_camoff.Designer.cs">
+      <DependentUpon>sdvx_camoff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="howtochat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="howtochat.Designer.cs">
+      <DependentUpon>howtochat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="howtomoveios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="howtomoveios.Designer.cs">
+      <DependentUpon>howtomoveios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrumChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DrumChat.Designer.cs">
+      <DependentUpon>DrumChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="license_used.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="license_used.Designer.cs">
+      <DependentUpon>license_used.cs</DependentUpon>
+    </Compile>
+    <Compile Include="maintaince_check.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="maintaince_check.Designer.cs">
+      <DependentUpon>maintaince_check.cs</DependentUpon>
+    </Compile>
+    <Compile Include="maintance_win.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="maintance_win.Designer.cs">
+      <DependentUpon>maintance_win.cs</DependentUpon>
+    </Compile>
+    <Compile Include="plus_settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="plus_settings.Designer.cs">
+      <DependentUpon>plus_settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="plv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="plv.Designer.cs">
+      <DependentUpon>plv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sdvxwin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdvxwin.Designer.cs">
+      <DependentUpon>sdvxwin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="update_noljabroadcast.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="update_noljabroadcast.Designer.cs">
+      <DependentUpon>update_noljabroadcast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VIDEO_on.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VIDEO_on.Designer.cs">
+      <DependentUpon>VIDEO_on.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Win32.cs" />
+    <EmbeddedResource Include="Authorize_acbas.resx">
+      <DependentUpon>Authorize_acbas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="camchange_maimai2p.resx">
+      <DependentUpon>camchange_maimai2p.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="check_stream.resx">
+      <DependentUpon>check_stream.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="drumwin.resx">
+      <DependentUpon>drumwin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="getuse_GEKImoe_Stream_safe.resx">
+      <DependentUpon>getuse_GEKImoe_Stream_safe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NOLJA_ReStream.resx">
+      <DependentUpon>NOLJA_ReStream.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="whatform.resx">
+      <DependentUpon>whatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="movefile_form.resx">
+      <DependentUpon>movefile_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nolja_restartinform.resx">
+      <DependentUpon>nolja_restartinform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="plv_settings_toonat_win.resx">
+      <DependentUpon>plv_settings_toonat_win.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdvx_camoff.resx">
+      <DependentUpon>sdvx_camoff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="howtochat.resx">
+      <DependentUpon>howtochat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="howtomoveios.resx">
+      <DependentUpon>howtomoveios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DrumChat.resx">
+      <DependentUpon>DrumChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="license_used.resx">
+      <DependentUpon>license_used.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="maintaince_check.resx">
+      <DependentUpon>maintaince_check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="maintance_win.resx">
+      <DependentUpon>maintance_win.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="plus_settings.resx">
+      <DependentUpon>plus_settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="plv.resx">
+      <DependentUpon>plv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="sdvxwin.resx">
+      <DependentUpon>sdvxwin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="update_noljabroadcast.resx">
+      <DependentUpon>update_noljabroadcast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VIDEO_on.resx">
+      <DependentUpon>VIDEO_on.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Firefox\omni.ja" />
+    <None Include="NoljaBroadcast_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="frame.png" />
+    <None Include="18.png" />
+    <None Include="res\gitadora_drum_qr.png" />
+    <None Include="res\transparent.png" />
+    <None Include="aast_d.png" />
+    <Content Include="areatm_arcade_stream_new_icon_250.ico" />
+    <Content Include="Firefox\AccessibleHandler.dll" />
+    <Content Include="Firefox\AccessibleMarshal.dll" />
+    <Content Include="Firefox\d3dcompiler_47.dll" />
+    <Content Include="Firefox\freebl3.dll" />
+    <Content Include="Firefox\IA2Marshal.dll" />
+    <Content Include="Firefox\lgpllibs.dll" />
+    <Content Include="Firefox\libEGL.dll" />
+    <Content Include="Firefox\libGLESv2.dll" />
+    <Content Include="Firefox\mozavcodec.dll" />
+    <Content Include="Firefox\mozavutil.dll" />
+    <Content Include="Firefox\mozglue.dll" />
+    <Content Include="Firefox\nss3.dll" />
+    <Content Include="Firefox\nssckbi.dll" />
+    <Content Include="Firefox\nssdbm3.dll" />
+    <Content Include="Firefox\plugin-container.exe" />
+    <Content Include="Firefox\plugin-hang-ui.exe" />
+    <Content Include="Firefox\qipcap64.dll" />
+    <Content Include="Firefox\softokn3.dll" />
+    <Content Include="Firefox\xul.dll" />
+    <Content Include="res\nolja_plive_window.png" />
+    <Content Include="res\unnamed.ico" />
+    <Content Include="unnamed.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>이 프로젝트는 이 컴퓨터에 없는 NuGet 패키지를 참조합니다. 해당 패키지를 다운로드하려면 NuGet 패키지 복원을 사용하십시오. 자세한 내용은 http://go.microsoft.com/fwlink/?LinkID=322105를 참조하십시오. 누락된 파일은 {0}입니다.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Geckofx60.64.60.0.50\build\Geckofx60.64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Geckofx60.64.60.0.50\build\Geckofx60.64.targets'))" />
+    <Error Condition="!Exists('packages\cef.redist.x64.104.4.18\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x64.104.4.18\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('packages\cef.redist.x86.104.4.18\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\cef.redist.x86.104.4.18\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.104.4.180\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.104.4.180\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('packages\CefSharp.Common.104.4.180\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\CefSharp.Common.104.4.180\build\CefSharp.Common.targets'))" />
+  </Target>
+  <Import Project="packages\Geckofx60.64.60.0.50\build\Geckofx60.64.targets" Condition="Exists('packages\Geckofx60.64.60.0.50\build\Geckofx60.64.targets')" />
+  <Import Project="packages\CefSharp.Common.104.4.180\build\CefSharp.Common.targets" Condition="Exists('packages\CefSharp.Common.104.4.180\build\CefSharp.Common.targets')" />
+</Project>
