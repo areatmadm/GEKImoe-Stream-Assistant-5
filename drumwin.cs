@@ -43,7 +43,7 @@ namespace AreaTM_acbas
 
             NOLJA_BlackEdition_Set();
 
-            textBox1.Text += "아레아티엠 게키모에 스트리밍 어시스턴트 5.0 업데이트 내용" + "\r\n" +
+            textBox1.Text += "게키모에 스트림 어시스턴트 5 업데이트 내용" + "\r\n" +
                 "업데이트 내용은 웹사이트에서 확인해 주세요." + "\r\n" +
                 "- https://areatm.com/gekimoe_streamassistant" + "\r\n" +
                 "------------------------------" + "\r\n" + "\r\n";

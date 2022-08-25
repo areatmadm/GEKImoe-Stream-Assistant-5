@@ -121,7 +121,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.1_E_20220714";
+            lbl_nowver.Text = "5.2_A_20220825";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -179,12 +179,7 @@ namespace AutoStartV2
                 pg.Text = "아레아티엠 게키모에 서버에서 인증을 받는 중...";
                 string get_auth;
                 get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
-                if (get_auth == "Authorized")
-                {
-                    pg.Text = "아레아티엠 게키모에 서버 인증 성공!";
-                    break;
-                }
-                else if (get_auth == "NotAuthorized")
+                if (get_auth == "NotAuthorized")
                 {
                     this.Hide();
                     Form dpp = new AutoStartV3.None_N();
@@ -195,6 +190,13 @@ namespace AutoStartV2
                         Delay(300000);
                     }
                 }
+
+                else if (get_auth == "Authorized")
+                {
+                    pg.Text = "아레아티엠 게키모에 서버 인증 성공!";
+                    break;
+                }
+
                 else
                 {
                     for (int i = 30; i > 0; i--)
