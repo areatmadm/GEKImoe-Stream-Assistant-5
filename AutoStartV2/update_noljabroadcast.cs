@@ -1,4 +1,4 @@
-﻿using nolja_game_set;
+﻿//using nolja_game_set;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,7 +86,7 @@ namespace AutoStartV2
             
 
             Delay(3000);
-            sourceFileURI[0] = "ftp://update.streamassistant.sv.gekimoe.areatm.com/public_html/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
+            sourceFileURI[0] = "https://update.streamassistant.sv.gekimoe.areatm.com/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
             targetpath[0] = System.IO.Path.GetFullPath("gekimoe_acbas_update.7z");
 
             lbl_status.Text = "다운로드 준비 중..";
@@ -97,12 +97,12 @@ namespace AutoStartV2
 
             try
             {
-                NOLJA_Game_Set newnoj = new NOLJA_Game_Set();
-                string usrid = newnoj.setgame_dll(4326);
-                string pwd = newnoj.setgame_dll(4635);
+                //NOLJA_Game_Set newnoj = new NOLJA_Game_Set();
+                //string usrid = newnoj.setgame_dll(4326);
+                //string pwd = newnoj.setgame_dll(4635);
 
-                Uri sourceFileUri = new Uri(sourceFileURI[0]);
-                FtpWebRequest ftpWebRequest = WebRequest.Create(sourceFileUri) as FtpWebRequest;
+                //Uri sourceFileUri = new Uri(sourceFileURI[0]);
+                /*FtpWebRequest ftpWebRequest = WebRequest.Create(sourceFileUri) as FtpWebRequest;
                 ftpWebRequest.Credentials = new NetworkCredential(usrid, pwd);
                 ftpWebRequest.Method = WebRequestMethods.Ftp.DownloadFile;
                 FtpWebResponse ftpWebResponse = ftpWebRequest.GetResponse() as FtpWebResponse;
@@ -122,7 +122,15 @@ namespace AutoStartV2
                 }
 
                 targetFileStream.Close();
-                sourceStream.Close();
+                sourceStream.Close();*/
+
+                try
+                {
+                    WebClient mywebClient = new WebClient();
+                    mywebClient.DownloadFile(sourceFileURI[0], targetpath[0]);
+                }
+                catch { return; }
+
                 lbl_status.Text = "다운로드 완료...";
                 //File.WriteAllText("_firstrun_update", "");
                 Delay(2000);

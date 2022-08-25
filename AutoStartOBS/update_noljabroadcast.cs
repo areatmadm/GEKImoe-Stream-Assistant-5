@@ -59,7 +59,8 @@ namespace NoljaUpdater
                 lbl_status.Text = "압축 해제 중...";
                 Delay(1000);
                 SevenZipExtractor.SetLibraryPath(System.IO.Path.GetFullPath("7z.dll"));
-                SevenZipExtractor se = new SevenZipExtractor(System.IO.Path.GetFullPath("gekimoe_acbas_update.7z"));
+                SevenZipExtractor se = new SevenZipExtractor(System.IO.Path.GetFullPath("gekimoe_acbas_update.7z"), "GekiMoeAssistant@withAreaTM00115!");
+                
                 //MessageBox.Show(System.IO.Directory.GetCurrentDirectory());
                 se.BeginExtractArchive(System.IO.Directory.GetCurrentDirectory());
                 
