@@ -489,7 +489,12 @@ namespace AreaTM_acbas
         {
             DrumChat de = new DrumChat();
 
-            ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
+            //ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
+            //공식 재개시 전까지 임시 주석
+
+            ytvideo_2.Navigate("https://1thgen.nolja-stream.geki.moe/nolja_info_ud.html");
+            //공식 재개시 전까지 임시 페이지로 리디렉션
+
             ytvideo_2.Dock = DockStyle.None;
             ytvideo_2.Size = new Size(380, 214);
             ytvideo_2.Location = new Point(10, 332);
