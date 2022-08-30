@@ -30,7 +30,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.8_A";
-        public static long acbas_build = 202208301323;
+        public static long acbas_build = 202208301352;
         public static string acbas_partnum = "v5_2";
 
         public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도
@@ -80,7 +80,7 @@ namespace AreaTM_acbas
 
                 var settings = new CefSettings();
                 settings.BrowserSubprocessPath = System.IO.Path.GetFullPath("CefSharp.BrowserSubprocess.exe");
-                //settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0";
+                settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/104.0";
                 settings.CefCommandLineArgs["autoplay-policy"] = "no-user-gesture-required";
                 settings.CefCommandLineArgs["disable-features"] = "HardwareMediaKeyHandling,MediaSessionService";
                 settings.Locale = "KO_KR";
