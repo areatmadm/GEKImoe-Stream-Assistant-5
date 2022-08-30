@@ -110,8 +110,8 @@ namespace AreaTM_acbas
                     int pd_timelimit = 3600;
                     //if (sdvxwin.setgame == "5_konami_sdvx") pd_timelimit = 1200;
                     maxtime = pd_timelimit;
-                    MessageBox.Show("환영합니다!" + "\r\n" + "PLIVE MultiStream 서비스를 등록하고 시간제한 없이 마음껏 즐겨보세요!" + "\r\n" + 
-                        "(미등록 회원은 세션당 " + (pd_timelimit/60) + "분 시간제한 발생)");
+                    MessageBox.Show("환영합니다!" + "\r\n" + "현재 관리자의 요청으로 MultiStream 세션 시간제한이 걸려 있습니다." + "\r\n" + 
+                        "(" + (pd_timelimit/60) + "분 후 MultiStream 강제종료됨)");
                         
                     Alpha_Open();
                 }
