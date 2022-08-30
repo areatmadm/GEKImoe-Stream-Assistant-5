@@ -131,7 +131,7 @@ namespace AreaTM_acbas
                 {
                     plivecode = "";
                     MessageBox.Show("서버 접속에 실패하였습니다." + "\r\n" +
-                        "DB 서버에 문제가 발생하였습니다. soruto@kakao.com으로 문의 바랍니다[PLIVE 운영팀]");
+                        "DB 서버에 문제가 발생하였습니다. soruto@kakao.com으로 문의 바랍니다[아레아티엠 게키모에 PLIVE 운영팀]");
                 }
                 else
                 {
