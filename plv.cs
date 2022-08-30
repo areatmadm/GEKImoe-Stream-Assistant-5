@@ -343,7 +343,7 @@ namespace AreaTM_acbas
             else
             {
                 lbl_nowstatus.Text = "PLIVE MultiStream 모듈이 없어 해당기능 사용 불가";
-                MessageBox.Show("해당 게임의 스트리밍 PC에는 PLIVE MultiStream 모듈이 아직 설치되어 있지 않아 해당 서비스의 이용이 불가합니다.");
+                MessageBox.Show("해당 게임의 스트리밍 PC에는 PLIVE MultiStream 모듈이 아직 설치되어 있지 않아 해당 서비스의 이용이 불가합니다. 설치를 원하시는 경우, 업주를 통해 아레아티엠 고객센터로 문의 바랍니다.(B2B전용 고객센터로 문의)");
                 this.Close();
             }
             
