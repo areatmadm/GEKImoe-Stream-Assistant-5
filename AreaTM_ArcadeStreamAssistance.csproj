@@ -161,6 +161,12 @@
     <Compile Include="drumwin.Designer.cs">
       <DependentUpon>drumwin.cs</DependentUpon>
     </Compile>
+    <Compile Include="plv_settings_custom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="plv_settings_custom.Designer.cs">
+      <DependentUpon>plv_settings_custom.cs</DependentUpon>
+    </Compile>
     <Compile Include="getuse_GEKImoe_Stream_safe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="drumwin.resx">
       <DependentUpon>drumwin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="plv_settings_custom.resx">
+      <DependentUpon>plv_settings_custom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="getuse_GEKImoe_Stream_safe.resx">
       <DependentUpon>getuse_GEKImoe_Stream_safe.cs</DependentUpon>

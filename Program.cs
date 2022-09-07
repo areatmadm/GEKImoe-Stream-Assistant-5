@@ -30,7 +30,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.8_A";
-        public static long acbas_build = 202208301352;
+        public static long acbas_build = 202209070919;
         public static string acbas_partnum = "v5_2";
 
         public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도
@@ -77,6 +77,9 @@ namespace AreaTM_acbas
                 Xpcom.EnableProfileMonitoring = false;
                 var app_dir = Path.GetDirectoryName(Application.ExecutablePath);
                 Xpcom.Initialize(Path.Combine(app_dir, "Firefox64"));
+
+                //HiDPI support
+                CefSharp.Cef.EnableHighDPISupport();
 
                 var settings = new CefSettings();
                 settings.BrowserSubprocessPath = System.IO.Path.GetFullPath("CefSharp.BrowserSubprocess.exe");

@@ -117,18 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lbl_info_1.Text" xml:space="preserve">
-    <value>가급적 대기 없을때 이용 바라며, 대기가 많으면 이용이 불가합니다.
-PLIVE MultiStream 스트리밍 서비스 중에는 반드시 이 창을 켜 주세요!! 닫으시면 해당 서비스가 종료됩니다.
-
-스트리밍 상황에 따라 2분 후 시작될 수 있습니다.
-누구나 무제한 PLIVE MultiStream 서비스를 이용하실 수 있습니다!
-
-해당 서비스는 오락실이 아닌 "아레아티엠 게키모에"에서 제공합니다.</value>
-  </data>
-  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
