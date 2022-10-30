@@ -492,7 +492,7 @@ namespace AreaTM_acbas
             //ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
             //공식 재개시 전까지 임시 주석
 
-            ytvideo_2.Navigate("https://1thgen.nolja-stream.geki.moe/nolja_info_ud.html");
+            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/test.html");
             //공식 재개시 전까지 임시 페이지로 리디렉션
 
             ytvideo_2.Dock = DockStyle.None;
