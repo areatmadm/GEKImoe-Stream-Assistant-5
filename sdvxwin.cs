@@ -492,8 +492,8 @@ namespace AreaTM_acbas
             //ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
             //공식 재개시 전까지 임시 주석
 
-            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/test.html");
-            //공식 재개시 전까지 임시 페이지로 리디렉션
+            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/" + Program.ad_location);
+            //각 오락실별 게키모에 프로모션 비디오 + 게키모에 광고 개재
 
             ytvideo_2.Dock = DockStyle.None;
             ytvideo_2.Size = new Size(380, 214);

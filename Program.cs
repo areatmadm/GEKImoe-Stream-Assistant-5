@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +15,26 @@ namespace AreaTM_acbas
 {
     static class Program
     {
+        private static string GetHtmlString(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
+                string strHtml = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+
+                return strHtml;
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
         private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
@@ -29,9 +51,14 @@ namespace AreaTM_acbas
         }
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.8_A";
-        public static long acbas_build = 202210310307;
+        public static string acbas_ver = "5.8_B";
+        public static long acbas_build = 202211161432;
         public static string acbas_partnum = "v5_3";
+
+        //public static string ad_servercountry = "KR";
+        //public static string ad_serverlocate = "gekimoe0prom";
+        public static string ad_location = "southkorea/daegu/nolja"; // country/city/gamecentername
+        public static long ad_version = 0; //ad ver - country/city/gamecentername?mod=1o
 
         public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도
 
@@ -73,6 +100,9 @@ namespace AreaTM_acbas
                         ExitThread = true;
                     }
                 }*/
+
+                //GEKImoe Promotion 2 Advertise location
+                if (File.Exists("gekimoe_prom2_ad_location")) ad_location = File.ReadAllText("gekimoe_prom2_ad_location");
 
                 Xpcom.EnableProfileMonitoring = false;
                 var app_dir = Path.GetDirectoryName(Application.ExecutablePath);
