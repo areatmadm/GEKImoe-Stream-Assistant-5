@@ -16,7 +16,7 @@ namespace AutoStartV2
         public static string ko_kr_ERRORACCURED_msgbox = "에러가 발생하여 스트리밍PC 부팅이 불가합니다." + "\r\n" + "매장 관리자나 soruto@kakao.com으로 문의 바랍니다.";
         public static string ko_kr_ERRORACCURED_msgbox_1 = "에러가 발생하여 스트리밍PC가 원활하게 작동하지 않을 수 있습니다." + "\r\n" + "매장 관리자나 soruto@kakao.com으로 문의 바랍니다.";
         public static string ko_kr_ERRORACCURED_msgbox_OBSnotfound = "OBS Studio 설치 위치를 찾지 못했습니다." + "\r\n" + "해당 소프트웨어는 OBS Studio를 보조하는 어시스턴트이며, 반드시 OBS Studio가 설치되어 있어야 합니다." + "\r\n\r\n" + "문의사항 또는 도움요청 필요 시 soruto@kakao.com으로 메일 보내주시기 바랍니다.";
-        public static string ko_kr_BOOTING = " 스트리밍PC 부팅 중";
+        public static string ko_kr_BOOTING = "방송PC를 준비하고 있습니다...";
 
         public static string ko_kr_NOWLOADING = "잠시만 기다려주세요...";
         public static string ko_kr_DONE = "작업 완료!";

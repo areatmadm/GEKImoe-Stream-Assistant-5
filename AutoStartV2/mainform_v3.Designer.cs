@@ -45,7 +45,7 @@
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(837, 48);
             this.lbl_name.TabIndex = 0;
-            this.lbl_name.Text = "{LOCATE} {GAMENAME} 스트리밍 PC 부팅 중";
+            this.lbl_name.Text = "방송PC를 준비하고 있습니다...";
             this.lbl_name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_nowver_txt

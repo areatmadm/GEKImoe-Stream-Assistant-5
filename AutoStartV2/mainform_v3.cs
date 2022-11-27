@@ -121,7 +121,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.2_A_20220825";
+            lbl_nowver.Text = "5.2_B_20221127";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -138,7 +138,7 @@ namespace AutoStartV2
                 this.Close();
             }
 
-            lbl_name.Text = game_name + language_.ko_kr_BOOTING;
+            lbl_name.Text = language_.ko_kr_BOOTING;
             
         }
 
