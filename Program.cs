@@ -1,5 +1,5 @@
 ﻿using CefSharp.WinForms;
-using Gecko;
+//using Gecko;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -52,7 +52,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.8_B";
-        public static long acbas_build = 202304180106;
+        public static long acbas_build = 202304180107;
         public static string acbas_partnum = "v5_3";
 
         //public static string ad_servercountry = "KR";
@@ -104,9 +104,9 @@ namespace AreaTM_acbas
                 //GEKImoe Promotion 2 Advertise location
                 if (File.Exists("gekimoe_prom2_ad_location")) ad_location = File.ReadAllText("gekimoe_prom2_ad_location");
 
-                Xpcom.EnableProfileMonitoring = false;
-                var app_dir = Path.GetDirectoryName(Application.ExecutablePath);
-                Xpcom.Initialize(Path.Combine(app_dir, "Firefox64"));
+                //Xpcom.EnableProfileMonitoring = false;
+                //var app_dir = Path.GetDirectoryName(Application.ExecutablePath);
+                //Xpcom.Initialize(Path.Combine(app_dir, "Firefox64"));
 
                 //HiDPI support
                 CefSharp.Cef.EnableHighDPISupport();
