@@ -51,7 +51,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.9_A";
-        public static long acbas_build = 202304180140;
+        public static long acbas_build = 202304180147;
         public static string acbas_partnum = "v5_3";
 
         //public static string ad_servercountry = "KR";
@@ -103,8 +103,8 @@ namespace AreaTM_acbas
                 //GEKImoe Promotion 2 Advertise location
                 if (File.Exists("gekimoe_prom2_ad_location")) ad_location = File.ReadAllText("gekimoe_prom2_ad_location");
 
-                //HiDPI support
-                CefSharp.Cef.EnableHighDPISupport();
+                //HiDPI support(Deleted)
+                //CefSharp.Cef.EnableHighDPISupport();
 
                 var settings = new CefSettings();
                 settings.BrowserSubprocessPath = System.IO.Path.GetFullPath("CefSharp.BrowserSubprocess.exe");
