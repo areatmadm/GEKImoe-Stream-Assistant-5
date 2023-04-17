@@ -22,8 +22,6 @@ using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
 
-/*using Gecko;
-using Gecko.DOM;*/ //AD Promotion GECKO deleted
 using System.Net;
 
 namespace AreaTM_acbas
@@ -205,33 +203,7 @@ namespace AreaTM_acbas
 
                 BeginInvoke((MethodInvoker)delegate
                 {
-                //펌프 캠 운영 일시중단에 따른 강제 비활성화 코드
-                /*if(setgame == "6_andamiro_pumpitup")
-                {
-                    if(newSceneName == "camon") { _obs.SetCurrentScene("camoff"); }
-                    if (newSceneName == "camon" || newSceneName == "camoff") FormsChange.Enabled = false;
-                    else FormsChange.Enabled = true;
-                } 1단계 조치로 인한 캠 강제 OFF 비활성화*/
                     if (newSceneName != "camoff_mute") FormsChange.Text = state;
-
-                /*
-                if(newSceneName == "camon" || newSceneName == "camoff")
-                {
-                    if (!PlusSettingForm_closed) { plus_settings.rd_cam_mode_0_pub = false; }
-                }
-                */
-
-                    /*if(setgame == "5_konami_sdvx")
-                    {
-                        if(sdvx_camoffstatus == 0 && newSceneName != "camon")
-                        {
-                            string nullSt;
-                            nullSt = GetHtmlString("https://nolja.bizotoge.areatm.com/public/plive/forgotid/sdvx_camstat.php?mod=ban");//twelv
-
-                            _obs.SetCurrentScene("camon");
-                        }
-                    }*/
-                
                 });
             }
             else
@@ -490,20 +462,6 @@ namespace AreaTM_acbas
         {
             DrumChat de = new DrumChat();
 
-            /*
-            //ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
-            //공식 재개시 전까지 임시 주석
-
-            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/ad/" + Program.ad_location);
-            //각 오락실별 게키모에 프로모션 비디오 + 게키모에 광고 개재
-
-            ytvideo_2.Dock = DockStyle.None;
-            ytvideo_2.Size = new Size(380, 214);
-            ytvideo_2.Location = new Point(10, 332);
-            ytvideo_2.BackColor = chinatsu_black;
-            this.Controls.Add(ytvideo_2);
-            ytvideo_2.Enabled = false;*/
-
             VIDEO_on video_on = new VIDEO_on(this);
             video_on.Show();
 
@@ -613,7 +571,9 @@ namespace AreaTM_acbas
             //else btn_personal.Enabled = false;
             btn_personal.Enabled = true;
 
-            sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
+            sdvxpic.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/gameservice/logoimg/" + setgame + "/logo.png";
+
+            //sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
             pictureBox1.Load(@"ResourceFiles\" + setgame + @"\qrcode.png");
 
             string setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
@@ -869,15 +829,6 @@ namespace AreaTM_acbas
             lbl_rectimer.Font = new Font(font_5_0_r.Families[0], 12f);
             lbl_version.Font = new Font(font_5_0_r.Families[0], 11.25f);
 
-            //ytvideo.Load("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
-
-            /*ytvideo.Dock = DockStyle.None;
-            ytvideo.Size = new Size(377, 212);
-            ytvideo.Location = new Point(12, 331);
-            ytvideo.BackColor = chinatsu_black;
-            this.Controls.Add(ytvideo);
-            ytvideo.Enabled = false;
-            //lbl_info.Visible = false;*/
 
             NOLJA_Edition_Statechange();
         }
@@ -1028,11 +979,6 @@ namespace AreaTM_acbas
             lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_IDLE;
         }
 
-        /*public static void openupdate_promotionvideo()
-        {
-            Form obd = new update_noljaprom();
-            obd.ShowDialog();
-        }*/
         
         public void openupdate_njb()
         {

@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//using Gecko;
 
 using NAudio;
 using NAudio.Wave;
@@ -554,79 +553,7 @@ namespace AreaTM_acbas
             }
             getp = "";
 
-            /*if (!isupd)
-            {
-                string np = "202009070155";
-                if (File.Exists(@"promotionvideo\version"))
-                {
-                    np = File.ReadAllText(@"promotionvideo\version");
-                }
-                getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/prom?md=" + np + "&game=" + sdvxwin.setgame);
-                if (getp == "1")
-                {
-                    VIDEO_on.isupdate = true;
-                    Delay(1000);
-
-                    File.WriteAllText("need_upd_njpv", "");
-                    Delay(500);
-                    try { mainform.Controls.Remove(sdvxwin.ytvideo_2); } catch { } try { mainform.Controls.Remove(VIDEO_on.ytvideo_2); } catch { }
-                    try { vdfrm.Controls.Remove(VIDEO_on.ytvideo_2); } catch { } try { vdfrm.Controls.Remove(VIDEO_on.ytvideo_2); } catch { }
-                    IntPtr ptr = new IntPtr(0);
-                    Xpcom.Free(ptr);
-
-                    Delay(500);
-                    Xpcom.EnableProfileMonitoring = false;
-                    var app_dir = Path.GetDirectoryName(Application.ExecutablePath);
-                    Xpcom.Initialize(Path.Combine(app_dir, "Firefox64"));
-                    Delay(100);
-                    sdvxwin.ytvideo_2.Navigate("https://1thgen.nolja-stream.geki.moe/nolja_info_ud.html");
-                    mainform.Controls.Add(sdvxwin.ytvideo_2);
-                    //VIDEO_on.ytvideo_2.Navigate("https://1thgen.nolja-stream.geki.moe/nolja_info_ud.html");
-                    //vdfrm.Controls.Add(VIDEO_on.ytvideo_2);
-                    isupd = true;
-
-                    Process.Start("NoljaPromUpdater.exe");
-                    Process[] prbb = Process.GetProcessesByName("NoljaPromUpdater");
-                    while (prbb.Length >= 1)
-                    {
-                        Delay(200);
-                        prbb = null;
-                        prbb = Process.GetProcessesByName("NoljaPromUpdater");
-                    }
-                    Delay(1000);
-                    mainform.Controls.Remove(sdvxwin.ytvideo_2);
-                    //if (sdvxwin.setgame == "0_sega_maimaidx") vdfrm.Controls.Remove(VIDEO_on.ytvideo_2);
-                    Delay(100);
-                    sdvxwin.ytvideo_2.Navigate("file:///" + sdvxwin.ytvd_pt.Replace(@"\", "/") + "/index.html");
-                    mainform.Controls.Add(sdvxwin.ytvideo_2);
-                    //VIDEO_on.ytvideo_2.Navigate("file:///" + sdvxwin.ytvd_pt.Replace(@"\", "/") + "/index.html");
-                    //vdfrm.Controls.Add(VIDEO_on.ytvideo_2);
-                    isupd = false;
-
-                    VIDEO_on.isupdate = false;
-                    VIDEO_on.isupdate = false;
-                    VIDEO_on.isupdate = false;
-                    VIDEO_on.isupdate = false;
-                }
-            }*/
-
-
-            /*
-            else if (!isupd_rtmp && !sdvxwin.isrecordmod && !sdvxwin.streamstatus)
-            {
-                rtmpget chkupd = new rtmpget();
-                string getr = chkupd.rtmpget_dll("updver");
-
-                getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/plive/plive_rtmp.php?ver=" + getr);
-                MessageBox.Show(getp);
-                if (getp == "1")
-                {
-                    
-                    isupd_rtmp = true;
-                    sdvxwin.openupdate_rtmp();
-                }
-            }
-            */
+            /*oldcode_video_download*/
         }
     }
 }
