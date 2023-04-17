@@ -1,4 +1,4 @@
-﻿using Gecko;
+﻿//using Gecko; //AD Promotion GECKO Deleted
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

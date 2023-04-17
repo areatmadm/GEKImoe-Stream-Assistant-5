@@ -22,8 +22,8 @@ using CefSharp;
 using CefSharp.WinForms;
 using CefSharp.SchemeHandler;
 
-using Gecko;
-using Gecko.DOM;
+/*using Gecko;
+using Gecko.DOM;*/ //AD Promotion GECKO deleted
 using System.Net;
 
 namespace AreaTM_acbas
@@ -53,7 +53,8 @@ namespace AreaTM_acbas
         //public static bool testver_3 = false;
         public static ChromiumWebBrowser ytvideo = new ChromiumWebBrowser();
 
-        public static GeckoWebBrowser ytvideo_2 = new GeckoWebBrowser();
+        //public static GeckoWebBrowser ytvideo_2 = new GeckoWebBrowser();
+        //promotion video deleted
 
         public static string ytvd_pt = System.IO.Path.GetFullPath("promotionvideo");
 
@@ -489,10 +490,11 @@ namespace AreaTM_acbas
         {
             DrumChat de = new DrumChat();
 
+            /*
             //ytvideo_2.Navigate("file:///" + ytvd_pt.Replace(@"\", "/") + "/index.html");
             //공식 재개시 전까지 임시 주석
 
-            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/" + Program.ad_location);
+            ytvideo_2.Navigate("https://gekimoe0prom.iwinv.net/ad/" + Program.ad_location);
             //각 오락실별 게키모에 프로모션 비디오 + 게키모에 광고 개재
 
             ytvideo_2.Dock = DockStyle.None;
@@ -500,7 +502,7 @@ namespace AreaTM_acbas
             ytvideo_2.Location = new Point(10, 332);
             ytvideo_2.BackColor = chinatsu_black;
             this.Controls.Add(ytvideo_2);
-            ytvideo_2.Enabled = false;
+            ytvideo_2.Enabled = false;*/
 
             VIDEO_on video_on = new VIDEO_on(this);
             video_on.Show();
