@@ -207,11 +207,11 @@
     <Compile Include="sdvx_camoff.Designer.cs">
       <DependentUpon>sdvx_camoff.cs</DependentUpon>
     </Compile>
-    <Compile Include="howtochat.cs">
+    <Compile Include="mutewin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="howtochat.Designer.cs">
-      <DependentUpon>howtochat.cs</DependentUpon>
+    <Compile Include="mutewin.Designer.cs">
+      <DependentUpon>mutewin.cs</DependentUpon>
     </Compile>
     <Compile Include="howtomoveios.cs">
       <SubType>Form</SubType>
@@ -312,8 +312,8 @@
     <EmbeddedResource Include="sdvx_camoff.resx">
       <DependentUpon>sdvx_camoff.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="howtochat.resx">
-      <DependentUpon>howtochat.cs</DependentUpon>
+    <EmbeddedResource Include="mutewin.resx">
+      <DependentUpon>mutewin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="howtomoveios.resx">
       <DependentUpon>howtomoveios.cs</DependentUpon>

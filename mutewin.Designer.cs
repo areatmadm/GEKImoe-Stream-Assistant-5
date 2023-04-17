@@ -1,6 +1,6 @@
 ﻿namespace AreaTM_acbas
 {
-    partial class howtochat
+    partial class mutewin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(howtochat));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mutewin));
             this.mutetimer = new System.Windows.Forms.Timer(this.components);
             this.lbl_whenstop = new System.Windows.Forms.Label();
             this.btn_finishmute = new System.Windows.Forms.Button();

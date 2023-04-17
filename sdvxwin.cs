@@ -240,14 +240,14 @@ namespace AreaTM_acbas
                 {
                     if (newSceneName == "camon_mute" && !isMuteWindow_opened)
                     {
-                        Form MuteWindow = new howtochat();
+                        Form MuteWindow = new mutewin();
                         isMuteWindow_opened = true;
                         pastScene = "camon";
                         MuteWindow.ShowDialog();
                     }
                     else if(newSceneName == "camoff_mute" && !isMuteWindow_opened)
                     {
-                        Form MuteWindow = new howtochat();
+                        Form MuteWindow = new mutewin();
                         isMuteWindow_opened = true;
                         pastScene = "camoff";
                         MuteWindow.ShowDialog();
@@ -996,7 +996,7 @@ namespace AreaTM_acbas
             }
             else if(setgame != "0_sega_maimaidx")
             {
-                Form p = new howtochat();
+                Form p = new mutewin();
                 p.ShowDialog();
             }
         }

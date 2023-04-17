@@ -16,7 +16,7 @@ using System.IO;
 
 namespace AreaTM_acbas
 {
-    public partial class howtochat : Form
+    public partial class mutewin : Form
     {
         int quick = 200;
         int qtemp;
@@ -24,7 +24,7 @@ namespace AreaTM_acbas
         string sdname;
         string dd;
 
-        public howtochat()
+        public mutewin()
         {
             InitializeComponent();
         }
