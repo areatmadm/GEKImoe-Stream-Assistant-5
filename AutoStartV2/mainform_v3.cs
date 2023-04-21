@@ -1,0 +1,616 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+using OBSWebsocketDotNet;
+using OBSWebsocketDotNet.Types;
+using System.Drawing.Text;
+using System.Net;
+
+namespace AutoStartV2
+{
+    public partial class AutoStartV3Main : Form
+    {
+        public static long acbas_build;
+        public static string acbas_partnum;
+
+        public static string p;
+        public string gc_name;
+        public string game_name;
+
+        public static PrivateFontCollection font_3_0_s = new PrivateFontCollection();
+
+        bool plive_available = false;
+        bool isstr = false;
+
+        protected OBSWebsocket _obs;
+
+        Process[] killProcess;
+
+        private static DateTime Delay(int MS)
+        {
+            DateTime ThisMoment = DateTime.Now;
+            TimeSpan duration = new TimeSpan(0, 0, 0, 0, MS);
+            DateTime AfterWards = ThisMoment.Add(duration);
+
+            while (AfterWards >= ThisMoment)
+            {
+                System.Windows.Forms.Application.DoEvents();
+                ThisMoment = DateTime.Now;
+            }
+
+            return DateTime.Now;
+        }
+
+        private string GetHtmlString(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
+                string strHtml = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+
+                return strHtml;
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
+
+        public AutoStartV3Main()
+        {
+            InitializeComponent();
+        }
+
+        void isPliveAvailable_Alpha()
+        {
+            //if (File.Exists(@"C:\nginx-rtmp-win32-dev\nginx.exe")) //nginx서버 노후화로 인한 코드 정리
+            if (File.Exists(@"C:\MonaServer\MonaServer.exe") && File.Exists(@"C:\MonaServer\ffmpeg.exe") && File.Exists(@"C:\MonaServer\ffprobe.exe")) //MonaServer, ffmpeg로 대체
+            {
+                plive_available = true;
+            }
+            else plive_available = false;
+        }
+
+        private void AutoStartV3Main_Load(object sender, EventArgs e)
+        {
+            string pvd = "taskkill /f /im explorer.exe";
+
+            string pve = "";
+            pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+            pve += "Dim strArgs" + "\r\n";
+            pve += "strArgs = \"imshi.bat\"" + "\r\n";
+            pve += "WshShell.Run strArgs, 0, false";
+
+            File.WriteAllText("imshi.bat", pvd);
+            File.WriteAllText("start.vbs", pve);
+            Delay(500);
+            Process.Start("start.vbs");
+            Delay(1500);
+            File.Delete("imshi.bat");
+            File.Delete("start.vbs");
+
+            Delay(1000);//임시
+
+            try
+            {
+                font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothicBold.otf");
+                font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothic.otf");
+                //font_3_0_s.AddFontFile(@"font_3.0\kakao\KakaoBold.ttf");
+                //font_3_0_s.AddFontFile(@"font_3.0\kakao\KakaoRegular.ttf");
+
+                lbl_information.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
+                lbl_name.Font = new Font(font_3_0_s.Families[0], 24f, FontStyle.Bold);
+                lbl_nowver_txt.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
+
+                lbl_nowver.Font = new Font(font_3_0_s.Families[0], 14f);
+                pg.Font = new Font(font_3_0_s.Families[0], 15f);
+            }
+            catch { }
+            lbl_nowver.Text = "5.2_B_20221127";
+
+            lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
+
+            try
+            {
+                //gc_name = "놀자";
+
+                p = File.ReadAllText(@"nolja_game_set.txt");
+                game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
+            }
+            catch
+            {
+                MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox);
+                this.Close();
+            }
+
+            lbl_name.Text = language_.ko_kr_BOOTING;
+            
+        }
+
+        private void AutoStartV3Main_Activate(object sender, EventArgs e)
+        {
+            string pvd;
+            string pve;
+
+            pg.Text = language_.ko_kr_NOWLOADING;
+            Delay(500);
+
+            if (File.Exists("restart_pc.bat"))
+            {
+                pg.Text = "불필요한 파일 삭제 중(A)...";
+                File.Delete("restart_pc.bat");
+                Delay(800);
+            }
+            if (File.Exists("restart_pc.vbs"))
+            {
+                pg.Text = "불필요한 파일 삭제 중(B)...";
+                File.Delete("restart_pc.vbs");
+                Delay(800);
+            }
+
+            if (File.Exists("AreaTM_acbas_updater_1.exe")) //Updater의 업데이트가 있을 경우
+            {
+                pg.Text = "Updater is now update...";
+                File.Copy("AreaTM_acbas_updater_1.exe", "AreaTM_acbas_updater_0.exe", true);
+                Delay(750);
+                File.Delete("AreaTM_acbas_updater_1.exe");
+
+                pg.Text = "Done.";
+                Delay(200);
+            }
+
+            while (true)
+            {
+                pg.Text = "아레아티엠 게키모에 서버에서 인증을 받는 중...";
+                string get_auth;
+                get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                if (get_auth == "NotAuthorized")
+                {
+                    this.Hide();
+                    Form dpp = new AutoStartV3.None_N();
+                    dpp.Show();
+
+                    while (true)
+                    {
+                        Delay(300000);
+                    }
+                }
+
+                else if (get_auth == "Authorized")
+                {
+                    pg.Text = "아레아티엠 게키모에 서버 인증 성공!";
+                    break;
+                }
+
+                else
+                {
+                    for (int i = 30; i > 0; i--)
+                    {
+                        pg.Text = "네트워크 연결 실패! " + i + "초 후 재시도합니다...";
+                        Delay(1000);
+                    }
+                }
+            }
+            Delay(1000);
+
+            if (!File.Exists("error_update"))
+            {
+                pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET_READY;
+                //File.WriteAllText("_CheckVersion_", "0");
+                Delay(600);
+
+                pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(1 / 3)";
+                Process acbas_get_version = new Process();
+                acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe");
+                acbas_get_version.StartInfo.Arguments = "getver";
+                try { acbas_get_version.Start(); } catch { }
+                Delay(1600);
+
+                pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(2 / 3)";
+                acbas_build = Convert.ToInt64(File.ReadAllText("_CheckVersion_"));
+                Delay(400);
+                acbas_partnum = File.ReadAllText("_ChecPartNUM_");
+                acbas_partnum.Replace("\r\n", "");
+                Delay(600);
+
+                pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(3 / 3)";
+                File.Delete("_CheckVersion_");
+                File.Delete("_ChecPartNUM_");
+                Delay(600);
+
+                pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_CHECK;
+                string getp;
+                getp = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + acbas_partnum + "?mod=1&ver=" + acbas_build);
+                Delay(1200);
+                if (getp == "1")
+                {
+                    pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_DO;
+                    Delay(1000);
+                    /*Process[] processifusenjbtmpcht = Process.GetProcessesByName("Nolja_OpenUp");
+                    if (processifusenjbtmpcht.Length >= 1)
+                    {
+                        Process killtask = new Process();
+                        killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
+                        killtask.StartInfo.Arguments = "/f /im Nolja_OpenUp.exe";
+                        try { killtask.Start(); } catch { }
+                        //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
+                        Delay(200);
+                    }*/
+
+                    Form updateForm = new update_noljabroadcast();
+                    updateForm.ShowDialog();
+                }
+                else pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_NONE + " " + language_.ko_kr_NOWLOADING;
+            }
+            
+            
+            Delay(1200);
+            //pg.Text = "잠시만 기다려주세요...";
+            if (!File.Exists("test"))
+            {
+                string getp_d = "";
+                getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
+                            "&mode=3&submode=1");
+            }
+            Delay(3000);
+
+            //pg.Text = "인터넷 상태 점검 중...";
+            //Delay(500);
+
+            Process[] processifusenjb = Process.GetProcessesByName("AreaTM_acbas");
+            if (processifusenjb.Length >= 1)
+            {
+                for (int i = 0; i < processifusenjb.Length; i++) processifusenjb[i].Kill(); //중복 실행 방지
+                //pg.Text = language_.ko_kr_ERROR_needreboot;
+                //Delay(120000);
+                //Application.Exit();
+            }
+
+            /*if(p== "1_namco_taiko")
+            {
+                pg.Text = "태고 스트리밍 필수 프로그램 실행 중...";
+                Process.Start(@"iiui.lnk");
+                Delay(7000);
+            }*/
+
+            //초기실행 S/W 코드 작성예정
+
+
+            Process[] processifuseobs = Process.GetProcessesByName("obs64"); //obs 선실행 중인지 체크
+            if (processifuseobs.Length < 1)
+            {
+                pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG;
+                //2021.11.16 : OBS Studio excuting code changed
+                Process findobs = new Process();
+                //if (File.Exists(@"C:\Program Files\obs-studio\bin\64bit\obs64.exe")) findobs.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\64bit\obs64.exe";
+                //else if (File.Exists(@"C:\Program Files\obs-studio\bin\32bit\obs32.exe")) findobs.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\32bit\obs32.exe";
+                //else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe")) findobs.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe";
+                //else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe")) findobs.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe";
+                //else
+                //{
+                //    MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox_OBSnotfound);
+                //    Application.ExitThread();
+                //    return;
+                //}
+                //findobs.Start();
+                Process.Start(Path.GetFullPath(@"autoobs.lnk"));
+                /*if (p == "3_squarepixels_ez2ac") Delay(16000);
+                else */
+                Delay(8000);
+
+                //NOLJA Popn only start
+
+                /*
+                if (p == "5_konami_popn" && processifuseobs.Length < 1)
+                {
+                    pg.Text = "팝픈뮤직 화면 조정 중...";
+                    Process.Start(Path.GetFullPath(@"iiui.lnk"));
+                    Delay(6000);
+
+                    pg.Text = "화면조정 프로세스 종료 중...";
+                    Process.Start(Path.GetFullPath(@"exitprocess.bat"));
+
+                    Delay(6000);
+                }*/
+                //NOLJA Popn only end
+            }
+            else //OBS 이미 실행중
+            {
+                pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_alreadyrun;
+                Delay(3000);
+            }
+            
+
+            if (processifuseobs.Length < 1)
+            {
+
+            }
+
+            pg.Text = language_.ko_kr_STARTING_PG_sync;
+            _obs = new OBSWebsocket();
+
+            Process[] processifuseobs2;
+            while (true)
+            {
+                processifuseobs2 = null;
+                processifuseobs2 = Process.GetProcessesByName("obs64");
+                if (processifuseobs2.Length >= 1) break;
+                Delay(2000);
+            }
+            
+            Delay(1890);
+
+            try
+            {
+                if(File.Exists("test")) _obs.Connect("ws://127.0.0.1:7849", "noljabroadcastpc");
+                else _obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
+                //_obs.Connect("ws://127.0.0.1:4444", "geosungbroadcastpc");
+
+                //pg.Text = "소켓을 찾았습니다";
+                Delay(1410);
+
+                OutputStatus optstr = _obs.GetStreamingStatus();
+                if (!optstr.IsStreaming)
+                {
+                    pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_availablecheck;
+                    isPliveAvailable_Alpha();
+                    Delay(1000);
+
+                    if (plive_available)
+                    {
+                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_available;
+                        Delay(500);
+                        //Process[] processifusenginx = Process.GetProcessesByName("nginx");
+                        Process[] processifusenginx = Process.GetProcessesByName("MonaServer");
+                        if (processifusenginx.Length >= 1)
+                        {
+                            pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_stopprocess;
+                            Delay(100);
+                            for (int i = 0; i < processifusenginx.Length; i++)
+                            {
+                                processifusenginx[i].Kill();
+                            }
+                            //Process.Start("nginxstop.lnk");
+                            Delay(2000);
+                        }
+                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_initialize;
+                        //Process.Start(@"nginxrollback.bat");
+                        File.Copy(@"C:\MonaServer\ffmpeg_start.bat.bak", @"C:\MonaServer\ffmpeg_start.bat", true);
+                        Delay(3000);
+
+                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_start;
+                        //Process.Start(@"nginx.lnk");
+
+                        //MonaServer 시작
+                        Process MonaStart = new Process();
+                        MonaStart.StartInfo.FileName = @"C:\MonaServer\MonaServer.vbs";
+                        MonaStart.StartInfo.WorkingDirectory = @"C:\MonaServer";
+                        MonaStart.Start();
+
+                        Delay(3000);
+                    }
+                    else
+                    {
+                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_unavailable;
+                        Delay(2000);
+                    }
+
+                    //NOLJA maimaiDX CamPatcher
+                    if (p == "0_sega_maimaidx")
+                    {
+                        pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
+
+                        pve = "";
+                        pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+                        pve += "Dim strArgs" + "\r\n";
+                        pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
+                        pve += "WshShell.Run strArgs, 0, false";
+
+                        //File.WriteAllText("chromium_taskkill.bat", pvd);
+                        File.WriteAllText("start.vbs", pve);
+                        Delay(500);
+                        Process.Start("start.vbs");
+                        Delay(2000);
+                    }
+
+                    if (File.Exists(@"chromium\chromium.exe"))
+                    {
+                        
+                        pg.Text = language_.ko_kr_STARTING_PG_beforestream;
+
+                        Process chr = new Process();
+                        string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
+
+                        chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
+                        chr.StartInfo.Arguments = pm;
+                        chr.Start();
+
+                        //Form bgam = new AutoStartV3.None_N();
+                        //bgam.Show();
+                        //this.Focus();
+
+                        /*if (p == "3_squarepixels_ez2ac") Delay(36000);
+                        else */Delay(27000);
+
+                        killProcess = Process.GetProcessesByName("chromium");
+                        if (killProcess.Length >= 1)
+                        {
+                            for (int i = 0; i < killProcess.Length; i++)
+                            {
+                                killProcess[i].Kill();
+                            }
+                            Delay(100);
+                        }
+
+                        killProcess = null;
+
+                        /*pvd = "taskkill /f /im chromium.exe";
+
+                        pve = "";
+                        pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+                        pve += "Dim strArgs" + "\r\n";
+                        pve += "strArgs = \"chromium_taskkill.bat\"" + "\r\n";
+                        pve += "WshShell.Run strArgs, 0, false";
+
+                        File.WriteAllText("chromium_taskkill.bat", pvd);
+                        File.WriteAllText("start.vbs", pve);
+                        Delay(500);
+                        Process.Start("start.vbs");
+                        Delay(1500);
+                        File.Delete("chromium_taskkill.bat");
+                        File.Delete("start.vbs");*/
+                        //bgam.Close();
+                        this.Focus();
+                    }
+                    /* if (p == "5_konami_sdvx")
+                    {
+                        pg.Text = "스트리밍을 시작합니다... [1 / 2]";
+                        isstr = true;
+                    }
+                    else */
+                    pg.Text = language_.ko_kr_STARTING_PG_startstream;
+                    _obs.StartStreaming();
+
+
+                    if (plive_available)
+                    {
+                        pg.Text = "Starting ffmpeg...";
+                        Delay(1000);
+
+                        //ffmpeg 시작
+                        Process MonaStart = new Process();
+                        MonaStart.StartInfo.FileName = @"C:\MonaServer\ffmpeg_start.vbs";
+                        MonaStart.StartInfo.WorkingDirectory = @"C:\MonaServer";
+                        MonaStart.Start();
+                    }
+                }
+                else
+                {
+                    pg.Text = language_.ko_kr_STARTING_PG_alreadystream;
+                    if(p != "6_andamiro_pumpitup") File.Create("already_stream");
+                    else File.Create("already_stream_piu");
+                }
+                Delay(2890);
+
+                if (processifuseobs.Length < 1)
+                {
+                    pg.Text = language_.ko_kr_WEBCAM_initialize;
+
+                    string nowscene;
+                    nowscene = _obs.GetCurrentScene().Name;
+
+                    if (nowscene != "camoff")
+                    {
+                        _obs.SetCurrentScene("camoff");
+                        Delay(1000);
+                        _obs.SetCurrentScene("camon");
+                        Delay(1000);
+                    }
+
+                    else
+                    {
+                        /* 사회적 거리두기 1단계로 인해 발캠 금지 해제
+                        if (p == "6_andamiro_pumpitup")
+                        {
+                            _obs.SetCurrentScene("camoff");
+                            pg.Text = "펌프 잇 업의 캠은 비활성화 조치로 활성화가 불가함.";
+                            Delay(1000);
+                        }
+                        //20200825부터 일시적으로 Pump It Up의 캠 사용을 제한함
+
+                        else */
+                        _obs.SetCurrentScene("camon");
+
+
+                        Delay(1000);
+                    }
+                }
+                else if (p == "5_konami_sdvx")
+                {
+                    if (_obs.GetCurrentScene().Name == "camon")
+                        pg.Text = language_.ko_kr_WEBCAM_initialize_alreadyon;
+
+                    else
+                    {
+                        pg.Text = language_.ko_kr_WEBCAM_initialize_switching;
+                        _obs.SetCurrentScene("camon");
+                    }
+                    Delay(1000);
+                }
+                else
+                {
+                    pg.Text = language_.ko_kr_WEBCAM_initialize_alreadyon;
+                    Delay(1000);
+                }
+
+                if (isstr)
+                {
+                    File.WriteAllText("laterseechat", "");
+                    pg.Text = "YouTube의 스트리밍 버그로 인한 패치 가동...";
+                    Delay(15000);
+
+                    _obs.StopStreaming();
+                    Delay(5000);
+                    pg.Text = "스트리밍을 시작합니다... [2 / 2]";
+                    _obs.StartStreaming();
+                    Delay(2000);
+                }
+
+
+                _obs.Disconnect();
+            }
+            catch
+            {
+                MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox_1);
+            }
+
+            pg.Text = language_.ko_kr_DONE + " " + language_.ko_kr_NOWLOADING;
+
+            //Windows Explorer 실행
+            pvd = "explorer.exe";
+
+            pve = "";
+            pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+            pve += "Dim strArgs" + "\r\n";
+            pve += "strArgs = \"imshi.bat\"" + "\r\n";
+            pve += "WshShell.Run strArgs, 0, false";
+
+            File.WriteAllText("imshi.bat", pvd);
+            File.WriteAllText("start.vbs", pve);
+            Delay(500);
+            Process.Start("start.vbs");
+            Delay(1500);
+            File.Delete("imshi.bat");
+            File.Delete("start.vbs");
+            //Windows Explorer 실행 종료
+
+            Delay(4000);
+
+            pg.Text = language_.ko_kr_DONE_;
+            Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe"));
+
+            Delay(2000);
+
+            //pg.Text = "놀자 코로나19 알리미 프로그램 실행";
+            //Process.Start(@"Nolja_covid19.exe");
+            //Delay(2000);
+
+            this.Close();
+        }
+    }
+}

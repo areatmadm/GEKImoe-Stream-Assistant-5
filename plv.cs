@@ -110,8 +110,8 @@ namespace AreaTM_acbas
                     int pd_timelimit = 3600;
                     //if (sdvxwin.setgame == "5_konami_sdvx") pd_timelimit = 1200;
                     maxtime = pd_timelimit;
-                    MessageBox.Show("환영합니다!" + "\r\n" + "PLIVE MultiStream 서비스를 등록하고 시간제한 없이 마음껏 즐겨보세요!" + "\r\n" + 
-                        "(미등록 회원은 세션당 " + (pd_timelimit/60) + "분 시간제한 발생)");
+                    MessageBox.Show("환영합니다!" + "\r\n" + "현재 관리자의 요청으로 MultiStream 세션 시간제한이 걸려 있습니다." + "\r\n" + 
+                        "(" + (pd_timelimit/60) + "분 후 MultiStream 강제종료됨)");
                         
                     Alpha_Open();
                 }
@@ -131,7 +131,7 @@ namespace AreaTM_acbas
                 {
                     plivecode = "";
                     MessageBox.Show("서버 접속에 실패하였습니다." + "\r\n" +
-                        "DB 서버에 문제가 발생하였습니다. soruto@kakao.com으로 문의 바랍니다[PLIVE 운영팀]");
+                        "DB 서버에 문제가 발생하였습니다. soruto@kakao.com으로 문의 바랍니다[아레아티엠 게키모에 PLIVE 운영팀]");
                 }
                 else
                 {
@@ -343,7 +343,7 @@ namespace AreaTM_acbas
             else
             {
                 lbl_nowstatus.Text = "PLIVE MultiStream 모듈이 없어 해당기능 사용 불가";
-                MessageBox.Show("해당 게임의 스트리밍 PC에는 PLIVE MultiStream 모듈이 아직 설치되어 있지 않아 해당 서비스의 이용이 불가합니다.");
+                MessageBox.Show("해당 게임의 스트리밍 PC에는 PLIVE MultiStream 모듈이 아직 설치되어 있지 않아 해당 서비스의 이용이 불가합니다. 설치를 원하시는 경우, 업주를 통해 아레아티엠 고객센터로 문의 바랍니다.(B2B전용 고객센터로 문의)");
                 this.Close();
             }
             

@@ -16,7 +16,7 @@ namespace AreaTM_acbas
     {
         Process chr = new Process();
         string pm = "";
-        string sec = "--incognito ";
+        string sec = "";
 
         private int OpenFolder()
         {
@@ -44,10 +44,50 @@ namespace AreaTM_acbas
 
         private void movefile_form_Load(object sender, EventArgs e)
         {
-            if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
-            else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe")) chr.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
-            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+            //Edge → Firefox → Whale → Chrome
+            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
+            }
+
+            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                sec = "-private ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                sec = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
+                sec = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
+                sec = "--incognito ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                sec = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                sec = "--incognito ";
+            }
             else { }
 
             this.Font = new Font(sdvxwin.font_5_0_r.Families[0], 14f);

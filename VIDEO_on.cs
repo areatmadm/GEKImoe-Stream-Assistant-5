@@ -1,5 +1,4 @@
-﻿using Gecko;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -77,14 +76,6 @@ namespace AreaTM_acbas
                 return "Error";
             }
         }
-
-        /*GeckoWebBrowser DeepCopy()
-        {
-            GeckoWebBrowser newYTBrowser = new GeckoWebBrowser();
-            newYTBrowser = sdvxwin.ytvideo_2;
-
-            return newYTBrowser;
-        }*/
 
         public VIDEO_on()
         {
@@ -290,24 +281,12 @@ namespace AreaTM_acbas
 
         void MyON()
         {
-            /*mainfrm0.Controls.Remove(ytvideo_2);
-            ytvideo_2.Dock = DockStyle.None;
-            ytvideo_2.Size = new Size(1920, 1080);
-            ytvideo_2.Location = new Point(0, 0);
-            ytvideo_2.BackColor = sdvxwin.chinatsu_black;
-            ytvideo_2.Enabled = false;
-            this.Controls.Add(ytvideo_2);*/
+            /*oldcode_video_full_on*/
         }
 
         void MyOFF()
         {
-            /*this.Controls.Remove(ytvideo_2);
-            mainfrm0.Controls.Add(ytvideo_2);
-            ytvideo_2.Dock = DockStyle.None;
-            ytvideo_2.Size = new Size(380, 214);
-            ytvideo_2.Location = new Point(10, 332);*/
-            //ytvideo_2.BackColor = sdvxwin.chinatsu_black;
-            //ytvideo_2.Enabled = false;
+            /*oldcode_video_full_off*/
         }
 
         void Keyboardd()

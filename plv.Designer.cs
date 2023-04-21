@@ -41,21 +41,22 @@
             this.btn_getstreamkey = new System.Windows.Forms.Button();
             this.btn_set_service = new System.Windows.Forms.Button();
             this.url_inform = new System.Windows.Forms.Button();
+            this.btn_customsettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_info_0
             // 
             this.lbl_info_0.AutoSize = true;
-            this.lbl_info_0.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.lbl_info_0.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.lbl_info_0.Location = new System.Drawing.Point(13, 13);
             this.lbl_info_0.Name = "lbl_info_0";
-            this.lbl_info_0.Size = new System.Drawing.Size(318, 32);
+            this.lbl_info_0.Size = new System.Drawing.Size(319, 32);
             this.lbl_info_0.TabIndex = 0;
             this.lbl_info_0.Text = "오락실 스트리밍과 내 스트리밍을 동시에 즐기자!\r\nAreaTM GEKImoe PLIVE MultiStream 서비스 입니다.";
             // 
             // lbl_info_1
             // 
-            this.lbl_info_1.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.lbl_info_1.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.lbl_info_1.Location = new System.Drawing.Point(13, 56);
             this.lbl_info_1.Name = "lbl_info_1";
             this.lbl_info_1.Size = new System.Drawing.Size(497, 151);
@@ -65,7 +66,7 @@
             // lbl_streamkey
             // 
             this.lbl_streamkey.AutoSize = true;
-            this.lbl_streamkey.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.lbl_streamkey.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.lbl_streamkey.Location = new System.Drawing.Point(11, 244);
             this.lbl_streamkey.Name = "lbl_streamkey";
             this.lbl_streamkey.Size = new System.Drawing.Size(200, 16);
@@ -76,7 +77,7 @@
             // 
             this.txt_stream.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.txt_stream.Enabled = false;
-            this.txt_stream.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.txt_stream.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.txt_stream.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.txt_stream.Location = new System.Drawing.Point(12, 264);
             this.txt_stream.Name = "txt_stream";
@@ -87,9 +88,9 @@
             // btn_livestart
             // 
             this.btn_livestart.Enabled = false;
-            this.btn_livestart.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.btn_livestart.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.btn_livestart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btn_livestart.Location = new System.Drawing.Point(13, 366);
+            this.btn_livestart.Location = new System.Drawing.Point(13, 399);
             this.btn_livestart.Name = "btn_livestart";
             this.btn_livestart.Size = new System.Drawing.Size(245, 37);
             this.btn_livestart.TabIndex = 12;
@@ -99,9 +100,9 @@
             // 
             // btn_close
             // 
-            this.btn_close.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.btn_close.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.btn_close.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.btn_close.Location = new System.Drawing.Point(265, 366);
+            this.btn_close.Location = new System.Drawing.Point(265, 399);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(245, 37);
             this.btn_close.TabIndex = 13;
@@ -115,7 +116,7 @@
             // 
             // lbl_nowstatus
             // 
-            this.lbl_nowstatus.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.lbl_nowstatus.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.lbl_nowstatus.Location = new System.Drawing.Point(9, 331);
             this.lbl_nowstatus.Name = "lbl_nowstatus";
             this.lbl_nowstatus.Size = new System.Drawing.Size(497, 26);
@@ -126,7 +127,7 @@
             // btn_getstreamkey
             // 
             this.btn_getstreamkey.Enabled = false;
-            this.btn_getstreamkey.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.btn_getstreamkey.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.btn_getstreamkey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.btn_getstreamkey.Location = new System.Drawing.Point(13, 294);
             this.btn_getstreamkey.Name = "btn_getstreamkey";
@@ -138,7 +139,7 @@
             // 
             // btn_set_service
             // 
-            this.btn_set_service.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.btn_set_service.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.btn_set_service.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.btn_set_service.Location = new System.Drawing.Point(12, 210);
             this.btn_set_service.Name = "btn_set_service";
@@ -151,7 +152,7 @@
             // url_inform
             // 
             this.url_inform.Enabled = false;
-            this.url_inform.Font = new System.Drawing.Font("카카오 Regular", 10F);
+            this.url_inform.Font = new System.Drawing.Font("나눔바른고딕OTF", 10F);
             this.url_inform.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.url_inform.Location = new System.Drawing.Point(265, 294);
             this.url_inform.Name = "url_inform";
@@ -161,11 +162,23 @@
             this.url_inform.UseVisualStyleBackColor = true;
             this.url_inform.Click += new System.EventHandler(this.url_inform_Click);
             // 
+            // btn_customsettings
+            // 
+            this.btn_customsettings.Font = new System.Drawing.Font("나눔바른고딕OTF", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_customsettings.ForeColor = System.Drawing.Color.Black;
+            this.btn_customsettings.Location = new System.Drawing.Point(14, 365);
+            this.btn_customsettings.Name = "btn_customsettings";
+            this.btn_customsettings.Size = new System.Drawing.Size(496, 28);
+            this.btn_customsettings.TabIndex = 17;
+            this.btn_customsettings.Text = "커스텀 배경 세팅";
+            this.btn_customsettings.UseVisualStyleBackColor = true;
+            // 
             // plv
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(522, 415);
+            this.ClientSize = new System.Drawing.Size(522, 448);
+            this.Controls.Add(this.btn_customsettings);
             this.Controls.Add(this.url_inform);
             this.Controls.Add(this.btn_set_service);
             this.Controls.Add(this.btn_getstreamkey);
@@ -207,5 +220,6 @@
         private System.Windows.Forms.Button btn_getstreamkey;
         private System.Windows.Forms.Button btn_set_service;
         private System.Windows.Forms.Button url_inform;
+        private System.Windows.Forms.Button btn_customsettings;
     }
 }

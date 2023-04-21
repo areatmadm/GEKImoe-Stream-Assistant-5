@@ -230,7 +230,7 @@
             this.openWhale.Name = "openWhale";
             this.openWhale.Size = new System.Drawing.Size(352, 39);
             this.openWhale.TabIndex = 12;
-            this.openWhale.Text = "네이버 웨일 브라우저 열기";
+            this.openWhale.Text = "인터넷 브라우저 열기";
             this.openWhale.UseVisualStyleBackColor = true;
             this.openWhale.Click += new System.EventHandler(this.openWhale_Click);
             // 
