@@ -22,6 +22,8 @@ namespace AutoStartV2
         public static long acbas_build;
         public static string acbas_partnum;
 
+        public static string vender;//오락실 어디쪽?
+
         public static string p;
         public string gc_name;
         public string game_name;
@@ -121,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.2_B_20221127";
+            lbl_nowver.Text = "5.3_A_20230903";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -178,10 +180,21 @@ namespace AutoStartV2
             {
                 pg.Text = "아레아티엠 게키모에 서버에서 인증을 받는 중...";
                 string get_auth;
-                get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                if (File.Exists("vender.txt"))
+                {
+                    vender = File.ReadAllText("vender.txt");
+                    get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
+                }
+                else
+                {
+                    vender = "NOLJA";
+                    get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                }
+
                 if (get_auth == "NotAuthorized")
                 {
                     this.Hide();
+                    if(File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); }
                     Form dpp = new AutoStartV3.None_N();
                     dpp.Show();
 
@@ -193,7 +206,9 @@ namespace AutoStartV2
 
                 else if (get_auth == "Authorized")
                 {
-                    pg.Text = "아레아티엠 게키모에 서버 인증 성공!";
+                    pg.Text = "아레아티엠 GEKImoe Stream Assistant 5 서버 인증 성공!";
+                    if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } }
+                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } }
                     break;
                 }
 
@@ -216,7 +231,9 @@ namespace AutoStartV2
 
                 pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(1 / 3)";
                 Process acbas_get_version = new Process();
-                acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe");
+
+                if(vender=="SANGGU") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("SangguGSA5.exe"); }
+                else { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); }
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
                 Delay(1600);
@@ -264,7 +281,9 @@ namespace AutoStartV2
             if (!File.Exists("test"))
             {
                 string getp_d = "";
-                getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
+                if(vender == "SANGGU") getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?game=" + p +
+                            "&mode=3&submode=1");
+                else getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
                             "&mode=3&submode=1");
             }
             Delay(3000);
@@ -411,7 +430,7 @@ namespace AutoStartV2
                     }
 
                     //NOLJA maimaiDX CamPatcher
-                    if (p == "0_sega_maimaidx")
+                    if (vender == "NOLJA" && p == "0_sega_maimaidx")
                     {
                         pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
 
@@ -602,7 +621,8 @@ namespace AutoStartV2
             Delay(4000);
 
             pg.Text = language_.ko_kr_DONE_;
-            Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe"));
+            if(vender=="SANGGU") { Process.Start(Path.GetFullPath(@"SangguGSA5.exe")); }
+            else { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
 
             Delay(2000);
 
