@@ -21,7 +21,7 @@ namespace AreaTM_acbas
         {
             try
             {
-                //System.Diagnostics.Process.Start(sdvxwin._obs.GetRecordDirectory());
+                System.Diagnostics.Process.Start(sdvxwin._obs.GetRecordingFolder());
                 return 0;
             }
             catch
