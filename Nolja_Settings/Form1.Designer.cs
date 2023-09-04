@@ -52,7 +52,7 @@
             this.label1.Font = new System.Drawing.Font("나눔바른고딕OTF", 14F);
             this.label1.Location = new System.Drawing.Point(12, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(685, 261);
+            this.label1.Size = new System.Drawing.Size(685, 214);
             this.label1.TabIndex = 0;
             this.label1.Text = resources.GetString("label1.Text");
             // 
@@ -65,7 +65,7 @@
             this.btn_fix.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btn_fix.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_fix.Font = new System.Drawing.Font("나눔바른고딕OTF", 18F, System.Drawing.FontStyle.Bold);
-            this.btn_fix.Location = new System.Drawing.Point(12, 313);
+            this.btn_fix.Location = new System.Drawing.Point(12, 266);
             this.btn_fix.Name = "btn_fix";
             this.btn_fix.Size = new System.Drawing.Size(366, 81);
             this.btn_fix.TabIndex = 1;
@@ -83,7 +83,7 @@
             this.btn_exit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_exit.Font = new System.Drawing.Font("나눔바른고딕OTF", 18F, System.Drawing.FontStyle.Bold);
-            this.btn_exit.Location = new System.Drawing.Point(384, 313);
+            this.btn_exit.Location = new System.Drawing.Point(384, 266);
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(313, 81);
             this.btn_exit.TabIndex = 2;
@@ -100,12 +100,12 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(709, 406);
+            this.ClientSize = new System.Drawing.Size(709, 362);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_fix);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbl_name);
-            this.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

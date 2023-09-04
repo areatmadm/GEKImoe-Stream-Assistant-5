@@ -85,12 +85,29 @@ namespace Nolja_Settings
             btn_fix.Enabled = false;
             btn_exit.Enabled = false;
 
-            Process.Start("nolja_fix_pp.vbs");
+            Process.Start("nolja_fix_pp.vbs"); //SW 강종 코드
             Delay(6000);
 
             string noll;
-            string setgame = File.ReadAllText(System.IO.Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""));
-            noll = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=5&game=" + setgame);
+            string setgame = "";
+            if (File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자 독자규격 사용 시
+            {
+                setgame = File.ReadAllText(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""));
+            }
+            else //표준규격 사용 업장
+            {
+                setgame = File.ReadAllText(Path.GetFullPath("game_set.txt").Replace(@"Bugfix\", ""));
+            }
+
+            if(File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자는 독자적인 도메인 이용
+            {
+                noll = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=5&game=" + setgame);
+            }
+            else // 그 외에는 표준규격 사용
+            {
+                noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?mode=4&submode=5&game=" + setgame);
+            }
+            
             Delay(1000);
 
             lbl_name.Text = "스트리밍PC 재부팅 요청됨";
