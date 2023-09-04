@@ -123,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.3_A_20230903";
+            lbl_nowver.Text = "5.3_B_20230903";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -430,14 +430,23 @@ namespace AutoStartV2
                     }
 
                     //NOLJA maimaiDX CamPatcher
-                    if (vender == "NOLJA" && p == "0_sega_maimaidx")
+                    if ((vender == "NOLJA" && p == "0_sega_maimaidx") || (vender == "SANGGU" && p == "0_sega_chunithm_asia"))
                     {
                         pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
 
                         pve = "";
                         pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
                         pve += "Dim strArgs" + "\r\n";
-                        pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
+
+                        if (vender == "NOLJA" && p == "0_sega_maimaidx")
+                        {
+                            pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
+                        }
+                        else
+                        {
+                            pve += "strArgs = \"WebCameraConfig" + @"\" + "WebCameraConfig.exe\"" + "\r\n";
+                        }
+                        
                         pve += "WshShell.Run strArgs, 0, false";
 
                         //File.WriteAllText("chromium_taskkill.bat", pvd);

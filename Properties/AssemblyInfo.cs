@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.7.0.97")]
-[assembly: AssemblyFileVersion("5.7.0.97")]
+[assembly: AssemblyVersion("5.10.9.152")]
+[assembly: AssemblyFileVersion("5.10.9.152")]
 [assembly: NeutralResourcesLanguage("ko-KR")]
 
