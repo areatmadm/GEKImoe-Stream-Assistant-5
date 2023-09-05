@@ -123,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.3_B_20230903";
+            lbl_nowver.Text = "5.3_C_20230905";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -180,15 +180,24 @@ namespace AutoStartV2
             {
                 pg.Text = "아레아티엠 게키모에 서버에서 인증을 받는 중...";
                 string get_auth;
-                if (File.Exists("vender.txt"))
+                if (!File.Exists("vender.txt"))
                 {
-                    vender = File.ReadAllText("vender.txt");
+                    // 라이선스 체크 프로세싱(놀자)
+                    vender = "NOLJA";
                     get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
                 }
                 else
                 {
-                    vender = "NOLJA";
-                    get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                    // 라이선스 체크 프로세싱(표준)
+                    vender = File.ReadAllText("vender.txt");
+                    if (vender == "NOLJA") // 놀자 프로세싱 변경 가능성 열어두기
+                    {
+                        get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                    }
+                    else
+                    {
+                        get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
+                    }
                 }
 
                 if (get_auth == "NotAuthorized")
@@ -206,9 +215,9 @@ namespace AutoStartV2
 
                 else if (get_auth == "Authorized")
                 {
-                    pg.Text = "아레아티엠 GEKImoe Stream Assistant 5 서버 인증 성공!";
-                    if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } }
-                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } }
+                    pg.Text = "GEKImoe Stream Assistant 5 서버 인증 성공!";
+                    if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // 로얄상구는 커스텀 앱 사용으로 표준앱 삭제
+                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 놀자를 포함한 대부분은 표준앱 사용
                     break;
                 }
 
@@ -394,6 +403,10 @@ namespace AutoStartV2
                     {
                         pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_available;
                         Delay(500);
+
+                        //PLIVE 2023년 12월 서비스 종료 예정
+                        pg.Text = "PLIVE 서비스는 2023년 12월 서비스 종료됩니다. 그동안 성원에 감사드립니다.";
+                        Delay(5000);
                         //Process[] processifusenginx = Process.GetProcessesByName("nginx");
                         Process[] processifusenginx = Process.GetProcessesByName("MonaServer");
                         if (processifusenginx.Length >= 1)
@@ -438,14 +451,7 @@ namespace AutoStartV2
                         pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
                         pve += "Dim strArgs" + "\r\n";
 
-                        if (vender == "NOLJA" && p == "0_sega_maimaidx")
-                        {
-                            pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
-                        }
-                        else
-                        {
-                            pve += "strArgs = \"WebCameraConfig" + @"\" + "WebCameraConfig.exe\"" + "\r\n";
-                        }
+                        pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
                         
                         pve += "WshShell.Run strArgs, 0, false";
 

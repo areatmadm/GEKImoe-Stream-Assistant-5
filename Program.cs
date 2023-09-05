@@ -50,8 +50,8 @@ namespace AreaTM_acbas
         }
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.10_Q";
-        public static long acbas_build = 202309050257;
+        public static string acbas_ver = "5.10_R";
+        public static long acbas_build = 202309052245;
         public static string acbas_partnum = "v5_3";
 
         //public static string ad_servercountry = "KR";
@@ -83,7 +83,7 @@ namespace AreaTM_acbas
             {
                 if (!mutex.WaitOne(0, false))
                 {
-                    MessageBox.Show("AreaTM GEKImoe Stream Assistant has already running!");
+                    MessageBox.Show("[AreaTM] GEKImoe Stream Assistant 5 has already running!");
                     return;
                 }
 
