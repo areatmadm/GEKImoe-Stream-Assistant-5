@@ -96,8 +96,8 @@ namespace NoljaUpdater
             }
             catch { }
             File.WriteAllText("update_success", "");
-            lbl_status.Text = "압축 해제 완료! 재부팅 중...";
-            Delay(6000);
+            lbl_status.Text = "압축 해제 완료! 재실행 중...";
+            Delay(2000);
 
             //재부팅 코드 임시 제거, AutoStartV3 재실행으로 대체
             /*Process reboot_now_process = new Process();
