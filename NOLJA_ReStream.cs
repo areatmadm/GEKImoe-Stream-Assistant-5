@@ -21,7 +21,7 @@ namespace AreaTM_acbas
         int npow2 = 0;
         bool thisWindowShowed = false;
 
-        int nHour = 6;
+        int nHour = 7;
         int nMin = 30;
 
         // Test용
@@ -144,7 +144,7 @@ namespace AreaTM_acbas
             if (!isRestarting)
             {
                 if ((((((npow / 60) / 60) >= nHour && ((npow / 60) % 60) >= nMin) || ((npow / 60) / 60) >= 10)) && sdvxwin.PLIVEForm_closed)
-                //6시간 30분, 7시간 30분, 8시간 30분, 9시간 30분에 알림
+                //7시간 30분, 8시간 30분, 9시간 30분, 10시간 30분에 알림
                 //PLIVE Mirroring 폼 닫혀 있을때만 동작
                 {
                     lbl_restartInfo.Text = (59 - ((npow / 60) % 60)) + "분 " + (59 - (npow % 60)) + "초 이후 자동으로 재시작 됩니다.";
@@ -154,7 +154,7 @@ namespace AreaTM_acbas
                         thisWindowShowed = true;
                         btn_goReStream.Enabled = true;
 
-                        if (((npow / 60) / 60) >= 9) btn_seelate.Enabled = false;
+                        if (((npow / 60) / 60) >= 10) btn_seelate.Enabled = false; //10시간 30분 이후부터 비활성화 불가
                         else btn_seelate.Enabled = true;
 
                         this.Show();
@@ -257,7 +257,7 @@ namespace AreaTM_acbas
                             "&mode=4&submode=4");
             }
             catch { }
-            Thread.Sleep(120000);
+            Thread.Sleep(120000); //2분 뒤 방송 시작, 이후 패치 예정
 
             Process chr = new Process();
             string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
@@ -315,13 +315,13 @@ namespace AreaTM_acbas
 
         public static void ChkIfStreamisNeedRestart()
         {
-            if (((npow / 60) / 60) >= 10) isRestarting = true;
+            if (((npow / 60) / 60) >= 11) isRestarting = true;
             else try { sdvxwin._obs.StartStreaming(); } catch { }
         }
 
         public static void ChkIfStreamisNeedRestart2()
         {
-            if (((npow / 60) / 60) >= 7) isRestarting = true;
+            if (((npow / 60) / 60) >= 8) isRestarting = true;
             else try { sdvxwin._obs.StartStreaming(); } catch { }
         }
 

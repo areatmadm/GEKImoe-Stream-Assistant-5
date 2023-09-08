@@ -78,7 +78,7 @@ namespace AutoStartV2
             InitializeComponent();
         }
 
-        void isPliveAvailable_Alpha()
+        void isPliveAvailable_Alpha() //2023년 12월부로 해당 코드 삭제
         {
             //if (File.Exists(@"C:\nginx-rtmp-win32-dev\nginx.exe")) //nginx서버 노후화로 인한 코드 정리
             if (File.Exists(@"C:\MonaServer\MonaServer.exe") && File.Exists(@"C:\MonaServer\ffmpeg.exe") && File.Exists(@"C:\MonaServer\ffprobe.exe")) //MonaServer, ffmpeg로 대체
@@ -123,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.3_C_20230905";
+            lbl_nowver.Text = "5.4_A_20230908";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -443,7 +443,7 @@ namespace AutoStartV2
                     }
 
                     //NOLJA maimaiDX CamPatcher
-                    if ((vender == "NOLJA" && p == "0_sega_maimaidx") || (vender == "SANGGU" && p == "0_sega_chunithm_asia"))
+                    if (vender == "NOLJA" && p == "0_sega_maimaidx")
                     {
                         pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
 
@@ -462,7 +462,7 @@ namespace AutoStartV2
                         Delay(2000);
                     }
 
-                    if (File.Exists(@"chromium\chromium.exe"))
+                    if (File.Exists(@"chromium\chromium.exe")) //2023년 10월부터 놀자오락실만 가동
                     {
                         
                         pg.Text = language_.ko_kr_STARTING_PG_beforestream;
@@ -474,12 +474,7 @@ namespace AutoStartV2
                         chr.StartInfo.Arguments = pm;
                         chr.Start();
 
-                        //Form bgam = new AutoStartV3.None_N();
-                        //bgam.Show();
-                        //this.Focus();
-
-                        /*if (p == "3_squarepixels_ez2ac") Delay(36000);
-                        else */Delay(27000);
+                        Delay(27000);
 
                         killProcess = Process.GetProcessesByName("chromium");
                         if (killProcess.Length >= 1)
@@ -492,36 +487,14 @@ namespace AutoStartV2
                         }
 
                         killProcess = null;
-
-                        /*pvd = "taskkill /f /im chromium.exe";
-
-                        pve = "";
-                        pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
-                        pve += "Dim strArgs" + "\r\n";
-                        pve += "strArgs = \"chromium_taskkill.bat\"" + "\r\n";
-                        pve += "WshShell.Run strArgs, 0, false";
-
-                        File.WriteAllText("chromium_taskkill.bat", pvd);
-                        File.WriteAllText("start.vbs", pve);
-                        Delay(500);
-                        Process.Start("start.vbs");
-                        Delay(1500);
-                        File.Delete("chromium_taskkill.bat");
-                        File.Delete("start.vbs");*/
-                        //bgam.Close();
                         this.Focus();
                     }
-                    /* if (p == "5_konami_sdvx")
-                    {
-                        pg.Text = "스트리밍을 시작합니다... [1 / 2]";
-                        isstr = true;
-                    }
-                    else */
+
                     pg.Text = language_.ko_kr_STARTING_PG_startstream;
                     _obs.StartStreaming();
 
 
-                    if (plive_available)
+                    if (plive_available) //PLIVE 2023년 10월부터 놀자오락실만 가동, 12월부로 서비스종료로 코드 삭제
                     {
                         pg.Text = "Starting ffmpeg...";
                         Delay(1000);
@@ -558,18 +531,7 @@ namespace AutoStartV2
 
                     else
                     {
-                        /* 사회적 거리두기 1단계로 인해 발캠 금지 해제
-                        if (p == "6_andamiro_pumpitup")
-                        {
-                            _obs.SetCurrentScene("camoff");
-                            pg.Text = "펌프 잇 업의 캠은 비활성화 조치로 활성화가 불가함.";
-                            Delay(1000);
-                        }
-                        //20200825부터 일시적으로 Pump It Up의 캠 사용을 제한함
-
-                        else */
                         _obs.SetCurrentScene("camon");
-
 
                         Delay(1000);
                     }
@@ -605,6 +567,27 @@ namespace AutoStartV2
                     Delay(2000);
                 }
 
+                //Royal SangGu maimaiDX & CHUNITHM CamPatcher
+                if (vender == "SANGGU" && (p == "0_sega_chunithm_asia" || p == "0_sega_maimaidx"))
+                {
+                    pg.Text = language_.ko_kr_WEBCAM_autosetup;
+
+                    pve = "";
+                    pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+                    pve += "Dim strArgs" + "\r\n";
+
+                    pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
+
+                    pve += "WshShell.Run strArgs, 0, false";
+
+                    //File.WriteAllText("chromium_taskkill.bat", pvd);
+                    File.WriteAllText("start.vbs", pve);
+                    Delay(500);
+                    Process.Start("start.vbs");
+                    Delay(2000);
+                    Process.Start("start.vbs"); //간혹 저장값을 못 불러오는 경우가 있어 한번 더 실행
+                    Delay(2000);
+                }
 
                 _obs.Disconnect();
             }

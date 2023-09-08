@@ -48,6 +48,7 @@ namespace AutoStartV2
         public static string ko_kr_WEBCAM_initialize_alreadyon = "이미 OBS가 실행 중이어서 웹캠 초기화는 생략함";
         public static string ko_kr_WEBCAM_initialize_switching = "웹캠이 꺼져있어 ON으로 복귀";
         public static string ko_kr_WEBCAM_NJ2Pmai = "2P 웹캠 초기화 중...";
+        public static string ko_kr_WEBCAM_autosetup = "웹캠 설정 저장값 불러오는 중...";
 
         public static string ko_kr_DONE_ = "아케이드 스트리밍 시스템 시작";
 
