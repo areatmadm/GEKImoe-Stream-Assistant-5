@@ -99,10 +99,18 @@ namespace NoljaUpdater
             lbl_status.Text = "압축 해제 완료! 재부팅 중...";
             Delay(6000);
 
-            Process reboot_now_process = new Process();
+            //재부팅 코드 임시 제거, AutoStartV3 재실행으로 대체
+            /*Process reboot_now_process = new Process();
             reboot_now_process.StartInfo.FileName = @"C:\Windows\SysWOW64\shutdown.exe";
             reboot_now_process.StartInfo.Arguments = "-r -t 0";
-            try { reboot_now_process.Start(); } catch { }
+            try { reboot_now_process.Start(); } catch { }*/
+
+            //업데이트 완료 후 AutoStartV3 재실행
+            if (File.Exists("AutoStartV3.exe")) //AutoStartV2 제거 예정
+            {
+                Process.Start("AutoStartV3.exe");
+            }
+            else Process.Start("AutoStartV2.exe");
             Application.ExitThread();
         }
 
