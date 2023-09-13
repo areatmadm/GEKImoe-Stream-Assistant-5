@@ -257,22 +257,17 @@ namespace AreaTM_acbas
                             "&mode=4&submode=4");
             }
             catch { }
-            Thread.Sleep(120000); //2분 뒤 방송 시작, 이후 패치 예정
+            Thread.Sleep(110000); //1분 50초 뒤 방송 시작, 이후 패치 예정
 
+            // 밴더 구분해서 놀자만 해당 코드 작동시키기 시작
+
+            // 밴더 구분해서 놀자만 해당 코드 작동시키기 끝
             Process chr = new Process();
             string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
             
             //리방 오류 방지
 
             VIDEO_on.isWakeOn = true;
-            /*if (sdvxwin.banneduser)
-            {
-
-            }
-            else
-            {
-
-            }*/
 
             chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
             chr.StartInfo.Arguments = pm;
