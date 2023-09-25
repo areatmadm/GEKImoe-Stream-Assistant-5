@@ -655,9 +655,6 @@ namespace AreaTM_acbas
             else
             {
                 rec_start.Text = "녹화 중지";
-                timer_rec = new System.Windows.Forms.Timer();
-                timer_rec.Interval = 1000;
-                timer_rec.Tick += new EventHandler(timer_rec_Tick);
                 timer_rec.Enabled = true;
             }
 
@@ -726,7 +723,7 @@ namespace AreaTM_acbas
                 }
             }
         }
-
+        
         int quick = 990;
         int qtemp;
 
@@ -758,10 +755,6 @@ namespace AreaTM_acbas
 
             if (!isrec)
             {
-
-                timer_rec = new System.Windows.Forms.Timer();
-                timer_rec.Interval = 1000;
-                timer_rec.Tick += new EventHandler(timer_rec_Tick);
                 _obs.StartRecording();
             }
             else

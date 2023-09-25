@@ -64,7 +64,8 @@ namespace AreaTM_acbas
         private void btn_UpdateLog_Click(object sender, EventArgs e)
         {
             Form d = new drumwin();
-            d.ShowDialog();
+            d.Show();
+            this.Close();
         }
     }
 }

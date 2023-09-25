@@ -35,15 +35,15 @@ namespace AreaTM_acbas
 
         private void drumwin_Load(object sender, EventArgs e)
         {
-            lbl_font.Text = "(c) 2019-2022 AreaTM GEKImoe" + "\r\n" +
-                "This assistant can use only in Game Center, authorized by AreaTM GEKImoe." + "\r\n\r\n" +
+            lbl_font.Text = "(c) 2019-2023 AreaTM" + "\r\n" +
+                "This assistant can use only for user or company, authorized by AreaTM." + "\r\n\r\n" +
                 "Font Copyright (c) NAVER Corp." + "\r\n" + 
                 "Chromium, OBS-Websocket, Gecko의 오픈소스가 사용되었습니다.";
             textBox1.Text = "";
 
             NOLJA_BlackEdition_Set();
 
-            textBox1.Text += "게키모에 스트림 어시스턴트 5 업데이트 내용" + "\r\n" +
+            textBox1.Text += "GEKImoe Stream Assistant 5 업데이트 내용" + "\r\n" +
                 "업데이트 내용은 웹사이트에서 확인해 주세요." + "\r\n" +
                 "- https://areatm.com/gekimoe_streamassistant" + "\r\n" +
                 "------------------------------" + "\r\n" + "\r\n";
@@ -59,7 +59,7 @@ namespace AreaTM_acbas
         private void btn_openlicense_Click(object sender, EventArgs e)
         {
             Form license = new license_used();
-            license.ShowDialog();
+            license.Show();
         }
     }
 }
