@@ -123,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.4_A_20230908";
+            lbl_nowver.Text = "5.4_B_20230928";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -278,7 +278,7 @@ namespace AutoStartV2
                         Delay(200);
                     }*/
 
-                    Form updateForm = new update_noljabroadcast();
+                    Form updateForm = new update_noljabroadcast(vender);
                     updateForm.ShowDialog();
                 }
                 else pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_NONE + " " + language_.ko_kr_NOWLOADING;
@@ -568,7 +568,7 @@ namespace AutoStartV2
                 }
 
                 //Royal SangGu maimaiDX & CHUNITHM CamPatcher
-                if (vender == "SANGGU" && (p == "0_sega_chunithm_asia" || p == "0_sega_maimaidx"))
+                if (vender == "SANGGU")
                 {
                     pg.Text = language_.ko_kr_WEBCAM_autosetup;
 

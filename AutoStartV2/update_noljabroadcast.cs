@@ -21,6 +21,7 @@ namespace AutoStartV2
         string[] sourceFileURI = new string[3];
         string[] targetpath = new string[3];
 
+        string vender; //오락실 업체
         private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
@@ -57,9 +58,10 @@ namespace AutoStartV2
             }
         }
 
-        public update_noljabroadcast()
+        public update_noljabroadcast(string vender)
         {
             InitializeComponent();
+            this.vender = vender;
         }
 
         private void update_noljabroadcast_Load(object sender, EventArgs e)
@@ -86,7 +88,8 @@ namespace AutoStartV2
             
 
             Delay(3000);
-            sourceFileURI[0] = "https://update.streamassistant.sv.gekimoe.areatm.com/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
+            //sourceFileURI[0] = "https://update.streamassistant.sv.gekimoe.areatm.com/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
+            sourceFileURI[0] = "https://download.stream-assistant-5.gekimoe.areatm.com/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
             targetpath[0] = System.IO.Path.GetFullPath("gekimoe_acbas_update.7z");
 
             lbl_status.Text = "다운로드 준비 중..";
