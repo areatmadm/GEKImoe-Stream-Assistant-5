@@ -44,9 +44,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sdvxpic = new System.Windows.Forms.PictureBox();
             this.btn_more = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.openexplorer_rec = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btn_ok = new System.Windows.Forms.Button();
+            this.txt_onelinetext = new System.Windows.Forms.TextBox();
+            this.lbl_LINECUSTIOM = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sdvxpic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -223,15 +225,6 @@
             this.btn_more.EnabledChanged += new System.EventHandler(this.btn_more_EnabledChanged);
             this.btn_more.Click += new System.EventHandler(this.btn_more_Click);
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(10, 332);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(380, 214);
-            this.label1.TabIndex = 112;
-            this.label1.Text = "label1";
-            this.label1.Visible = false;
-            // 
             // openexplorer_rec
             // 
             this.openexplorer_rec.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -259,6 +252,43 @@
             this.pictureBox2.TabIndex = 113;
             this.pictureBox2.TabStop = false;
             // 
+            // btn_ok
+            // 
+            this.btn_ok.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_ok.FlatAppearance.BorderSize = 3;
+            this.btn_ok.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btn_ok.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ok.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btn_ok.Location = new System.Drawing.Point(273, 448);
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.Size = new System.Drawing.Size(42, 32);
+            this.btn_ok.TabIndex = 116;
+            this.btn_ok.Text = "OK";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
+            // 
+            // txt_onelinetext
+            // 
+            this.txt_onelinetext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
+            this.txt_onelinetext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txt_onelinetext.ForeColor = System.Drawing.Color.White;
+            this.txt_onelinetext.Location = new System.Drawing.Point(87, 457);
+            this.txt_onelinetext.Name = "txt_onelinetext";
+            this.txt_onelinetext.Size = new System.Drawing.Size(180, 26);
+            this.txt_onelinetext.TabIndex = 115;
+            // 
+            // lbl_LINECUSTIOM
+            // 
+            this.lbl_LINECUSTIOM.AutoSize = true;
+            this.lbl_LINECUSTIOM.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_LINECUSTIOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lbl_LINECUSTIOM.Location = new System.Drawing.Point(85, 438);
+            this.lbl_LINECUSTIOM.Name = "lbl_LINECUSTIOM";
+            this.lbl_LINECUSTIOM.Size = new System.Drawing.Size(185, 17);
+            this.lbl_LINECUSTIOM.TabIndex = 114;
+            this.lbl_LINECUSTIOM.Text = "한줄문구 입력 - 방송화면에 반영";
+            // 
             // sdvxwin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -266,7 +296,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(400, 920);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btn_ok);
+            this.Controls.Add(this.txt_onelinetext);
+            this.Controls.Add(this.lbl_LINECUSTIOM);
             this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_linkinfo);
             this.Controls.Add(this.btn_personal);
@@ -317,8 +349,10 @@
         private System.Windows.Forms.Button rec_3mh;
         private System.Windows.Forms.Button btn_personal;
         private System.Windows.Forms.Button btn_more;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button openexplorer_rec;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button btn_ok;
+        private System.Windows.Forms.TextBox txt_onelinetext;
+        private System.Windows.Forms.Label lbl_LINECUSTIOM;
     }
 }

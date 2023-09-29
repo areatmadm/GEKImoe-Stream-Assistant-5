@@ -123,7 +123,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.4_B_20230928";
+            lbl_nowver.Text = "5.5_A_20230930";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -396,10 +396,11 @@ namespace AutoStartV2
                 if (!optstr.IsStreaming)
                 {
                     pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_availablecheck;
-                    isPliveAvailable_Alpha();
+                    pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_unavailable;//불가능 임시패치(서비스종료)
+                    //isPliveAvailable_Alpha();
                     Delay(1000);
 
-                    if (plive_available)
+                    /*if (plive_available)
                     {
                         pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_available;
                         Delay(500);
@@ -440,7 +441,7 @@ namespace AutoStartV2
                     {
                         pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_unavailable;
                         Delay(2000);
-                    }
+                    }*/
 
                     //NOLJA maimaiDX CamPatcher
                     if (vender == "NOLJA" && p == "0_sega_maimaidx")
@@ -462,7 +463,7 @@ namespace AutoStartV2
                         Delay(2000);
                     }
 
-                    if (File.Exists(@"chromium\chromium.exe")) //2023년 10월부터 놀자오락실만 가동
+                    /*if (File.Exists(@"chromium\chromium.exe")) //2023년 10월부터 놀자오락실만 가동(x) 놀자도 미가동
                     {
                         
                         pg.Text = language_.ko_kr_STARTING_PG_beforestream;
@@ -488,7 +489,7 @@ namespace AutoStartV2
 
                         killProcess = null;
                         this.Focus();
-                    }
+                    }*/
 
                     pg.Text = language_.ko_kr_STARTING_PG_startstream;
                     _obs.StartStreaming();
@@ -509,8 +510,7 @@ namespace AutoStartV2
                 else
                 {
                     pg.Text = language_.ko_kr_STARTING_PG_alreadystream;
-                    if(p != "6_andamiro_pumpitup") File.Create("already_stream");
-                    else File.Create("already_stream_piu");
+                    File.Create("already_stream");
                 }
                 Delay(2890);
 

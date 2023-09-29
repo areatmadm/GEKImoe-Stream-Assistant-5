@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lbl_info.Text" xml:space="preserve">
-    <value>YouTube의 스트리밍은 한 세션당 11시간 55분을 초과하는 경우 방송분이 유실됩니다. 해당 문제를 막기 위해 방송시간 6시간 30분 경과부터 스트리밍 재시작 요청을 시작합니다.
-스트리밍 재시작 연기는 한 스트리밍당 10시간까지 가능하며, 이후에는 스트리밍 재시작 연기가 불가합니다.
+    <value>YouTube의 스트리밍은 한 세션당 11시간 55분을 초과하는 경우 방송분이 유실됩니다. 해당 문제를 막기 위해 방송시간 7시간 30분 경과부터 스트리밍 재시작 요청을 시작합니다.
+스트리밍 재시작 연기는 한 스트리밍당 11시간까지 가능하며, 이후에는 스트리밍 재시작 연기가 불가합니다.
 
 스트리밍 재시작 작업 중 YouTube 스트리밍 세팅용 윈도우가 자동으로 표시됩니다. 이때, 절대로 PC를 건들지 마세요. PC 조작 시 스트리밍이 제대로 진행되지 않습니다.
 

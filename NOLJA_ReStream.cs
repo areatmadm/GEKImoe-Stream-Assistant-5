@@ -195,7 +195,7 @@ namespace AreaTM_acbas
                 isRestarting = false;
                 isRestartProcessing = false;
                 isRestartProcessingFinished = true;
-                DrumChat.isRestarted = true;
+                //DrumChat.isRestarted = true;
 
                 thisWindowShowed = false;
                 this.Hide();
@@ -262,22 +262,22 @@ namespace AreaTM_acbas
             // 밴더 구분해서 놀자만 해당 코드 작동시키기 시작
 
             // 밴더 구분해서 놀자만 해당 코드 작동시키기 끝
-            Process chr = new Process();
-            string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
+            //Process chr = new Process();
+            //string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
             
             //리방 오류 방지
 
             VIDEO_on.isWakeOn = true;
 
-            chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
+            /*chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
             chr.StartInfo.Arguments = pm;
-            chr.Start();
+            chr.Start();*/
 
             Thread.Sleep(10000);
             VIDEO_on.isWakeOn = false;
 
-            Thread.Sleep(19000);
-            string pvd = "taskkill /f /im chromium.exe";
+            //Thread.Sleep(19000);
+            /*string pvd = "taskkill /f /im chromium.exe";
 
             string pve = "";
             pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
@@ -291,7 +291,7 @@ namespace AreaTM_acbas
             Process.Start("start.vbs");
             Thread.Sleep(1500);
             File.Delete("chromium_taskkill.bat");
-            File.Delete("start.vbs");
+            File.Delete("start.vbs");*/
 
             try { sdvxwin._obs.StartStreaming(); } catch { }
 

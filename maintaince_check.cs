@@ -98,13 +98,13 @@ namespace AreaTM_acbas
             mainform = mainfrm;
             vdfrm = vdon;
         }
-        public maintaince_check(sdvxwin mainfrm, VIDEO_on vdon, DrumChat chtfrm)
+        /*public maintaince_check(sdvxwin mainfrm, VIDEO_on vdon, DrumChat chtfrm)
         {
             InitializeComponent();
             mainform = mainfrm;
             vdfrm = vdon;
             chatform = chtfrm;
-        }
+        }*/
 
         private void maintaince_check_Load(object sender, EventArgs e)
         {
@@ -128,9 +128,9 @@ namespace AreaTM_acbas
             OBSStatus1.Start();
 
             // FFmpeg 잘 실행중인지 체크하는 별도 스레드 생성
-            Thread ffmpegStatus1 = new Thread(chkFFmpegisFine1);
+            /*Thread ffmpegStatus1 = new Thread(chkFFmpegisFine1);
             ffmpegStatus1.SetApartmentState(ApartmentState.STA);
-            ffmpegStatus1.Start();
+            ffmpegStatus1.Start();*/
 
             /* var waveIn = new NAudio.Wave.WaveInEvent();
             waveIn.DeviceNumber = 0;
@@ -182,7 +182,7 @@ namespace AreaTM_acbas
                     Thread.Sleep(rechecktime);
                     string getp = "";
                     if (!sdvxwin.isRestreaming_onlyCheckStatus)
-                        getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame + "&mode=0");
+                         getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame + "&mode=0");
 
                     if (getp == "Success")
                     {
@@ -264,7 +264,7 @@ namespace AreaTM_acbas
             }
         }
 
-        private void chkFFmpegisFine1() //스트리밍 중 FFmpeg가 잘 살아있는지 체크
+        /*private void chkFFmpegisFine1() //스트리밍 중 FFmpeg가 잘 살아있는지 체크
         {
             while (true)
             {
@@ -284,7 +284,7 @@ namespace AreaTM_acbas
                     Thread.Sleep(10000); //10초마다 한번씩 실행
                 }
             }
-        }
+        }*/
 
         /*private void ChkIfBanned()
         {

@@ -108,7 +108,7 @@ namespace AreaTM_acbas
         public static bool banneduser = false;
 
         //ffmpeg 가동 Process
-        public static Process startFFmpeg = new Process();
+        //public static Process startFFmpeg = new Process();
 
 
         public sdvxwin()
@@ -319,10 +319,10 @@ namespace AreaTM_acbas
             BeginInvoke((MethodInvoker)delegate
             {
                 //btnToggleStreaming.Text = state;
-                if(newState == OutputState.Started && File.Exists(@"C:\MonaServer\ffmpeg.exe")) //PLIVE MultiStream2 모듈 확인
+                /*if(newState == OutputState.Started && File.Exists(@"C:\MonaServer\ffmpeg.exe")) //PLIVE MultiStream2 모듈 확인
                 {
                     startFFmpeg.Start();
-                }
+                }*/
             });
         }
 
@@ -460,7 +460,7 @@ namespace AreaTM_acbas
 
         private void sdvxwin_Shown(EventArgs e)
         {
-            DrumChat de = new DrumChat();
+            //DrumChat de = new DrumChat();
 
             VIDEO_on video_on = new VIDEO_on(this);
             video_on.Show();
@@ -477,7 +477,7 @@ namespace AreaTM_acbas
             }
             else
             {
-                Form d = de;
+                /*Form d = de;
                 d.Show();
 
                 //YouTube 정책 변경에 따른 변화된 스트리밍 방식 적용
@@ -485,39 +485,28 @@ namespace AreaTM_acbas
                 {
                     Form checkstream = new check_stream(de);
                     checkstream.Show();
-                }
+                }*/
             }
 
             this.Focus();
-            
-            if (setgame == "6_andamiro_pumpitup")
-            {
-                Delay(500);
-                if (File.Exists("already_stream_piu")) File.Delete("already_stream_piu");
-                else
-                {
-                    //Form piumute = new piu_micmute();
-                    //piumute.Show();
-                }
-            }
 
             Form ReStreaming = new NOLJA_ReStream();
             ReStreaming.Show();
 
             Form maintance;
-            if (File.Exists(@"nolja_maimaichat_termpfix\Nolja_OpenUp.exe"))
+            /*if (File.Exists(@"nolja_maimaichat_termpfix\Nolja_OpenUp.exe"))
             {
                 maintance = new maintaince_check(this, video_on);
             }
-            else maintance = new maintaince_check(this, video_on, de);
+            else */maintance = new maintaince_check(this, video_on);
             maintance.Show();
             Delay(300);
         }
 
         private void sdvxwin_Load(object sender, EventArgs e)
         {
-            startFFmpeg.StartInfo.FileName = @"C:\MonaServer\ffmpeg_start.vbs";
-            startFFmpeg.StartInfo.WorkingDirectory = @"C:\MonaServer";
+            //startFFmpeg.StartInfo.FileName = @"C:\MonaServer\ffmpeg_start.vbs";
+            //startFFmpeg.StartInfo.WorkingDirectory = @"C:\MonaServer";
 
             if (Program.ExitThread == true) Application.ExitThread();
 
@@ -822,6 +811,11 @@ namespace AreaTM_acbas
             lbl_rectimer.Font = new Font(font_5_0_r.Families[0], 12f);
             lbl_version.Font = new Font(font_5_0_r.Families[0], 11.25f);
 
+            //한줄문구 Font Setting
+            lbl_LINECUSTIOM.Font = new Font(font_5_0_b.Families[0], 10f);
+            txt_onelinetext.Font = new Font(font_5_0_r.Families[0], 12f);
+            btn_ok.Font = new Font(font_5_0_b.Families[0], 10f);
+
 
             NOLJA_Edition_Statechange();
         }
@@ -1089,6 +1083,26 @@ namespace AreaTM_acbas
             FormsChange.Enabled = false;
             btn_mute.Enabled = false;
             rec_3mh.Enabled = false;
+        }
+
+        private void btn_ok_Click(object sender, EventArgs e)
+        {
+            if (txt_onelinetext.Text == null)
+            {
+                if (File.Exists("_OnelineTXT_"))
+                {
+                    File.Delete("_OnelineTXT_");
+                }
+            }
+            else
+            {
+                if (File.Exists("_OnelineTXT_"))
+                {
+                    File.Delete("_OnelineTXT_");
+                }
+                File.WriteAllText("_OnelineTXT_", (txt_onelinetext.Text));
+                txt_onelinetext.Text = null;
+            }
         }
     }
 }

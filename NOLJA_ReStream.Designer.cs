@@ -40,7 +40,7 @@
             // 
             // lbl_information
             // 
-            this.lbl_information.Font = new System.Drawing.Font("카카오 Bold", 30F);
+            this.lbl_information.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F);
             this.lbl_information.Location = new System.Drawing.Point(13, 13);
             this.lbl_information.Name = "lbl_information";
             this.lbl_information.Size = new System.Drawing.Size(775, 50);
@@ -63,7 +63,7 @@
             this.btn_goReStream.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
             this.btn_goReStream.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btn_goReStream.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_goReStream.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.btn_goReStream.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.btn_goReStream.Location = new System.Drawing.Point(12, 287);
             this.btn_goReStream.Name = "btn_goReStream";
             this.btn_goReStream.Size = new System.Drawing.Size(452, 48);
@@ -79,7 +79,7 @@
             this.btn_seelate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.btn_seelate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btn_seelate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_seelate.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.btn_seelate.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.btn_seelate.Location = new System.Drawing.Point(470, 287);
             this.btn_seelate.Name = "btn_seelate";
             this.btn_seelate.Size = new System.Drawing.Size(318, 48);
@@ -91,10 +91,10 @@
             // lbl_restartInfo
             // 
             this.lbl_restartInfo.AutoSize = true;
-            this.lbl_restartInfo.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.lbl_restartInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.lbl_restartInfo.Location = new System.Drawing.Point(17, 235);
             this.lbl_restartInfo.Name = "lbl_restartInfo";
-            this.lbl_restartInfo.Size = new System.Drawing.Size(398, 27);
+            this.lbl_restartInfo.Size = new System.Drawing.Size(387, 29);
             this.lbl_restartInfo.TabIndex = 4;
             this.lbl_restartInfo.Text = "{N}분 {N}초 이후 자동으로 재시작 됩니다.";
             // 
@@ -114,7 +114,7 @@
             this.Controls.Add(this.btn_goReStream);
             this.Controls.Add(this.lbl_info);
             this.Controls.Add(this.lbl_information);
-            this.Font = new System.Drawing.Font("카카오 Regular", 12F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
