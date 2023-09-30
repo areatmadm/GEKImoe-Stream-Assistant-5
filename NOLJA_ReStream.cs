@@ -257,50 +257,23 @@ namespace AreaTM_acbas
                             "&mode=4&submode=4");
             }
             catch { }
-            Thread.Sleep(110000); //1분 50초 뒤 방송 시작, 이후 패치 예정
 
-            // 밴더 구분해서 놀자만 해당 코드 작동시키기 시작
+            this.TopMost = false; //일시적으로 맨 위로 해제
+            Thread.Sleep(60000); //60초 뒤 다시 방송 시작
 
-            // 밴더 구분해서 놀자만 해당 코드 작동시키기 끝
-            //Process chr = new Process();
-            //string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
-            
-            //리방 오류 방지
+            VIDEO_on.isWakeOn = true; // 리방 오류 방지 기능으로 작동
 
-            VIDEO_on.isWakeOn = true;
-
-            /*chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
-            chr.StartInfo.Arguments = pm;
-            chr.Start();*/
-
-            Thread.Sleep(10000);
-            VIDEO_on.isWakeOn = false;
-
-            //Thread.Sleep(19000);
-            /*string pvd = "taskkill /f /im chromium.exe";
-
-            string pve = "";
-            pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
-            pve += "Dim strArgs" + "\r\n";
-            pve += "strArgs = \"chromium_taskkill.bat\"" + "\r\n";
-            pve += "WshShell.Run strArgs, 0, false";
-
-            File.WriteAllText("chromium_taskkill.bat", pvd);
-            File.WriteAllText("start.vbs", pve);
-            Thread.Sleep(500);
-            Process.Start("start.vbs");
-            Thread.Sleep(1500);
-            File.Delete("chromium_taskkill.bat");
-            File.Delete("start.vbs");*/
-
-            try { sdvxwin._obs.StartStreaming(); } catch { }
+            try { sdvxwin._obs.StartStreaming(); } catch { } // 스트리밍 다시 시작
 
             Thread.Sleep(1100);
 
             if (!File.Exists("test")) getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame +
                         "&mode=0");
+            VIDEO_on.isWakeOn = false;
+
             sdvxwin.isRestreaming_onlyCheckStatus = false;
             isRestartProcessingFinished = false;
+            this.TopMost = true; //다시 맨 위로 적용
         }
 
         private void NOLJA_ReStream_Shown(object sender, EventArgs e)
