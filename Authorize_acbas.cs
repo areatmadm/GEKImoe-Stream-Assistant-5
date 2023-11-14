@@ -70,8 +70,17 @@ namespace AreaTM_acbas
             {
                 lbl_status.Text = "Get Server Response...";
                 Delay(1000);
+
                 String rsp = "";
-                rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + sdvxwin.setgame);
+                if (!File.Exists("vender.txt")) { sdvxwin.vender = "NOLJA"; }
+                else
+                { sdvxwin.vender = File.ReadAllText("vender.txt"); }
+
+                if (sdvxwin.vender == "NOLJA") { rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + 
+                    sdvxwin.setgame); } //놀자 인증
+                else {
+                    rsp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + sdvxwin.vender + "&game=" +
+                    sdvxwin.setgame); } //그외 인증
 
                 if (rsp == "Authorized")
                 {
@@ -80,10 +89,17 @@ namespace AreaTM_acbas
                     if (!File.Exists("test"))
                     {
                         string rsp_0;
-                        rsp_0 = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
-                            sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver);
+                        if (sdvxwin.vender == "NOLJA") { rsp_0 = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
+                            sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver); } //놀자
+                        else { rsp_0 = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=5&submode=0&vender=" +
+                            sdvxwin.vender + "&game=" + sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver); } //그외
                     }
                     Delay(1000);
+                    lbl_status.Text = "Get some settings...";
+                    sdvxwin.setqrinfo = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/area/" + sdvxwin.vender + "/" + 
+                        sdvxwin.setgame + "/qrinfo.otogeonpf.html");
+                    Delay(1000);
+
                     lbl_status.Text = "Done!";
                     Delay(1000);
                     break;

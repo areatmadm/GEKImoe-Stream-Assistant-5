@@ -99,7 +99,8 @@ namespace AreaTM_acbas
 
         //int chk_highlight_beta = 0;
 
-        public static string setgame;
+        public static string setgame; //현재 게임 확인
+        public static string vender; //업소 확인
 
         float obsvol = 0f;
         int chkbeta_mute; //음소거 대상 확인
@@ -550,7 +551,7 @@ namespace AreaTM_acbas
 
             if (!isCheckedGenuine)
             {
-                MessageBox.Show("아레아티엠 게키모에 인증을 받지 않은 오락실입니다." + "\r\n" + "관리자에게 문의 바랍니다.", "아레아티엠 게키모에 스트리밍 어시스턴트 인증");
+                MessageBox.Show("아레아티엠의 인증을 받지 않은 오락실입니다." + "\r\n" + "문의 SMS: 070-8018-6973", "아레아티엠 GEKImoe Stream Assistant 인증");
                 Application.ExitThread();
             }
 
@@ -566,7 +567,7 @@ namespace AreaTM_acbas
             //sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
             pictureBox1.Load(@"ResourceFiles\" + setgame + @"\qrcode.png");
 
-            setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
+            //setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
             lbl_linkinfo.Text = setqrinfo;
 
 
