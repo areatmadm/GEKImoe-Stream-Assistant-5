@@ -253,7 +253,7 @@ namespace AreaTM_acbas
                 sdvxwin.isRestreaming_onlyCheckStatus = true;
                 Thread.Sleep(200);
                 
-                if(!File.Exists("test")) getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame +
+                if(!File.Exists("test")) getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                             "&mode=4&submode=4");
             }
             catch { }
@@ -267,7 +267,7 @@ namespace AreaTM_acbas
 
             Thread.Sleep(1100);
 
-            if (!File.Exists("test")) getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame +
+            if (!File.Exists("test")) getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                         "&mode=0");
             VIDEO_on.isWakeOn = false;
 
