@@ -34,12 +34,13 @@
             // label1
             // 
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("카카오 Bold", 100F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 90F);
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1920, 1080);
             this.label1.TabIndex = 0;
-            this.label1.Text = "어시스턴트 인증에 실패했습니다.\r\n실패사유: 미인증 기기에서의 실행\r\n\r\n관리자에게 문의 바랍니다.";
+            this.label1.Text = "어시스턴트 인증에 실패했습니다.\r\n인증된 업장에서 문제가 발생할 경우\r\n아레아티엠에 문의해 주세요.\r\n\r\n업장, 게임명을 작성해\r\n070-8018" +
+    "-6973으로\r\n문자 발송해 주세요";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 

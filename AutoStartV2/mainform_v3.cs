@@ -22,7 +22,8 @@ namespace AutoStartV2
         public static long acbas_build;
         public static string acbas_partnum;
 
-        public static string vender;//오락실 어디쪽?
+        public static string vender; //오락실 정보
+        public static string vender_swdf; //오락실별 이용 소프트웨어 구분
 
         public static string p;
         public string gc_name;
@@ -123,7 +124,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.5_A_20230930";
+            lbl_nowver.Text = "5.6_A_20231114";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -203,7 +204,6 @@ namespace AutoStartV2
                 if (get_auth == "NotAuthorized")
                 {
                     this.Hide();
-                    if(File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); }
                     Form dpp = new AutoStartV3.None_N();
                     dpp.Show();
 
@@ -216,8 +216,21 @@ namespace AutoStartV2
                 else if (get_auth == "Authorized")
                 {
                     pg.Text = "GEKImoe Stream Assistant 5 서버 인증 성공!";
-                    if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // 로얄상구는 커스텀 앱 사용으로 표준앱 삭제
-                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 놀자를 포함한 대부분은 표준앱 사용
+
+                    //구. 상구 놀자 나누기
+                    //if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // 로얄상구는 커스텀 앱 사용으로 표준앱 삭제
+                    //else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 놀자를 포함한 대부분은 표준앱 사용
+                    Delay(1000);
+                    pg.Text = "서버에서 추가 정보를 불러오는 중...";
+                    //신. plan별 SW 나누기
+                    if (vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p); }
+                    else { vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p); }
+                    
+                    Delay(1000);
+                    pg.Text = "잠시만 기다려 주세요...";
+                    //mini, full 소프트웨어 나누기
+                    if (vender_swdf == "mini") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // mini 플랜 이용 시 앱만 남기기
+                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 플랜
                     break;
                 }
 
@@ -241,8 +254,8 @@ namespace AutoStartV2
                 pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(1 / 3)";
                 Process acbas_get_version = new Process();
 
-                if(vender=="SANGGU") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("SangguGSA5.exe"); }
-                else { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); }
+                if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("SangguGSA5.exe"); } //mini플랜 간소화버전 사용
+                else { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full버전 full버전 사용
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
                 Delay(1600);
@@ -290,10 +303,16 @@ namespace AutoStartV2
             if (!File.Exists("test"))
             {
                 string getp_d = "";
-                if(vender == "SANGGU") getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?game=" + p +
+                if (vender != "NOLJA")
+                {
+                    getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?game=" + p +
                             "&mode=3&submode=1");
-                else getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
+                }
+                else
+                {
+                    getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
                             "&mode=3&submode=1");
+                }
             }
             Delay(3000);
 
@@ -619,7 +638,7 @@ namespace AutoStartV2
             Delay(4000);
 
             pg.Text = language_.ko_kr_DONE_;
-            if(vender=="SANGGU") { Process.Start(Path.GetFullPath(@"SangguGSA5.exe")); }
+            if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"SangguGSA5.exe")); }
             else { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
 
             Delay(2000);

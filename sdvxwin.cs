@@ -76,6 +76,7 @@ namespace AreaTM_acbas
         public static bool ischeckedupd = false;
 
         public static bool isCheckedGenuine = false;
+        public static string setqrinfo; //QR코드 위에 있는 문구 불러오기
 
         //ReStreamingStatus
         public static bool isRestreaming_onlyCheckStatus = false;
@@ -565,7 +566,7 @@ namespace AreaTM_acbas
             //sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
             pictureBox1.Load(@"ResourceFiles\" + setgame + @"\qrcode.png");
 
-            string setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
+            setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
             lbl_linkinfo.Text = setqrinfo;
 
 
