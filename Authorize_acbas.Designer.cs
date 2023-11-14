@@ -47,7 +47,7 @@
             // 
             // lbl_0
             // 
-            this.lbl_0.Font = new System.Drawing.Font("카카오 Bold", 24F);
+            this.lbl_0.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.lbl_0.Location = new System.Drawing.Point(12, 128);
             this.lbl_0.Name = "lbl_0";
             this.lbl_0.Size = new System.Drawing.Size(697, 46);
@@ -73,7 +73,7 @@
             this.Controls.Add(this.lbl_status);
             this.Controls.Add(this.lbl_0);
             this.Controls.Add(this.pictureBox1);
-            this.Font = new System.Drawing.Font("카카오 Regular", 11F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -83,7 +83,7 @@
             this.Name = "Authorize_acbas";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AreaTM Arcade Stream Assistant - Genuine Authorizing...";
+            this.Text = "AreaTM GEKImoe Stream Assistant 5 - Genuine Authorizing...";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Authrize_acbas_Load);
             this.Shown += new System.EventHandler(this.Authrize_acbas_Shown);
