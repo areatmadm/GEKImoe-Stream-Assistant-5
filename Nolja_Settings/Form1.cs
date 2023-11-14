@@ -90,6 +90,7 @@ namespace Nolja_Settings
 
             string noll;
             string setgame = "";
+            string vender = "";
             if (File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자 독자규격 사용 시
             {
                 setgame = File.ReadAllText(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""));
@@ -99,13 +100,16 @@ namespace Nolja_Settings
                 setgame = File.ReadAllText(Path.GetFullPath("game_set.txt").Replace(@"Bugfix\", ""));
             }
 
-            if(File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자는 독자적인 도메인 이용
+            if(File.Exists(Path.GetFullPath("vender.txt").Replace(@"Bugfix\", ""))) vender = File.ReadAllText(Path.GetFullPath("vender.txt").Replace(@"Bugfix\", ""));
+            else vender = "NOLJA";
+
+            if (File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자는 독자적인 도메인 이용
             {
                 noll = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=5&game=" + setgame);
             }
             else // 그 외에는 표준규격 사용
             {
-                noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?mode=4&submode=5&game=" + setgame);
+                noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + vender + "mode=4&submode=5&game=" + setgame);
             }
             
             Delay(1000);
