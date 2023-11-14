@@ -224,7 +224,7 @@ namespace AreaTM_acbas
                             string getp_d = "";
                             while (getp_d != "Success")
                             {
-                                getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame +
+                                getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                                             "&mode=3&submode=1");
                                 Thread.Sleep(10);
                             }
@@ -247,7 +247,7 @@ namespace AreaTM_acbas
                             string getp_d = "";
                             while (getp_d != "Success")
                             {
-                                getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame +
+                                getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                                         "&mode=3&submode=0");
                                 Thread.Sleep(10);
                             }

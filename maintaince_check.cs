@@ -182,7 +182,7 @@ namespace AreaTM_acbas
                     Thread.Sleep(rechecktime);
                     string getp = "";
                     if (!sdvxwin.isRestreaming_onlyCheckStatus)
-                         getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + sdvxwin.setgame + "&mode=0");
+                         getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame + "&mode=0");
 
                     if (getp == "Success")
                     {
@@ -239,7 +239,7 @@ namespace AreaTM_acbas
                     pve += "WshShell.Run strArgs, 0, false";
 
                     string noll;
-                    noll = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=5&game=" + sdvxwin.setgame);
+                    noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=4&submode=5&game=" + sdvxwin.setgame);
 
                     File.WriteAllText("restart_pc.bat", pvd);
                     File.WriteAllText("restart_pc.vbs", pve);
@@ -462,7 +462,7 @@ namespace AreaTM_acbas
             string getp = "";
             if (!isopen)
             {
-                getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/maintance_old.php?ngame=" + sdvxwin.setgame +
+                getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance_old.php?ngame=" + sdvxwin.setgame +
                     "&build=" + sdvxwin.nolja_build);
             }
             //https://nolja.bizotoge.areatm.com/public/maintance_old.php?ngame=0_sega_maimaidx
@@ -513,7 +513,7 @@ namespace AreaTM_acbas
 
             if (!isupd) //AreaTM IoT
             {
-                getp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/areatm_iot?game=" + sdvxwin.setgame +
+                getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/areatm_iot?game=" + sdvxwin.setgame +
                     "&mode=1");
 
                 if (getp == "1" && !sdvxwin.AreaTM_IoT)

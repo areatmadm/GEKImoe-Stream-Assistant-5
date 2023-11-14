@@ -72,7 +72,7 @@ namespace AreaTM_acbas
         public static PrivateFontCollection font_5_0_r = new PrivateFontCollection();
         public static PrivateFontCollection font_5_0_b = new PrivateFontCollection();
 
-        //NOLJA Update Chk
+        //GEKImoe Stream Assistant 5 - Update Chk
         public static bool ischeckedupd = false;
 
         public static bool isCheckedGenuine = false;
