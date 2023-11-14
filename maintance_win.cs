@@ -40,7 +40,7 @@ namespace AreaTM_acbas
 
         public void InitBrowser()
         {
-            string url = GetHtmlString("https://nolja.bizotoge.areatm.com/public/maintance/?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
+            string url = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
 
             browser = new ChromiumWebBrowser(url);
             //browser = new ChromiumWebBrowser("chrome://version");
