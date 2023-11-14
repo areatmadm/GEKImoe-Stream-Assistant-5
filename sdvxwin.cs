@@ -565,7 +565,7 @@ namespace AreaTM_acbas
             sdvxpic.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/gameservice/logoimg/" + setgame + "/logo.png";
 
             //sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
-            pictureBox1.Load(@"ResourceFiles\" + setgame + @"\qrcode.png");
+            pictureBox1.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/area/" + vender + "/qrcode.png";
 
             //setqrinfo = File.ReadAllText(@"ResourceFiles\" + setgame + @"\qrinfo.otogeonpf");
             lbl_linkinfo.Text = setqrinfo;
