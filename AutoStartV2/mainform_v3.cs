@@ -124,7 +124,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.6_A_20231114";
+            lbl_nowver.Text = "5.6_B_20231115";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -298,7 +298,7 @@ namespace AutoStartV2
             }
             
             
-            Delay(1200);
+            Delay(1100);
             //pg.Text = "잠시만 기다려주세요...";
             if (!File.Exists("test"))
             {
@@ -314,7 +314,7 @@ namespace AutoStartV2
                             "&mode=3&submode=1");
                 }
             }
-            Delay(3000);
+            Delay(2000);
 
             //pg.Text = "인터넷 상태 점검 중...";
             //Delay(500);
@@ -341,7 +341,7 @@ namespace AutoStartV2
             Process[] processifuseobs = Process.GetProcessesByName("obs64"); //obs 선실행 중인지 체크
             if (processifuseobs.Length < 1)
             {
-                pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG;
+                
                 //2021.11.16 : OBS Studio excuting code changed
                 Process findobs = new Process();
                 //if (File.Exists(@"C:\Program Files\obs-studio\bin\64bit\obs64.exe")) findobs.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\64bit\obs64.exe";
@@ -355,7 +355,19 @@ namespace AutoStartV2
                 //    return;
                 //}
                 //findobs.Start();
-                Process.Start(Path.GetFullPath(@"autoobs.lnk"));
+
+                //2023.11.15 : OBS 30.0.0 Logic changed - Safety mode disable
+                pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_before;
+                Delay(900);
+                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode")) //Find safemode enable status
+                {
+                    pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_before_delete;
+                    Delay(1000);
+                    try { File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode"); } catch { }//do not run safe mode
+                }
+
+                pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG;
+                Process.Start(Path.GetFullPath(@"autoobs.lnk")); //Start OBS
                 /*if (p == "3_squarepixels_ez2ac") Delay(16000);
                 else */
                 Delay(8000);

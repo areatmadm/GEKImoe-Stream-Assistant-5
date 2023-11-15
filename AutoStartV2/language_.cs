@@ -30,6 +30,8 @@ namespace AutoStartV2
 
         public static string ko_kr_STARTING_PG = "를 시작하는 중...";
         public static string ko_kr_STARTING_PG_alreadyrun = "는(은) 이미 실행 중입니다.";
+        public static string ko_kr_STARTING_PG_before = "를 시작하기 전 안전모드 여부 확인중...";
+        public static string ko_kr_STARTING_PG_before_delete = "를 시작하기 전 안전모드 비활성화 중...";
 
         public static string ko_kr_STARTING_PG_sync = "OBS 연동작업 진행 중...";
 
