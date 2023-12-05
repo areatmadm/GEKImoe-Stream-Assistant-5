@@ -1109,7 +1109,86 @@ namespace AreaTM_acbas
 
         private void btn_cardmove_Click(object sender, EventArgs e)
         {
+            Process browserProcess_cardMove = new Process(); //Edge/Firefox/NaverWhale/Chrome 열기 위한 프로세스 선언
+            string moveWebPage = ""; //이동할 웹페이지 주소
+            string privatePageMode = ""; //시크릿모드 인수줄 브라우저별 설정
 
+            //게임카드(Aime, banapassport, NESiCA, e-amusement) 관리페이지 이동
+            //해당되지 않는 개발사는 버튼 클릭 시 비활성화 처리
+
+            if (setgame.Contains("0_sega") || setgame.Contains("2_marvelous")) //세가 또는 마벨러스 제작 게임은 Aime 카드 사용으로 Aime 카드 관리 페이지로 이동
+            {
+                moveWebPage = "https://my-aime.net"; //웹페이지를 아이메 설정 페이지로 세팅
+            }
+            else if (setgame.Contains("1_namco")) //반다이 남코 엔터테인먼트는 banapassport 사용으로 banapassport 카드 관리 페이지로 이동
+            {
+                moveWebPage = "https://banapass.net/"; //웹페이지를 바나패스 설정 페이지로 세팅
+            }
+            else if (setgame.Contains("7_taito")) //타이토는 NESiCA 사용으로 NESiCA 카드 관리 페이지로 이동
+            {
+                moveWebPage = "https://nesica.net/"; //웹페이지를 네시카 설정 페이지로 세팅
+            }
+            else if (setgame.Contains("5_konami")) //코나미는 e-amusement pass 사용으로 e-amusement 페이지로 이동
+            {
+                moveWebPage = "https://p.eagate.573.jp/gate/eapass/menu.html"; //웹페이지를 이어뮤 페이지로 세팅
+            }
+            else //그 외 네트워크 미사용 업체
+            {
+                btn_cardmove.Enabled = false; //버튼 비활성화
+                return; //아무성과 없이 이 과정 종료시키기
+            }
+
+            //Edge → Firefox → Whale → Chrome 순으로 시크릿모드로 실행하기
+            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+
+            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                privatePageMode = "-private ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe")) //Firefox(구 32비트)
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                privatePageMode = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) //Naver Whale 구.32비트
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
+                privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe")) //Naver Whale
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
+                privatePageMode = "--incognito ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) //크롬 구.32비트
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                privatePageMode = "--incognito ";
+            }
+            else
+            {
+                return; //또 에러네;;
+            }
+
+            browserProcess_cardMove.StartInfo.Arguments = privatePageMode + moveWebPage; //브라우저 실행 전 사전값 세팅
+            browserProcess_cardMove.Start(); //브라우저 시작
         }
     }
 }
