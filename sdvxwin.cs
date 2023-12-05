@@ -384,7 +384,7 @@ namespace AreaTM_acbas
                     rec_start.Enabled = true;
                     if (chkbeta_mute == 1) btn_mute.Enabled = true;
                     //rec_3mh.Enabled = true;
-                    if (!streamstatus) btn_personal.Enabled = true;
+                    //if (!streamstatus) btn_personal.Enabled = true;
                 }
 
                 else if (newState == OutputState.Starting)
@@ -396,7 +396,7 @@ namespace AreaTM_acbas
                     rec_start.Enabled = false;
                     if (chkbeta_mute == 1) btn_mute.Enabled = false;
                     //rec_3mh.Enabled = false;
-                    if(!streamstatus) btn_personal.Enabled = false;
+                    //if(!streamstatus) btn_personal.Enabled = false;
                 }
 
                 else if (newState == OutputState.Stopping)
@@ -560,7 +560,7 @@ namespace AreaTM_acbas
 
             //if (setgame == "0_sega_maimaidx" || setgame == "6_andamiro_pumpitup") btn_personal.Enabled = true;
             //else btn_personal.Enabled = false;
-            btn_personal.Enabled = true;
+            //btn_personal.Enabled = true;
 
             sdvxpic.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/gameservice/logoimg/" + setgame + "/logo.png";
 
@@ -805,7 +805,7 @@ namespace AreaTM_acbas
 
             rec_3mh.Font = kakao_r_16;
             //updatelog.Font = kakao_r_12;
-            btn_personal.Font = kakao_r_12;
+            btn_cardmove.Font = kakao_r_12;
             btn_more.Font = kakao_r_12;
 
             lbl_linkinfo.Font = new Font(font_5_0_b.Families[0], 17f, FontStyle.Bold);
@@ -831,7 +831,7 @@ namespace AreaTM_acbas
             //if (btn_itunes.Enabled) btn_itunes.BackColor = nowseason_b_color; else btn_itunes.BackColor = chinatsu_disabled;
             //if (updatelog.Enabled) updatelog.BackColor = nowseason_b_color; else updatelog.BackColor = chinatsu_disabled;
             if (rec_3mh.Enabled) rec_3mh.BackColor = nowseason_b_color; else rec_3mh.BackColor = chinatsu_disabled;
-            if (btn_personal.Enabled) btn_personal.BackColor = nowseason_b_color; else btn_personal.BackColor = chinatsu_disabled;
+            if (btn_cardmove.Enabled) btn_cardmove.BackColor = nowseason_b_color; else btn_cardmove.BackColor = chinatsu_disabled;
             if (btn_more.Enabled) btn_more.BackColor = nowseason_b_color; else btn_more.BackColor = chinatsu_disabled;
         }
         private void rec_start_EnabledChanged(object sender, EventArgs e) //녹화 시작/중지 버튼 상태 변경 시 작동되는 코드
@@ -869,11 +869,11 @@ namespace AreaTM_acbas
             if (rec_3mh.Enabled) rec_3mh.BackColor = nowseason_b_color;
             else rec_3mh.BackColor = chinatsu_disabled;
         }
-        private void btn_personal_EnabledChanged(object sender, EventArgs e) //PLIVE 버튼 상태 변경 시 작동되는 코드
+        /*private void btn_personal_EnabledChanged(object sender, EventArgs e) //PLIVE 버튼 상태 변경 시 작동되는 코드
         {
             if (btn_personal.Enabled) btn_personal.BackColor = nowseason_b_color;
             else btn_personal.BackColor = chinatsu_disabled;
-        }
+        }*/
         private void btn_more_EnabledChanged(object sender, EventArgs e) //+설정 버튼 상태 변경 시 작동되는 코드
         {
             if (btn_more.Enabled) btn_more.BackColor = nowseason_b_color;
@@ -947,7 +947,7 @@ namespace AreaTM_acbas
             if(setgame != "6_andamiro_pumpitup") FormsChange.Enabled = false;
             if (chkbeta_mute == 1) btn_mute.Enabled = false;
             rec_start.Enabled = false; openexplorer_rec.Enabled = false; /*btn_itunes.Enabled = false;*/
-            /*updatelog.Enabled = false;*/ rec_3mh.Enabled = false; btn_personal.Enabled = false; btn_more.Enabled = false;
+            /*updatelog.Enabled = false;*/ rec_3mh.Enabled = false; /*btn_personal.Enabled = false;*/ btn_more.Enabled = false;
             lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_HLSAVE;
 
             try
@@ -964,7 +964,7 @@ namespace AreaTM_acbas
             if (setgame != "6_andamiro_pumpitup") FormsChange.Enabled = true;
             if (chkbeta_mute == 1) btn_mute.Enabled = true;
             rec_start.Enabled = true; openexplorer_rec.Enabled = true; /*btn_itunes.Enabled = true;*/
-            /*updatelog.Enabled = true;*/ rec_3mh.Enabled = true; btn_personal.Enabled = true; btn_more.Enabled = true;
+            /*updatelog.Enabled = true;*/ rec_3mh.Enabled = true; /*btn_personal.Enabled = true;*/ btn_more.Enabled = true;
             lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_IDLE;
         }
 
@@ -1052,9 +1052,9 @@ namespace AreaTM_acbas
                 //updatelog.FlatAppearance.BorderColor = season_btn_2[0];
                 //updatelog.FlatAppearance.MouseDownBackColor = season_btn_2[1];
                 //updatelog.FlatAppearance.MouseOverBackColor = season_btn_2[2];
-                btn_personal.FlatAppearance.BorderColor = season_btn_2[0];
-                btn_personal.FlatAppearance.MouseDownBackColor = season_btn_2[1];
-                btn_personal.FlatAppearance.MouseOverBackColor = season_btn_2[2];
+                btn_cardmove.FlatAppearance.BorderColor = season_btn_2[0];
+                btn_cardmove.FlatAppearance.MouseDownBackColor = season_btn_2[1];
+                btn_cardmove.FlatAppearance.MouseOverBackColor = season_btn_2[2];
                 btn_more.FlatAppearance.BorderColor = season_btn_2[0];
                 btn_more.FlatAppearance.MouseDownBackColor = season_btn_2[1];
                 btn_more.FlatAppearance.MouseOverBackColor = season_btn_2[2];
@@ -1105,6 +1105,11 @@ namespace AreaTM_acbas
                 File.WriteAllText("_OnelineTXT_", (txt_onelinetext.Text));
                 txt_onelinetext.Text = null;
             }
+        }
+
+        private void btn_cardmove_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

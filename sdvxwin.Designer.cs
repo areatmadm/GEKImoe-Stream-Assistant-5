@@ -40,15 +40,15 @@
             this.timer_viewer = new System.Windows.Forms.Timer(this.components);
             this.btn_mute = new System.Windows.Forms.Button();
             this.rec_3mh = new System.Windows.Forms.Button();
-            this.btn_personal = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.sdvxpic = new System.Windows.Forms.PictureBox();
             this.btn_more = new System.Windows.Forms.Button();
             this.openexplorer_rec = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_ok = new System.Windows.Forms.Button();
             this.txt_onelinetext = new System.Windows.Forms.TextBox();
             this.lbl_LINECUSTIOM = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.sdvxpic = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.btn_cardmove = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sdvxpic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -172,42 +172,6 @@
             this.rec_3mh.EnabledChanged += new System.EventHandler(this.rec_3mh_EnabledChanged);
             this.rec_3mh.Click += new System.EventHandler(this.setpersonalbroadcast_Click);
             // 
-            // btn_personal
-            // 
-            this.btn_personal.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btn_personal.FlatAppearance.BorderSize = 3;
-            this.btn_personal.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btn_personal.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btn_personal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_personal.Font = new System.Drawing.Font("나눔바른고딕OTF", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_personal.Location = new System.Drawing.Point(12, 292);
-            this.btn_personal.Name = "btn_personal";
-            this.btn_personal.Size = new System.Drawing.Size(188, 32);
-            this.btn_personal.TabIndex = 6;
-            this.btn_personal.Text = "PLIVE MultiStream";
-            this.btn_personal.UseVisualStyleBackColor = true;
-            this.btn_personal.EnabledChanged += new System.EventHandler(this.btn_personal_EnabledChanged);
-            this.btn_personal.Click += new System.EventHandler(this.btn_personal_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::AreaTM_acbas.Properties.Resources.frame;
-            this.pictureBox1.Location = new System.Drawing.Point(70, 610);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(247, 247);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
-            // sdvxpic
-            // 
-            this.sdvxpic.Location = new System.Drawing.Point(0, 0);
-            this.sdvxpic.Name = "sdvxpic";
-            this.sdvxpic.Size = new System.Drawing.Size(400, 160);
-            this.sdvxpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.sdvxpic.TabIndex = 0;
-            this.sdvxpic.TabStop = false;
-            // 
             // btn_more
             // 
             this.btn_more.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -220,7 +184,7 @@
             this.btn_more.Name = "btn_more";
             this.btn_more.Size = new System.Drawing.Size(182, 32);
             this.btn_more.TabIndex = 7;
-            this.btn_more.Text = "+설정";
+            this.btn_more.Text = "더보기";
             this.btn_more.UseVisualStyleBackColor = true;
             this.btn_more.EnabledChanged += new System.EventHandler(this.btn_more_EnabledChanged);
             this.btn_more.Click += new System.EventHandler(this.btn_more_Click);
@@ -241,16 +205,6 @@
             this.openexplorer_rec.UseVisualStyleBackColor = true;
             this.openexplorer_rec.EnabledChanged += new System.EventHandler(this.openexplorer_rec_EnabledChanged);
             this.openexplorer_rec.Click += new System.EventHandler(this.openexplorer_rec_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.Color.White;
-            this.pictureBox2.Location = new System.Drawing.Point(59, 598);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(269, 273);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 113;
-            this.pictureBox2.TabStop = false;
             // 
             // btn_ok
             // 
@@ -289,6 +243,52 @@
             this.lbl_LINECUSTIOM.TabIndex = 114;
             this.lbl_LINECUSTIOM.Text = "한줄문구 입력 - 방송화면에 반영";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::AreaTM_acbas.Properties.Resources.frame;
+            this.pictureBox1.Location = new System.Drawing.Point(70, 610);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(247, 247);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // sdvxpic
+            // 
+            this.sdvxpic.Location = new System.Drawing.Point(0, 0);
+            this.sdvxpic.Name = "sdvxpic";
+            this.sdvxpic.Size = new System.Drawing.Size(400, 160);
+            this.sdvxpic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.sdvxpic.TabIndex = 0;
+            this.sdvxpic.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.White;
+            this.pictureBox2.Location = new System.Drawing.Point(59, 598);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(269, 273);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 113;
+            this.pictureBox2.TabStop = false;
+            // 
+            // btn_cardmove
+            // 
+            this.btn_cardmove.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_cardmove.FlatAppearance.BorderSize = 3;
+            this.btn_cardmove.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btn_cardmove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_cardmove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_cardmove.Font = new System.Drawing.Font("나눔바른고딕OTF", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_cardmove.Location = new System.Drawing.Point(12, 292);
+            this.btn_cardmove.Name = "btn_cardmove";
+            this.btn_cardmove.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_cardmove.Size = new System.Drawing.Size(188, 32);
+            this.btn_cardmove.TabIndex = 6;
+            this.btn_cardmove.Text = "게임카드 이전하기";
+            this.btn_cardmove.UseVisualStyleBackColor = true;
+            this.btn_cardmove.Click += new System.EventHandler(this.btn_cardmove_Click);
+            // 
             // sdvxwin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -296,12 +296,12 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(400, 920);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_cardmove);
             this.Controls.Add(this.btn_ok);
             this.Controls.Add(this.txt_onelinetext);
             this.Controls.Add(this.lbl_LINECUSTIOM);
             this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_linkinfo);
-            this.Controls.Add(this.btn_personal);
             this.Controls.Add(this.rec_3mh);
             this.Controls.Add(this.btn_mute);
             this.Controls.Add(this.lbl_rectimer);
@@ -347,12 +347,12 @@
         private System.Windows.Forms.Timer timer_viewer;
         private System.Windows.Forms.Button btn_mute;
         private System.Windows.Forms.Button rec_3mh;
-        private System.Windows.Forms.Button btn_personal;
         private System.Windows.Forms.Button btn_more;
         private System.Windows.Forms.Button openexplorer_rec;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.TextBox txt_onelinetext;
         private System.Windows.Forms.Label lbl_LINECUSTIOM;
+        private System.Windows.Forms.Button btn_cardmove;
     }
 }
