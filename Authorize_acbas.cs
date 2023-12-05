@@ -96,8 +96,10 @@ namespace AreaTM_acbas
                     }
                     Delay(1000);
                     lbl_status.Text = "Get some settings...";
-                    sdvxwin.setqrinfo = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/area/" + sdvxwin.vender + "/" + 
-                        sdvxwin.setgame + "/qrinfo.otogeonpf.html");
+                    //텍스트 일시 비활성화
+                    /*sdvxwin.setqrinfo = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/area/" + sdvxwin.vender + "/" + 
+                        sdvxwin.setgame + "/qrinfo.otogeonpf.html");*/
+                    sdvxwin.setqrinfo = "";
                     Delay(1000);
 
                     lbl_status.Text = "Done!";
