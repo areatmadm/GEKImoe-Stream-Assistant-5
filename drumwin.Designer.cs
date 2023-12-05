@@ -102,7 +102,7 @@
             this.Name = "drumwin";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "아레아티엠 GEKImoe Stream Assistant 업데이트 내역";
+            this.Text = "아레아티엠 GEKImoe Stream Assistant 5 업데이트 내역";
             this.Load += new System.EventHandler(this.drumwin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
