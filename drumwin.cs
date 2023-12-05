@@ -35,7 +35,7 @@ namespace AreaTM_acbas
 
         private void drumwin_Load(object sender, EventArgs e)
         {
-            lbl_font.Text = "(c) 2019-2023 AreaTM" + "\r\n" +
+            lbl_font.Text = "(c) 2019-2024 AreaTM" + "\r\n" +
                 "This assistant can use only for user or company, authorized by AreaTM." + "\r\n\r\n" +
                 "Font Copyright (c) NAVER Corp." + "\r\n" + 
                 "Chromium, OBS-Websocket, Gecko의 오픈소스가 사용되었습니다.";
