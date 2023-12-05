@@ -474,8 +474,8 @@ namespace AutoStartV2
                         Delay(2000);
                     }*/
 
-                    //NOLJA maimaiDX CamPatcher
-                    if (vender == "NOLJA" && p == "0_sega_maimaidx")
+                    //CamPatcher
+                    if (File.Exists(@"WebCameraConfig\cam_sett.cfg"))
                     {
                         pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
 
