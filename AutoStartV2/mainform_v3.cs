@@ -31,7 +31,6 @@ namespace AutoStartV2
 
         public static PrivateFontCollection font_3_0_s = new PrivateFontCollection();
 
-        bool plive_available = false;
         bool isstr = false;
 
         protected OBSWebsocket _obs;
@@ -77,16 +76,6 @@ namespace AutoStartV2
         public AutoStartV3Main()
         {
             InitializeComponent();
-        }
-
-        void isPliveAvailable_Alpha() //2023년 12월부로 해당 코드 삭제
-        {
-            //if (File.Exists(@"C:\nginx-rtmp-win32-dev\nginx.exe")) //nginx서버 노후화로 인한 코드 정리
-            if (File.Exists(@"C:\MonaServer\MonaServer.exe") && File.Exists(@"C:\MonaServer\ffmpeg.exe") && File.Exists(@"C:\MonaServer\ffprobe.exe")) //MonaServer, ffmpeg로 대체
-            {
-                plive_available = true;
-            }
-            else plive_available = false;
         }
 
         private void AutoStartV3Main_Load(object sender, EventArgs e)
@@ -217,9 +206,6 @@ namespace AutoStartV2
                 {
                     pg.Text = "GEKImoe Stream Assistant 5 서버 인증 성공!";
 
-                    //구. 상구 놀자 나누기
-                    //if (vender == "SANGGU") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // 로얄상구는 커스텀 앱 사용으로 표준앱 삭제
-                    //else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 놀자를 포함한 대부분은 표준앱 사용
                     Delay(1000);
                     pg.Text = "서버에서 추가 정보를 불러오는 중...";
                     //신. plan별 SW 나누기
@@ -426,53 +412,7 @@ namespace AutoStartV2
                 OutputStatus optstr = _obs.GetStreamingStatus();
                 if (!optstr.IsStreaming)
                 {
-                    pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_availablecheck;
-                    pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_unavailable;//불가능 임시패치(서비스종료)
-                    //isPliveAvailable_Alpha();
-                    Delay(1000);
-
-                    /*if (plive_available)
-                    {
-                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_available;
-                        Delay(500);
-
-                        //PLIVE 2023년 12월 서비스 종료 예정
-                        pg.Text = "PLIVE 서비스는 2023년 12월 서비스 종료됩니다. 그동안 성원에 감사드립니다.";
-                        Delay(5000);
-                        //Process[] processifusenginx = Process.GetProcessesByName("nginx");
-                        Process[] processifusenginx = Process.GetProcessesByName("MonaServer");
-                        if (processifusenginx.Length >= 1)
-                        {
-                            pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_stopprocess;
-                            Delay(100);
-                            for (int i = 0; i < processifusenginx.Length; i++)
-                            {
-                                processifusenginx[i].Kill();
-                            }
-                            //Process.Start("nginxstop.lnk");
-                            Delay(2000);
-                        }
-                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_initialize;
-                        //Process.Start(@"nginxrollback.bat");
-                        File.Copy(@"C:\MonaServer\ffmpeg_start.bat.bak", @"C:\MonaServer\ffmpeg_start.bat", true);
-                        Delay(3000);
-
-                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_start;
-                        //Process.Start(@"nginx.lnk");
-
-                        //MonaServer 시작
-                        Process MonaStart = new Process();
-                        MonaStart.StartInfo.FileName = @"C:\MonaServer\MonaServer.vbs";
-                        MonaStart.StartInfo.WorkingDirectory = @"C:\MonaServer";
-                        MonaStart.Start();
-
-                        Delay(3000);
-                    }
-                    else
-                    {
-                        pg.Text = language_.ko_kr_STARTING_PG_PLIVEMULTI_unavailable;
-                        Delay(2000);
-                    }*/
+                    Delay(500);
 
                     //CamPatcher
                     if (File.Exists(@"WebCameraConfig\cam_sett.cfg"))
@@ -494,49 +434,8 @@ namespace AutoStartV2
                         Delay(2000);
                     }
 
-                    /*if (File.Exists(@"chromium\chromium.exe")) //2023년 10월부터 놀자오락실만 가동(x) 놀자도 미가동
-                    {
-                        
-                        pg.Text = language_.ko_kr_STARTING_PG_beforestream;
-
-                        Process chr = new Process();
-                        string pm = "https://studio.youtube.com/channel/UC/livestreaming/dashboard";
-
-                        chr.StartInfo.FileName = System.IO.Path.GetFullPath("chromium") + @"\chromium.exe";
-                        chr.StartInfo.Arguments = pm;
-                        chr.Start();
-
-                        Delay(27000);
-
-                        killProcess = Process.GetProcessesByName("chromium");
-                        if (killProcess.Length >= 1)
-                        {
-                            for (int i = 0; i < killProcess.Length; i++)
-                            {
-                                killProcess[i].Kill();
-                            }
-                            Delay(100);
-                        }
-
-                        killProcess = null;
-                        this.Focus();
-                    }*/
-
                     pg.Text = language_.ko_kr_STARTING_PG_startstream;
                     _obs.StartStreaming();
-
-
-                    if (plive_available) //PLIVE 2023년 10월부터 놀자오락실만 가동, 12월부로 서비스종료로 코드 삭제
-                    {
-                        pg.Text = "Starting ffmpeg...";
-                        Delay(1000);
-
-                        //ffmpeg 시작
-                        Process MonaStart = new Process();
-                        MonaStart.StartInfo.FileName = @"C:\MonaServer\ffmpeg_start.vbs";
-                        MonaStart.StartInfo.WorkingDirectory = @"C:\MonaServer";
-                        MonaStart.Start();
-                    }
                 }
                 else
                 {
