@@ -112,6 +112,8 @@ namespace AreaTM_acbas
         //ffmpeg 가동 Process
         //public static Process startFFmpeg = new Process();
 
+        //버전 업 확인, 확인될 경우 업데이트 로그 표시, 기본값은 false
+        public static bool isUpdateLogWindowShow = false;
 
         public sdvxwin()
         {
@@ -554,6 +556,12 @@ namespace AreaTM_acbas
                 MessageBox.Show("아레아티엠의 인증을 받지 않은 오락실입니다." + "\r\n" + "문의 SMS: 070-8018-6973", "아레아티엠 GEKImoe Stream Assistant 인증");
                 Application.ExitThread();
             }
+
+            if (isUpdateLogWindowShow) //업데이트 로그를 표시해야 할 때
+            {
+                UpdateLogShow(); //업데이트 로그를 띄우기 위해 인터넷 창 표시
+            }
+
 
             //NOLJA_Game_Set setgame_newget = new NOLJA_Game_Set();
             //setgame = setgame_newget.setgame_dll();
@@ -1189,6 +1197,67 @@ namespace AreaTM_acbas
 
             browserProcess_cardMove.StartInfo.Arguments = privatePageMode + moveWebPage; //브라우저 실행 전 사전값 세팅
             browserProcess_cardMove.Start(); //브라우저 시작
+        }
+
+        private void UpdateLogShow() //업데이트 로그를 웹 브라우저에서 표시해주기
+        {
+            Process browserProcess_updateLogShow = new Process(); //Edge/Firefox/NaverWhale/Chrome 열기 위한 프로세스 선언
+            string moveWebPage = ""; //이동할 웹페이지 주소
+            string privatePageMode = ""; //시크릿모드 인수줄 브라우저별 설정
+
+            moveWebPage = "https://pages.areatm.com/gekimoe_stream_assistant-5/updatelog/" + Program.acbas_build + "/ko"; //웹페이지를 업데이트 페이지로 설정
+
+            //Edge → Firefox → Whale → Chrome 순으로 시크릿모드로 실행하기
+            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+
+            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                privatePageMode = "-private ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe")) //Firefox(구 32비트)
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                privatePageMode = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) //Naver Whale 구.32비트
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
+                privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe")) //Naver Whale
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
+                privatePageMode = "--incognito ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) //크롬 구.32비트
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                privatePageMode = "--incognito ";
+            }
+            else
+            {
+                return; //또 에러네;;
+            }
+
+            browserProcess_updateLogShow.StartInfo.Arguments = privatePageMode + moveWebPage; //브라우저 실행 전 사전값 세팅
+            browserProcess_updateLogShow.Start(); //브라우저 시작
         }
     }
 }
