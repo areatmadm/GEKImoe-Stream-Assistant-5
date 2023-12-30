@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AreaTM_ArcadeStreamAssistance", "AreaTM_ArcadeStreamAssistance.csproj", "{3D0790D5-9FBE-4FE3-8D68-AFC342DA207D}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoljaPromUpdater", "NoljaPr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nolja_Settings", "Nolja_Settings\Nolja_Settings.csproj", "{FA09B623-9A79-48AB-A8A5-68ADF1B4B5F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoStartV2", "AutoStartV2\AutoStartV2.csproj", "{5312DCD1-6257-4CCC-A445-1F8EFD30F8B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoStartV3", "AutoStartV2\AutoStartV3.csproj", "{5312DCD1-6257-4CCC-A445-1F8EFD30F8B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

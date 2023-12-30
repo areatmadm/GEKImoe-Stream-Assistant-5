@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 // 어셈블리에 대한 일반 정보는 다음 특성 집합을 통해 
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
-[assembly: AssemblyTitle("AreaTM GEKImoe acbas AutoStart System")]
+[assembly: AssemblyTitle("AreaTM GEKImoe Stream Assistant AutoStart System")]
 [assembly: AssemblyDescription("AreaTM GEKImoe Stream Assistant BOOTLOADER")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("AreaTM GEKImoe")]
-[assembly: AssemblyProduct("AutoStartABCAS")]
-[assembly: AssemblyCopyright("Copyright © 2021 AreaTM GEKImoe")]
-[assembly: AssemblyTrademark("AreaTM GEKImoe")]
+[assembly: AssemblyCompany("AreaTM")]
+[assembly: AssemblyProduct("AutoStartGSA")]
+[assembly: AssemblyCopyright("Copyright © 2019-2023 AreaTM")]
+[assembly: AssemblyTrademark("AreaTM")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.6.1.5")]
-[assembly: AssemblyFileVersion("5.6.1.5")]
+[assembly: AssemblyVersion("5.7.0.1")]
+[assembly: AssemblyFileVersion("5.7.0.1")]
 [assembly: NeutralResourcesLanguage("ko-KR")]
 

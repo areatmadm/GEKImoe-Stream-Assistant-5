@@ -113,7 +113,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.6_B_20231115";
+            lbl_nowver.Text = "5.7_A_20231230";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -214,9 +214,10 @@ namespace AutoStartV2
                     
                     Delay(1000);
                     pg.Text = "잠시만 기다려 주세요...";
+                    if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } //SangguGSA5.exe는 더이상 사용되지 않음
                     //mini, full 소프트웨어 나누기
                     if (vender_swdf == "mini") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // mini 플랜 이용 시 앱만 남기기
-                    else { if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } } // 그외 플랜
+                    else { if (File.Exists(@"GEKImoeStreamAssistant5Lite.exe")) { File.Delete(@"GEKImoeStreamAssistant5Lite.exe"); } } // 그외 플랜
                     break;
                 }
 
@@ -240,7 +241,7 @@ namespace AutoStartV2
                 pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(1 / 3)";
                 Process acbas_get_version = new Process();
 
-                if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("SangguGSA5.exe"); } //mini플랜 간소화버전 사용
+                if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("GEKImoeStreamAssistant5Lite.exe"); } //mini플랜 간소화버전 사용
                 else { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full버전 full버전 사용
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
@@ -549,7 +550,7 @@ namespace AutoStartV2
             Delay(4000);
 
             pg.Text = language_.ko_kr_DONE_;
-            if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"SangguGSA5.exe")); }
+            if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
             else { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
 
             Delay(2000);
