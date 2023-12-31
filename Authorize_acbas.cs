@@ -105,10 +105,11 @@ namespace AreaTM_acbas
                     lbl_status.Text = "Done!";
                     Delay(1000);
 
-                    //업데이트 로그 불러오는지 불러오기
-                    if (!File.Exists("upd_version"))
+                    //업데이트 로그 불러오는지 불러오기 1안 : 업데이트 시간을 기준으로 확인
+                    /*if (!File.Exists("upd_version"))
                     {
-                        File.WriteAllText("upd_version", DateTime.Now.ToString());
+                        File.WriteAllText("upd_version", DateTime.Now.ToString());//없으면 만들어
+                        sdvxwin.isUpdateLogWindowShow = true; //업데이트 로그 표시
                     }
                     else
                     {
@@ -119,6 +120,22 @@ namespace AreaTM_acbas
                         {
                             sdvxwin.isUpdateLogWindowShow = true; //업데이트 로그 표시
                         } //아니면 그냥 없던일로 ㅎㅎ
+                    }*/
+
+                    //업데이트 로그 불러오는지 불러오기 2안
+                    if (File.Exists("update_success"))
+                    {
+                        DateTime fileVersion = File.GetLastWriteTime("update_success"); //언제 업데이트 했는지 파일 수정 시간으로 불러오기
+                        TimeSpan ts = DateTime.Now - fileVersion; //시간 계산은 TimeSpan으로 진행
+
+                        if (ts.TotalDays <= 2) //이틀 이내로 차이가 나면
+                        {
+                            sdvxwin.isUpdateLogWindowShow = true; //업데이트 로그 표시
+                        }
+                        else //아니면 그 파일 지우기
+                        {
+                            File.Delete("update_success");
+                        }
                     }
                     break;
                 }
