@@ -113,7 +113,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.7_A_20231230";
+            lbl_nowver.Text = "5.7_C_20240102";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -152,6 +152,12 @@ namespace AutoStartV2
             {
                 pg.Text = "불필요한 파일 삭제 중(B)...";
                 File.Delete("restart_pc.vbs");
+                Delay(800);
+            }
+            if (File.Exists("upd_version")) //2024.03부터 삭제
+            {
+                pg.Text = "불필요한 파일 삭제 중(C)...";
+                File.Delete("upd_version");
                 Delay(800);
             }
 
