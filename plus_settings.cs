@@ -35,8 +35,6 @@ namespace AreaTM_acbas
             btn_rebang.Font = new Font(sdvxwin.font_5_0_r.Families[0], 11f);
 
             btn_UpdateLog.Font = new Font(sdvxwin.font_5_0_r.Families[0], 11f);
-
-            if (!sdvxwin.PLIVEForm_closed) btn_rebang.Enabled = false;
         }
 
         private void plus_settings_FormClosing(object sender, FormClosingEventArgs e)

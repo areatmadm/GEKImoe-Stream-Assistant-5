@@ -143,7 +143,7 @@ namespace AreaTM_acbas
 
             if (!isRestarting)
             {
-                if ((((((npow / 60) / 60) >= nHour && ((npow / 60) % 60) >= nMin) || ((npow / 60) / 60) >= 10)) && sdvxwin.PLIVEForm_closed)
+                if ((((((npow / 60) / 60) >= nHour && ((npow / 60) % 60) >= nMin) || ((npow / 60) / 60) >= 10)))
                 //7시간 30분, 8시간 30분, 9시간 30분, 10시간 30분에 알림
                 //PLIVE Mirroring 폼 닫혀 있을때만 동작
                 {

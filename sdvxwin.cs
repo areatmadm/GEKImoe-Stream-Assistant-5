@@ -35,9 +35,6 @@ namespace AreaTM_acbas
         public static string pastScene;
         public static bool AreaTM_IoT = false;
 
-        Form PLIVEForm = new plv();
-        public static bool PLIVEForm_closed = true;
-
         Form PlusSettingForm = new plus_settings();
         public static bool PlusSettingForm_closed = true;
         public static bool PS_cam_reset = true; // 기타 캠 모드
@@ -989,22 +986,6 @@ namespace AreaTM_acbas
             {
                 obd.ShowDialog();
                 //this.Hide();
-            }
-        }
-        
-        private void btn_personal_Click(object sender, EventArgs e)
-        {
-            if (PLIVEForm_closed)
-            {
-                PLIVEForm = new plv();
-                PLIVEForm_closed = false;
-
-                PLIVEForm.Show();
-            }
-            else
-            {
-                PLIVEForm.Show();
-                PLIVEForm.Focus();
             }
         }
 
