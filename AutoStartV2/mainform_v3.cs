@@ -113,7 +113,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.7_C_20240102";
+            lbl_nowver.Text = "5.8_A_20240112";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -165,8 +165,9 @@ namespace AutoStartV2
             {
                 pg.Text = "Updater is now update...";
                 File.Copy("AreaTM_acbas_updater_1.exe", "AreaTM_acbas_updater_0.exe", true);
-                Delay(750);
+                Delay(2000);
                 File.Delete("AreaTM_acbas_updater_1.exe");
+                Delay(1750);
 
                 pg.Text = "Done.";
                 Delay(200);
@@ -174,13 +175,18 @@ namespace AutoStartV2
 
             while (true)
             {
-                pg.Text = "아레아티엠 게키모에 서버에서 인증을 받는 중...";
+                pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
                 string get_auth;
                 if (!File.Exists("vender.txt"))
                 {
                     // 라이선스 체크 프로세싱(놀자)
                     vender = "NOLJA";
-                    get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
+                    while (true)
+                    {
+                        get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
+                        if (get_auth != null) { break; } //서버 통신 확인
+                        else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
+                    }
                 }
                 else
                 {
@@ -189,6 +195,8 @@ namespace AutoStartV2
                     if (vender == "NOLJA") // 놀자 프로세싱 변경 가능성 열어두기
                     {
                         get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
+                        if(get_auth != null) { break; } //서버 통신 확인
+                        else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
                     }
                     else
                     {
@@ -215,15 +223,31 @@ namespace AutoStartV2
                     Delay(1000);
                     pg.Text = "서버에서 추가 정보를 불러오는 중...";
                     //신. plan별 SW 나누기
-                    if (vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p); }
-                    else { vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p); }
+                    if (vender == "NOLJA")
+                    {
+                        while (true)
+                        {
+                            vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p);
+                            if (vender_swdf != null) { break; }
+                            else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
+                        }
+                    }
+                    else
+                    {
+                        while (true)
+                        {
+                            vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + vender + "&game=" + p);
+                            if (vender_swdf != null) { break; }
+                            else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
+                        }
+                    }
                     
                     Delay(1000);
                     pg.Text = "잠시만 기다려 주세요...";
                     if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } //SangguGSA5.exe는 더이상 사용되지 않음
-                    //mini, full 소프트웨어 나누기
-                    if (vender_swdf == "mini") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // mini 플랜 이용 시 앱만 남기기
-                    else { if (File.Exists(@"GEKImoeStreamAssistant5Lite.exe")) { File.Delete(@"GEKImoeStreamAssistant5Lite.exe"); } } // 그외 플랜
+                    //mini, full 소프트웨어 나누기 - 소프트웨어 삭제는 없어짐
+                    //if (vender_swdf == "mini") { if (File.Exists(@"AreaTM_acbas.exe")) { File.Delete(@"AreaTM_acbas.exe"); } } // mini 플랜 이용 시 앱만 남기기
+                    //else { if (File.Exists(@"GEKImoeStreamAssistant5Lite.exe")) { File.Delete(@"GEKImoeStreamAssistant5Lite.exe"); } } // 그외 플랜
                     break;
                 }
 
@@ -248,7 +272,8 @@ namespace AutoStartV2
                 Process acbas_get_version = new Process();
 
                 if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("GEKImoeStreamAssistant5Lite.exe"); } //mini플랜 간소화버전 사용
-                else { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full버전 full버전 사용
+                else if(vender_swdf == "full") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full플랜 full버전 사용
+                else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.channel.io로 문의 요망"); Process.Start("explorer.exe");  Application.ExitThread(); }
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
                 Delay(1600);
@@ -557,9 +582,10 @@ namespace AutoStartV2
 
             pg.Text = language_.ko_kr_DONE_;
             if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
-            else { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
+            else if(vender_swdf == "full") { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
+            else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.channel.io로 문의 요망"); }
 
-            Delay(2000);
+            Delay(400);
 
             //pg.Text = "놀자 코로나19 알리미 프로그램 실행";
             //Process.Start(@"Nolja_covid19.exe");

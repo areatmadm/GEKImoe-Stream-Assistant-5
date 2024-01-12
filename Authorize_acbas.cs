@@ -66,7 +66,7 @@ namespace AreaTM_acbas
 
             Boolean ispp = false;
 
-            for(int i=0; i<10; i+=0)
+            while(true)
             {
                 lbl_status.Text = "Get Server Response...";
                 Delay(1000);
@@ -86,15 +86,43 @@ namespace AreaTM_acbas
                 {
                     sdvxwin.isCheckedGenuine = true;
 
-                    if (!File.Exists("test"))
+                    // Full(full) 또는 Lite(mini) 라이선스 확인. 여기서는 "mini" 라이선스로, "mini"이(가) 아니면 실행 거부
+                    lbl_status.Text = "Get more information to load assistant...";
+                    string vender_swdf; //Software Devide Form
+                    while (true)
                     {
-                        string rsp_0;
-                        if (sdvxwin.vender == "NOLJA") { rsp_0 = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
-                            sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver); } //놀자
-                        else { rsp_0 = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=5&submode=0&vender=" +
-                            sdvxwin.vender + "&game=" + sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver); } //그외
+                        if (sdvxwin.vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
+                        else { vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
+
+                        //여기는 "mini" 라이선스 입니다!!
+                        if (File.Exists("test") && (vender_swdf == "full" || vender_swdf == "mini")) //Test
+                        {
+                            lbl_status.Text = "PASS!(test) Please wait...";
+                            Delay(1120);
+                            break;
+                        }
+                        else if (vender_swdf == "mini") //통과
+                        {
+                            lbl_status.Text = "PASS! Please wait...";
+                            Delay(1120);
+                            break;
+                        }
+                        else if (vender_swdf == "full") //미통과
+                        {
+                            lbl_status.Text = "FAIL! Please check software license.";
+                            sdvxwin.isCheckedGenuine = false;
+                            Delay(1120);
+                            break;
+                        }
+                        else //인터넷 미 연결 시 또는 서버 맛갔을 때
+                        {
+                            lbl_status.Text = "Cannot connect server. Try after 10 sec...";
+                            Delay(10000);
+                        }
                     }
-                    Delay(1000);
+
+                    if (!sdvxwin.isCheckedGenuine) { break; } //미통과 강제 종료
+
                     lbl_status.Text = "Get some settings...";
                     //텍스트 일시 비활성화
                     /*sdvxwin.setqrinfo = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/area/" + sdvxwin.vender + "/" + 
@@ -105,24 +133,23 @@ namespace AreaTM_acbas
                     lbl_status.Text = "Done!";
                     Delay(1000);
 
-                    //업데이트 로그 불러오는지 불러오기 1안 : 업데이트 시간을 기준으로 확인
-                    /*if (!File.Exists("upd_version"))
+                    if (!File.Exists("test"))
                     {
-                        File.WriteAllText("upd_version", DateTime.Now.ToString());//없으면 만들어
-                        sdvxwin.isUpdateLogWindowShow = true; //업데이트 로그 표시
-                    }
-                    else
-                    {
-                        DateTime fileVersion = Convert.ToDateTime(File.ReadAllText("upd_version")); //언제 업데이트 했는지 불러오기
-                        TimeSpan ts = DateTime.Now - fileVersion; //시간 계산은 TimeSpan으로 진행
-
-                        if (ts.TotalDays <= 2) //이틀 이내로 차이가 나면
+                        string rsp_0;
+                        if (sdvxwin.vender == "NOLJA")
                         {
-                            sdvxwin.isUpdateLogWindowShow = true; //업데이트 로그 표시
-                        } //아니면 그냥 없던일로 ㅎㅎ
-                    }*/
+                            rsp_0 = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
+                            sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver);
+                        } //놀자
+                        else
+                        {
+                            rsp_0 = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=5&submode=0&vender=" +
+                            sdvxwin.vender + "&game=" + sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver);
+                        } //그외
+                    }
+                    Delay(1000);
 
-                    //업데이트 로그 불러오는지 불러오기 2안
+                    //업데이트 로그 불러오는지 불러오기
                     if (File.Exists("update_success"))
                     {
                         DateTime fileVersion = File.GetLastWriteTime("update_success"); //언제 업데이트 했는지 파일 수정 시간으로 불러오기
