@@ -72,10 +72,7 @@ namespace AreaTM_acbas
                 Delay(1000);
 
                 String rsp = "";
-                if (!File.Exists("vender.txt")) { sdvxwin.vender = "NOLJA"; }
-                else
-                { sdvxwin.vender = File.ReadAllText("vender.txt"); }
-
+                
                 if (sdvxwin.vender == "NOLJA") { rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + 
                     sdvxwin.setgame); } //놀자 인증
                 else {

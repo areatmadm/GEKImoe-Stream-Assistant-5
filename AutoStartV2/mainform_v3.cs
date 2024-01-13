@@ -27,7 +27,7 @@ namespace AutoStartV2
 
         public static string p;
         public string gc_name;
-        public string game_name;
+        //public string game_name;
 
         public static PrivateFontCollection font_3_0_s = new PrivateFontCollection();
 
@@ -121,8 +121,24 @@ namespace AutoStartV2
             {
                 //gc_name = "놀자";
 
-                p = File.ReadAllText(@"nolja_game_set.txt");
-                game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
+                //구형 파일 제거, Ver.5.19에서 삭제 시작
+                if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
+                {
+                    File.Delete(@"nolja_game_set.txt");
+                }
+                else if (File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+                {
+                    File.Move(@"nolja_game_set.txt", @"game_set.txt");
+                }
+                else if (!File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+                {
+                    MessageBox.Show("Error", "Error");
+                    Application.ExitThread();
+                }
+                //구형 파일 제거, Ver.5.19에서 삭제 끝
+
+                p = File.ReadAllText(@"game_set.txt");
+                //game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
             }
             catch
             {
@@ -359,21 +375,6 @@ namespace AutoStartV2
             Process[] processifuseobs = Process.GetProcessesByName("obs64"); //obs 선실행 중인지 체크
             if (processifuseobs.Length < 1)
             {
-                
-                //2021.11.16 : OBS Studio excuting code changed
-                Process findobs = new Process();
-                //if (File.Exists(@"C:\Program Files\obs-studio\bin\64bit\obs64.exe")) findobs.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\64bit\obs64.exe";
-                //else if (File.Exists(@"C:\Program Files\obs-studio\bin\32bit\obs32.exe")) findobs.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\32bit\obs32.exe";
-                //else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe")) findobs.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe";
-                //else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe")) findobs.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe";
-                //else
-                //{
-                //    MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox_OBSnotfound);
-                //    Application.ExitThread();
-                //    return;
-                //}
-                //findobs.Start();
-
                 //2023.11.15 : OBS 30.0.0 Logic changed - Safety mode disable
                 pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_before;
                 Delay(900);
@@ -385,9 +386,40 @@ namespace AutoStartV2
                 }
 
                 pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG;
-                Process.Start(Path.GetFullPath(@"autoobs.lnk")); //Start OBS
-                /*if (p == "3_squarepixels_ez2ac") Delay(16000);
-                else */
+                //Process.Start(Path.GetFullPath(@"autoobs.lnk")); //Start OBS (Old)
+
+                //2021.11.16 : OBS Studio excuting code changed
+                //2024.1.13 : Modified
+                Process findOBS = new Process();
+                if (File.Exists(@"C:\Program Files\obs-studio\bin\64bit\obs64.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\64bit\obs64.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files\obs-studio\bin\64bit\";
+                }
+                else if (File.Exists(@"C:\Program Files\obs-studio\bin\32bit\obs32.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\32bit\obs32.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files\obs-studio\bin\32bit\";
+                }
+                else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files (x86)\obs-studio\bin\64bit\";
+                }
+                else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files (x86)\obs-studio\bin\32bit\";
+                }
+                else
+                {
+                    MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox_OBSnotfound);
+                    Process.Start("explorer.exe");
+                    Application.ExitThread();
+                    return;
+                }
+                findOBS.Start();
+
                 Delay(8000);
 
                 //NOLJA Popn only start
@@ -556,6 +588,7 @@ namespace AutoStartV2
             catch
             {
                 MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox_1);
+                Application.ExitThread();
             }
 
             pg.Text = language_.ko_kr_DONE + " " + language_.ko_kr_NOWLOADING;

@@ -528,7 +528,28 @@ namespace AreaTM_acbas
 
             this.Text = language_.ko_kr_sdvxwin_name;
 
-            setgame = File.ReadAllText(@"nolja_game_set.txt");
+            //오락실 업장 위치 및 연결된 게임정보 불러오기
+            if (!File.Exists("vender.txt")) { sdvxwin.vender = "NOLJA"; }
+            else { sdvxwin.vender = File.ReadAllText("vender.txt"); }
+
+            //구형 파일 제거, Ver.5.19에서 삭제 시작
+            if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
+            {
+                File.Delete(@"nolja_game_set.txt");
+            }
+            else if (File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+            {
+                File.Move(@"nolja_game_set.txt", @"game_set.txt");
+            }
+            else if (!File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+            {
+                MessageBox.Show("Error", "Error");
+                Application.ExitThread();
+            }
+            //구형 파일 제거, Ver.5.19에서 삭제 끝
+
+            setgame = File.ReadAllText(@"game_set.txt");
+
 
             //Version 일람
             //Alpha_{N} : {N}번째 알파 버전, Beta_{N}: {N}번째 베타 버전, Pre_{N} or Pre: 정식출시 직전 마지막 버전
@@ -576,9 +597,9 @@ namespace AreaTM_acbas
             lbl_linkinfo.Text = setqrinfo;
 
 
-            FileStream fs = new FileStream(@"ResourceFiles\" + setgame + @"\highlight_beta.otogeonpf", FileMode.Open, FileAccess.Read);
+            /*FileStream fs = new FileStream(@"ResourceFiles\" + setgame + @"\highlight_beta.otogeonpf", FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
-            //chk_highlight_beta = int.Parse(sr.ReadLine());
+            chk_highlight_beta = int.Parse(sr.ReadLine());
             sr.Close();
             fs.Close();
 
@@ -586,7 +607,7 @@ namespace AreaTM_acbas
             sr = new StreamReader(fs);
             chkbeta_mute = int.Parse(sr.ReadLine());
             sr.Close();
-            fs.Close();
+            fs.Close();*/
 
             //if (chk_highlight_beta == 1)
             rec_3mh.Enabled = true;
