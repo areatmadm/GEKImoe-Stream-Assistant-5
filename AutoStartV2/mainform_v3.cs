@@ -14,6 +14,7 @@ using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Types;
 using System.Drawing.Text;
 using System.Net;
+using System.Security.Cryptography;
 
 namespace AutoStartV2
 {
@@ -25,7 +26,8 @@ namespace AutoStartV2
         public static string vender; //오락실 정보
         public static string vender_swdf; //오락실별 이용 소프트웨어 구분
 
-        public static string p;
+        public static string p; //gamecode
+        public static int pc_num; //동일 게임에 여러대 방송PC 운영할 경우, 구분을 위해 필요
         public string gc_name;
         //public string game_name;
 
@@ -36,6 +38,9 @@ namespace AutoStartV2
         protected OBSWebsocket _obs;
 
         Process[] killProcess;
+
+        string[] postStringKey;
+        string[] postStringValue;
 
         private static DateTime Delay(int MS)
         {
@@ -70,6 +75,50 @@ namespace AutoStartV2
             catch
             {
                 return "Error";
+            }
+        }
+
+        private string PostHtmlString(string url, string[] postDataKey, string[] postDataValue) //POST 전송에 필요한 데이터 수집
+        {
+            try
+            {
+
+                String callUrl = url;
+                //String[] data = new String[1];
+
+                String postDataToSend = null;
+                for (int i = 0; i < postDataKey.Length; i++) //값 전달할 key 전달
+                {
+                    if (i > 0) postDataToSend += "&";
+                    postDataToSend += postDataKey[i];
+                    postDataToSend += "=";
+                    postDataToSend += postDataValue[i];
+                }
+
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(callUrl);
+
+                //인코딩 UTF-8
+                byte[] sendData = UTF8Encoding.UTF8.GetBytes(postDataToSend);
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = sendData.Length;
+
+                Stream requestStream = httpWebRequest.GetRequestStream();
+                requestStream.Write(sendData, 0, sendData.Length);
+                requestStream.Close();
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+                String response = streamReader.ReadToEnd();
+
+                streamReader.Close();
+                httpWebResponse.Close();
+
+                return response;
+            }
+            catch
+            {
+                return "__Error__";
             }
         }
 
@@ -113,7 +162,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.9_A_20240114";
+            lbl_nowver.Text = "5.9_A_20240115";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -121,7 +170,7 @@ namespace AutoStartV2
             {
                 //gc_name = "놀자";
 
-                //구형 파일 제거, Ver.5.19에서 삭제 시작
+                //구형 파일 제거, Ver.5.20에서 삭제 시작
                 if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
                 {
                     File.Delete(@"nolja_game_set.txt");
@@ -135,9 +184,12 @@ namespace AutoStartV2
                     MessageBox.Show("Error", "Error");
                     Application.ExitThread();
                 }
-                //구형 파일 제거, Ver.5.19에서 삭제 끝
+                //구형 파일 제거, Ver.5.20에서 삭제 끝
 
                 p = File.ReadAllText(@"game_set.txt");
+                if (File.Exists(@"game_pc_num.txt")) { pc_num = Int32.Parse(File.ReadAllText(@"game_pc_num.txt")); } //PC 여러대 감지되면 구분.
+                //PC 여러대 감지되었다 해도 DB에 반영되어 있지 않으면 0을 제외한 모든 PC는 서버에서 무시 처리될 수도 있음
+                
                 //game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
             }
             catch
@@ -193,6 +245,8 @@ namespace AutoStartV2
             {
                 pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
                 string get_auth;
+                //public(v1) 구형 방식 인증 시작
+                /*
                 if (!File.Exists("vender.txt"))
                 {
                     // 라이선스 체크 프로세싱(놀자)
@@ -201,7 +255,12 @@ namespace AutoStartV2
                     {
                         get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
                         if (get_auth != null) { break; } //서버 통신 확인
-                        else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
+                        else
+                        {
+                            pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요...";
+                            Delay(10000);
+                            pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
+                        }
                     }
                 }
                 else
@@ -219,6 +278,27 @@ namespace AutoStartV2
                         get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
                     }
                 }
+                */
+                //public(v1) 구형 방식 인증 끝
+
+                //v2 보안 강화 인증 시작
+                while (true)
+                {
+                    postStringKey = new string[2];
+                    postStringValue = new string[2];
+
+                    if (!File.Exists("vender.txt")) { vender = "NOLJA"; } //놀자 vender
+                    else { vender = File.ReadAllText("vender.txt"); } //그외 vender
+                    postStringKey[0] = "vender"; postStringValue[0] = vender; //postkey_vender
+                    postStringKey[1] = "game"; postStringValue[1] = p; //game
+
+                    get_auth = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+
+                    if (get_auth != null && get_auth != "__ERROR__") { break; }
+                    else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
+                }
+                //v2 보안 강화 인증 끝
+
 
                 if (get_auth == "NotAuthorized")
                 {
@@ -238,7 +318,10 @@ namespace AutoStartV2
 
                     Delay(1000);
                     pg.Text = "서버에서 추가 정보를 불러오는 중...";
-                    //신. plan별 SW 나누기
+                    //신. plan별 SW 나누기 시작
+
+                    //구 GET Code(비활성화) 시작
+                    /*
                     if (vender == "NOLJA")
                     {
                         while (true)
@@ -257,7 +340,25 @@ namespace AutoStartV2
                             else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
                         }
                     }
-                    
+                    */
+                    //구 GET Code(비활성화) 끝
+
+                    //신 POST Code 시작
+                    while (true)
+                    {
+                        postStringKey = new string[3]; postStringValue = new string[3]; //보낼 키값 초기화
+                        postStringKey[0] = "mode"; postStringValue[0] = "1"; //mode
+                        postStringKey[1] = "vender"; postStringValue[1] = vender; // key_vender
+                        postStringKey[2] = "game"; postStringValue[2] = p; //game
+
+                        vender_swdf = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+
+                        if (vender_swdf != null && vender_swdf != "__Error__") { break; }
+                        else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
+                    }
+                    //신 POST Code 끝
+
+                    //신. plan별 SW 나누기 끝
                     Delay(1000);
                     pg.Text = "잠시만 기다려 주세요...";
                     if (File.Exists(@"SangguGSA5.exe")) { File.Delete(@"SangguGSA5.exe"); } //SangguGSA5.exe는 더이상 사용되지 않음
@@ -336,7 +437,9 @@ namespace AutoStartV2
             //pg.Text = "잠시만 기다려주세요...";
             if (!File.Exists("test"))
             {
-                string getp_d = "";
+                string getp_d = ""; //의미없는거
+                //구 GET Code(비활성화) 시작
+                /*
                 if (vender != "NOLJA")
                 {
                     getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/temp_sanggu_2/serverstatus?game=" + p +
@@ -347,6 +450,23 @@ namespace AutoStartV2
                     getp_d = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?game=" + p +
                             "&mode=3&submode=1");
                 }
+                */
+                //구 GET Code(비활성화) 끝
+                //신 POST Code 시작
+                postStringKey = new string[5];
+                postStringValue = new string[5];
+                postStringKey[0] = "vender"; postStringValue[0] = vender; // key_vender
+                postStringKey[1] = "game"; postStringValue[1] = p; //game
+                postStringKey[2] = "mode"; postStringValue[2] = "3"; //mode
+                postStringKey[3] = "submode"; postStringValue[3] = "1"; //submode
+
+                while (true) //에러 뜰때만 다시 시도하자
+                {
+                    getp_d = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
+                    if (getp_d == "__ERROR__") { Delay(1200); }
+                    else { break; }
+                }
+                //신 POST Code 끝
             }
             Delay(2000);
 
@@ -421,22 +541,6 @@ namespace AutoStartV2
                 findOBS.Start();
 
                 Delay(8000);
-
-                //NOLJA Popn only start
-
-                /*
-                if (p == "5_konami_popn" && processifuseobs.Length < 1)
-                {
-                    pg.Text = "팝픈뮤직 화면 조정 중...";
-                    Process.Start(Path.GetFullPath(@"iiui.lnk"));
-                    Delay(6000);
-
-                    pg.Text = "화면조정 프로세스 종료 중...";
-                    Process.Start(Path.GetFullPath(@"exitprocess.bat"));
-
-                    Delay(6000);
-                }*/
-                //NOLJA Popn only end
             }
             else //OBS 이미 실행중
             {

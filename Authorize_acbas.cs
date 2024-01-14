@@ -14,6 +14,9 @@ namespace AreaTM_acbas
 {
     public partial class Authorize_acbas : Form
     {
+        string[] postStringKey;
+        string[] postStringValue;
+
         private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
@@ -27,27 +30,6 @@ namespace AreaTM_acbas
             }
 
             return DateTime.Now;
-        }
-
-        private string GetHtmlString(string url)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
-                string strHtml = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-
-                return strHtml;
-            }
-            catch
-            {
-                return "Error";
-            }
         }
 
         public Authorize_acbas()
@@ -72,39 +54,64 @@ namespace AreaTM_acbas
                 Delay(1000);
 
                 String rsp = "";
-                
-                if (sdvxwin.vender == "NOLJA") { rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + 
+
+                //public(v1) 구형 방식 인증 시작
+                /*if (sdvxwin.vender == "NOLJA") { rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + 
                     sdvxwin.setgame); } //놀자 인증
                 else {
                     rsp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + sdvxwin.vender + "&game=" +
-                    sdvxwin.setgame); } //그외 인증
+                    sdvxwin.setgame); } //그외 인증 */
+                //public(v1) 구형 방식 인증 끝
+
+                //v2 보안 강화 인증 시작
+                postStringKey = new string[2];
+                postStringValue = new string[2];
+
+                if (sdvxwin.vender == "NOLJA") { postStringKey[0] = "vender"; postStringValue[0] = "NOLJA"; } //놀자 vender
+                else { postStringKey[0] = "vender"; postStringValue[0] = sdvxwin.vender; } //그외 vender
+                postStringKey[1] = "game"; postStringValue[1] = sdvxwin.setgame; //game
+
+                rsp = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                //v2 보안 강화 인증 끝
 
                 if (rsp == "Authorized")
                 {
                     sdvxwin.isCheckedGenuine = true;
 
-                    // Full(full) 또는 Lite(mini) 라이선스 확인. 여기서는 "mini" 라이선스로, "mini"이(가) 아니면 실행 거부
+                    // Full(full) 또는 Lite(mini) 라이선스 확인. 여기서는 "full" 라이선스로, "full"이(가) 아니면 실행 거부
                     lbl_status.Text = "Get more information to load assistant...";
                     string vender_swdf; //Software Devide Form
                     while (true)
                     {
-                        if (sdvxwin.vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
+                        //구 GET Code(비활성화) 시작
+                        /*if (sdvxwin.vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
                         else { vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
+                        */
+                        //구 GET Code(비활성화) 끝
 
-                        //여기는 "mini" 라이선스 입니다!!
+                        //신 POST Code 시작
+                        postStringKey = new string[3]; postStringValue = new string[3]; //보낼 키값 초기화
+                        postStringKey[0] = "mode"; postStringValue[0] = "1"; //mode
+                        postStringKey[1] = "vender"; postStringValue[1] = sdvxwin.vender; //key_vender
+                        postStringKey[2] = "game"; postStringValue[2] = sdvxwin.setgame; //game
+
+                        vender_swdf = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                        //신 POST Code 끝
+
+                        //여기는 "full" 라이선스 입니다!!
                         if (File.Exists("test") && (vender_swdf == "full" || vender_swdf == "mini")) //Test
                         {
                             lbl_status.Text = "PASS!(test) Please wait...";
                             Delay(1120);
                             break;
                         }
-                        else if (vender_swdf == "mini") //통과
+                        else if (vender_swdf == "full") //통과
                         {
                             lbl_status.Text = "PASS! Please wait...";
                             Delay(1120);
                             break;
                         }
-                        else if (vender_swdf == "full") //미통과
+                        else if (vender_swdf == "mini") //미통과
                         {
                             lbl_status.Text = "FAIL! Please check software license.";
                             sdvxwin.isCheckedGenuine = false;
@@ -114,7 +121,7 @@ namespace AreaTM_acbas
                         else //인터넷 미 연결 시 또는 서버 맛갔을 때
                         {
                             lbl_status.Text = "Cannot connect server. Try after 10 sec...";
-                            Delay(10000);
+                            Delay(10000); lbl_status.Text = "Get more information to load assistant...";
                         }
                     }
 
@@ -133,16 +140,36 @@ namespace AreaTM_acbas
                     if (!File.Exists("test"))
                     {
                         string rsp_0;
+                        //구 GET Code(비활성화) 시작
+                        /*
                         if (sdvxwin.vender == "NOLJA")
                         {
-                            rsp_0 = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
+                            rsp_0 = Program.GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=5&submode=0&game=" +
                             sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver);
                         } //놀자
                         else
                         {
-                            rsp_0 = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=5&submode=0&vender=" +
+                            rsp_0 = Program.GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=5&submode=0&vender=" +
                             sdvxwin.vender + "&game=" + sdvxwin.setgame + "&ver=" + sdvxwin.nolja_ver);
                         } //그외
+                        */
+                        //구 GET Code(비활성화) 끝
+
+                        //신 POST Code 시작
+                        postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
+                        postStringKey[0] = "mode"; postStringValue[0] = "5"; //모드선택(버전 관련)
+                        postStringKey[1] = "submode"; postStringValue[1] = "0"; //서브모드 선택(버전 Input)
+                        postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; //vender 입력
+                        postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game 입력
+                        postStringKey[4] = "ver"; postStringValue[4] = sdvxwin.nolja_ver; //버전 입력
+
+                        while (true)
+                        {
+                            rsp_0 = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue); //보내기
+                            if(rsp_0 == "Success") { break; }
+                            else { Delay(2000); }
+                        }
+                        //신 POST Code 끝
                     }
                     Delay(1000);
 
@@ -174,7 +201,8 @@ namespace AreaTM_acbas
                 else
                 {
                     lbl_status.Text = "Cannot connect server. Try after 10 sec...";
-                    Delay(10000);
+                    MessageBox.Show("");
+                    Delay(1000);
                 }
             }
 

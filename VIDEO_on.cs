@@ -54,28 +54,10 @@ namespace AreaTM_acbas
         string X_Cursor;
         string Y_Cursor;
 
+        string[] postStringKey;
+        string[] postStringValue;
+
         float level;
-
-        private string GetHtmlString(string url)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
-                string strHtml = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-
-                return strHtml;
-            }
-            catch
-            {
-                return "Error";
-            }
-        }
 
         public VIDEO_on()
         {
@@ -224,8 +206,22 @@ namespace AreaTM_acbas
                             string getp_d = "";
                             while (getp_d != "Success")
                             {
-                                getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
+                                //구 GET 코드 시작
+                                /*
+                                getp_d = Program.GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                                             "&mode=3&submode=1");
+                                */
+                                //구 GET 코드 끝
+
+                                //신 POST Code 시작
+                                postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
+                                postStringKey[0] = "mode"; postStringValue[0] = "3"; //mode
+                                postStringKey[1] = "subode"; postStringValue[1] = "1"; //submode
+                                postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
+                                postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
+
+                                getp_d = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
+                                //신 POST Code 끝
                                 Thread.Sleep(10);
                             }
                         }
@@ -247,8 +243,21 @@ namespace AreaTM_acbas
                             string getp_d = "";
                             while (getp_d != "Success")
                             {
+                                //구 GET 코드 시작
+                                /*
                                 getp_d = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
                                         "&mode=3&submode=0");
+                                */
+                                //구 GET 코드 끝
+                                //신 POST Code 시작
+                                postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
+                                postStringKey[0] = "mode"; postStringValue[0] = "3"; //mode
+                                postStringKey[1] = "subode"; postStringValue[1] = "0"; //submode
+                                postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
+                                postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
+
+                                getp_d = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
+                                //신 POST Code 끝
                                 Thread.Sleep(10);
                             }
                         }
