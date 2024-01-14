@@ -14,7 +14,7 @@ namespace AreaTM_acbas
 {
     static class Program
     {
-        private static string GetHtmlString(string url)
+        public static string GetHtmlString(string url)
         {
             try
             {
@@ -34,6 +34,50 @@ namespace AreaTM_acbas
                 return "Error";
             }
         }
+        public static string PostHtmlString(string url, String[] postDataKey, String[] postDataValue) //POST 전송에 필요한 데이터 수집
+        {
+            try
+            {
+
+                String callUrl = url;
+                //String[] data = new String[1];
+
+                String postDataToSend = null;
+                for (int i = 0; i < postDataKey.Length; i++) //값 전달할 key 전달
+                {
+                    if (i > 0) postDataToSend += "&";
+                    postDataToSend += postDataKey[i];
+                    postDataToSend += "=";
+                    postDataToSend += postDataValue[i];
+                }
+
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(callUrl);
+
+                //인코딩 UTF-8
+                byte[] sendData = UTF8Encoding.UTF8.GetBytes(postDataToSend);
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = sendData.Length;
+
+                Stream requestStream = httpWebRequest.GetRequestStream();
+                requestStream.Write(sendData, 0, sendData.Length);
+                requestStream.Close();
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+                String response = streamReader.ReadToEnd();
+
+                streamReader.Close();
+                httpWebResponse.Close();
+
+                return response;
+            }
+            catch
+            {
+                return "__Error__";
+            }
+        }
+
         private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
@@ -51,7 +95,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.17_A";
-        public static long acbas_build = 202401140303;
+        public static long acbas_build = 202401141100;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";

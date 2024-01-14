@@ -573,6 +573,7 @@ namespace AreaTM_acbas
             {
                 MessageBox.Show("아레아티엠의 인증을 받지 않은 오락실입니다." + "\r\n" + "문의 SMS: 070-8018-6973", "아레아티엠 GEKImoe Stream Assistant 인증");
                 Application.ExitThread();
+                return;
             }
 
             if (isUpdateLogWindowShow) //업데이트 로그를 표시해야 할 때
