@@ -156,7 +156,7 @@ namespace AreaTM_acbas
                         //구 GET Code(비활성화) 끝
 
                         //신 POST Code 시작
-                        postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
+                        postStringKey = new string[5]; postStringValue = new string[5]; //보낼 키값 초기화
                         postStringKey[0] = "mode"; postStringValue[0] = "5"; //모드선택(버전 관련)
                         postStringKey[1] = "submode"; postStringValue[1] = "0"; //서브모드 선택(버전 Input)
                         postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; //vender 입력
