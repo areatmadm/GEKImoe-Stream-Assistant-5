@@ -147,27 +147,6 @@ namespace AreaTM_acbas
             return DateTime.Now;
         }
 
-        private string GetHtmlString(string url)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
-                string strHtml = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-
-                return strHtml;
-            }
-            catch
-            {
-                return "Error";
-            }
-        }
-
         public static OBSWebsocket _obs;
 
 
