@@ -44,9 +44,9 @@
             this.lbl_d_n_m.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 22F);
             this.lbl_d_n_m.Location = new System.Drawing.Point(0, 0);
             this.lbl_d_n_m.Name = "lbl_d_n_m";
-            this.lbl_d_n_m.Size = new System.Drawing.Size(420, 55);
+            this.lbl_d_n_m.Size = new System.Drawing.Size(500, 55);
             this.lbl_d_n_m.TabIndex = 0;
-            this.lbl_d_n_m.Text = "스트림 어시스턴트 플러스설정";
+            this.lbl_d_n_m.Text = "GEKImoe Stream Assistant 5 설정";
             this.lbl_d_n_m.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // gb_other
@@ -56,7 +56,7 @@
             this.gb_other.Controls.Add(this.lbl_gb_other);
             this.gb_other.Location = new System.Drawing.Point(13, 72);
             this.gb_other.Name = "gb_other";
-            this.gb_other.Size = new System.Drawing.Size(395, 75);
+            this.gb_other.Size = new System.Drawing.Size(475, 75);
             this.gb_other.TabIndex = 3;
             this.gb_other.TabStop = false;
             // 
@@ -111,7 +111,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(420, 196);
+            this.ClientSize = new System.Drawing.Size(500, 196);
             this.Controls.Add(this.btn_UpdateLog);
             this.Controls.Add(this.gb_other);
             this.Controls.Add(this.lbl_d_n_m);
@@ -124,7 +124,7 @@
             this.MinimizeBox = false;
             this.Name = "plus_settings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "아레아티엠 게키모에 스트림 어시스턴트 플러스설정";
+            this.Text = "GEKImoe Stream Assistant 5 설정";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.plus_settings_FormClosing);
             this.Load += new System.EventHandler(this.plus_settings_Load);
             this.Shown += new System.EventHandler(this.plus_settings_Shown);
