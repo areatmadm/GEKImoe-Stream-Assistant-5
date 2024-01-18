@@ -216,7 +216,7 @@ namespace AreaTM_acbas
                                 //신 POST Code 시작
                                 postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
                                 postStringKey[0] = "mode"; postStringValue[0] = "3"; //mode
-                                postStringKey[1] = "subode"; postStringValue[1] = "1"; //submode
+                                postStringKey[1] = "submode"; postStringValue[1] = "1"; //submode
                                 postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
                                 postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
 
@@ -252,7 +252,7 @@ namespace AreaTM_acbas
                                 //신 POST Code 시작
                                 postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
                                 postStringKey[0] = "mode"; postStringValue[0] = "3"; //mode
-                                postStringKey[1] = "subode"; postStringValue[1] = "0"; //submode
+                                postStringKey[1] = "submode"; postStringValue[1] = "0"; //submode
                                 postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
                                 postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
 
