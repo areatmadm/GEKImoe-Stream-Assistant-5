@@ -201,7 +201,7 @@ namespace AreaTM_acbas
                 else
                 {
                     lbl_status.Text = "Cannot connect server. Try after 10 sec...";
-                    Delay(1000);
+                    Delay(10000);
                 }
             }
 
