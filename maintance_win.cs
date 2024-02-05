@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace AreaTM_acbas
 {
     public partial class maintance_win : Form
     {
+        string url;
         public ChromiumWebBrowser browser;
 
         private string GetHtmlString(string url)
@@ -40,7 +42,7 @@ namespace AreaTM_acbas
 
         public void InitBrowser()
         {
-            string url = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
+            //string url = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
 
             browser = new ChromiumWebBrowser(url);
             //browser = new ChromiumWebBrowser("chrome://version");
@@ -51,9 +53,10 @@ namespace AreaTM_acbas
             browser.MenuHandler = new CustomMenuHandler();
             browser.Dock = DockStyle.Fill;
         }
-
-        public maintance_win()
+        
+        public maintance_win(string url_g)
         {
+            url = url_g;
             InitializeComponent();
             InitBrowser();
         }

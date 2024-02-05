@@ -92,10 +92,42 @@ namespace AreaTM_acbas
 
             return DateTime.Now;
         }
+        private static void CheckOS()
+        {
+            OperatingSystem os = Environment.OSVersion;
+            int majorVersion = os.Version.Major;//메이저
+            int minorVersion = os.Version.Minor;//마이너
+            int buildVersion = os.Version.Build;//빌드
+
+            if(majorVersion < 10)//Windows 10, Windows 11이 아닐 경우 실행 차단
+            {
+                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10 and Windows 11." + "\r\n\r\n" + "Please upgrade this computer first and re-launch this assistant.");
+                isAvailableOS = false;
+                ExitThread = true;
+                return;
+            }
+            else if (buildVersion < 17763) //Windows 10 1809 미만일 경우 실행 차단
+            {
+                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10(over than 1809) and Windows 11." + "\r\n\r\n" + "Please run Windows Update to update build over than 1809 first and re-launch this assistant.");
+                isAvailableOS = false;
+                ExitThread = true;
+                return;
+            }
+            else if(buildVersion < 19044) //Windows 10 21H2 미만일 경우 사전 경고(지원 종료 예정)
+            {
+                isAvailableOS = false;
+                return;
+            }
+            else
+            {
+                isAvailableOS = false;
+            }
+        }
+
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.17_B";
-        public static long acbas_build = 202401190535;
+        public static string acbas_ver = "5.18_A";
+        public static long acbas_build = 202402052133;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";
@@ -103,7 +135,8 @@ namespace AreaTM_acbas
         public static string ad_location = "southkorea/daegu/nolja"; // country/city/gamecentername
         public static long ad_version = 0; //ad ver - country/city/gamecentername?mod=1o
 
-        public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도
+        public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도, Windows 빌드 미지원으로 인한 강제종료 여부
+        public static bool isAvailableOS = false; //Windows 빌드 체크 적합성 확인
 
         /// <summary>
         /// 해당 응용 프로그램의 주 진입점입니다.
@@ -111,6 +144,8 @@ namespace AreaTM_acbas
         [STAThread]
         static void Main(string[] args)
         {
+            CheckOS();
+
             if (args.Length > 0)
             {
                 if (args[0] == "getver")

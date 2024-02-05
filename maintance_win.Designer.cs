@@ -42,7 +42,7 @@
             this.Name = "maintance_win";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AreaTM Arcade Stream Assistant - Notice";
+            this.Text = "GEKImoe Stream Assistant - Notice";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.maintance_win_FormClosing);
             this.Load += new System.EventHandler(this.maintance_win_Load);

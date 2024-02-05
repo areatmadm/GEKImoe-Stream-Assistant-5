@@ -469,7 +469,8 @@ namespace AreaTM_acbas
             if (getp == "1")
             {
                 isopen = true;
-                Form openform = new maintance_win();
+                string url_g = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
+                Form openform = new maintance_win(url_g);
                 openform.Show();
 
                 //this.Close();

@@ -488,7 +488,18 @@ namespace AreaTM_acbas
             //startFFmpeg.StartInfo.FileName = @"C:\MonaServer\ffmpeg_start.vbs";
             //startFFmpeg.StartInfo.WorkingDirectory = @"C:\MonaServer";
 
-            if (Program.ExitThread == true) Application.ExitThread();
+            if (Program.ExitThread)
+            {
+                Application.ExitThread();
+                return;
+            }
+
+
+            if (!Program.isAvailableOS) //곧 지원 종료될 OS라면?
+            {
+                Form newOpenBrowser = new maintance_win("https://pages.areatm.com/gekimoe_stream_assistant-5/will_unsupportos/ko");
+                newOpenBrowser.Show();
+            }
 
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
