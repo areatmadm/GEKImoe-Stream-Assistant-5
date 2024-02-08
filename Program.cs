@@ -127,7 +127,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.18_A";
-        public static long acbas_build = 202402052133;
+        public static long acbas_build = 202402090526;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";
