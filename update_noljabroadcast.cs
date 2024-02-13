@@ -1,5 +1,4 @@
-﻿using nolja_game_set;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -82,12 +81,13 @@ namespace AreaTM_acbas
 
             string downver;
             lbl_status.Text = "업데이트 정보를 받는 중...";
-            downver = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + sdvxwin.nolja_partnum + "?ver=" + sdvxwin.nolja_build);
-            
+            downver = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + Program.acbas_partnum + "?ver=" + Program.acbas_build);
+
 
             Delay(3000);
-            sourceFileURI[0] = "ftp://update.streamassistant.sv.gekimoe.areatm.com/public_html/sa/" + sdvxwin.nolja_partnum + "/" + downver + ".7z";
-            targetpath[0] = System.IO.Path.GetFullPath("noljaupdate.7z");
+            //sourceFileURI[0] = "https://update.streamassistant.sv.gekimoe.areatm.com/sa/" + Program.acbas_partnum + "/" + downver + ".7z";
+            sourceFileURI[0] = "https://download.stream-assistant-5.gekimoe.areatm.com/sa/" + Program.acbas_partnum + "/" + downver + ".7z";
+            targetpath[0] = System.IO.Path.GetFullPath("gekimoe_acbas_update.7z");
 
             lbl_status.Text = "다운로드 준비 중..";
             Delay(2000);
@@ -97,12 +97,12 @@ namespace AreaTM_acbas
 
             try
             {
-                NOLJA_Game_Set newnoj = new NOLJA_Game_Set();
-                string usrid = newnoj.setgame_dll(4326);
-                string pwd = newnoj.setgame_dll(4635);
+                //NOLJA_Game_Set newnoj = new NOLJA_Game_Set();
+                //string usrid = newnoj.setgame_dll(4326);
+                //string pwd = newnoj.setgame_dll(4635);
 
-                Uri sourceFileUri = new Uri(sourceFileURI[0]);
-                FtpWebRequest ftpWebRequest = WebRequest.Create(sourceFileUri) as FtpWebRequest;
+                //Uri sourceFileUri = new Uri(sourceFileURI[0]);
+                /*FtpWebRequest ftpWebRequest = WebRequest.Create(sourceFileUri) as FtpWebRequest;
                 ftpWebRequest.Credentials = new NetworkCredential(usrid, pwd);
                 ftpWebRequest.Method = WebRequestMethods.Ftp.DownloadFile;
                 FtpWebResponse ftpWebResponse = ftpWebRequest.GetResponse() as FtpWebResponse;
@@ -122,79 +122,71 @@ namespace AreaTM_acbas
                 }
 
                 targetFileStream.Close();
-                sourceStream.Close();
+                sourceStream.Close();*/
+
+                try
+                {
+                    WebClient mywebClient = new WebClient();
+                    mywebClient.DownloadFile(sourceFileURI[0], targetpath[0]);
+                }
+                catch { return; }
+
                 lbl_status.Text = "다운로드 완료...";
                 //File.WriteAllText("_firstrun_update", "");
                 Delay(2000);
 
-                if (!maintaince_check.ischeckone)
+
+                Process[] processifusenjbtmpcht = Process.GetProcessesByName("Nolja_OpenUp");
+                if (processifusenjbtmpcht.Length >= 1)
                 {
-                    Process[] processifusenjbtmpcht = Process.GetProcessesByName("Nolja_OpenUp");
-                    if (processifusenjbtmpcht.Length >= 1)
+                    for (int i = 0; i < processifusenjbtmpcht.Length; i++)
                     {
-                        for (int i = 0; i < processifusenjbtmpcht.Length; i++)
-                        {
-                            processifusenjbtmpcht[i].Kill();
-                        }
-                        /*Process killtask = new Process();
-                        killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
-                        killtask.StartInfo.Arguments = "/f /im Nolja_OpenUp.exe";
-                        try { killtask.Start(); } catch { }*/
-                        //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
-                        Delay(200);
+                        processifusenjbtmpcht[i].Kill();
                     }
-
-                    Process[] processifusenjbtmpcht2 = Process.GetProcessesByName("AreaTM_IoT");
-                    if (processifusenjbtmpcht2.Length >= 1)
-                    {
-                        for (int i = 0; i < processifusenjbtmpcht2.Length; i++)
-                        {
-                            processifusenjbtmpcht2[i].Kill();
-                        }
-                        /*Process killtask = new Process();
-                        killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
-                        killtask.StartInfo.Arguments = "/f /im AreaTM_IoT.exe";
-                        try { killtask.Start(); } catch { }*/
-                        //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
-                        Delay(200);
-                    }
-
-                    String N_null;
-                    N_null = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=0&game=" + sdvxwin.setgame);
-
-                    Process.Start("NoljaUpdater.exe");
-                    //Application.ExitThread();
-
-                    Process killtask2 = new Process();
-                    killtask2.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
-                    killtask2.StartInfo.Arguments = "/f /im AreaTM_acbas.exe";
-                    try { killtask2.Start(); } catch { }
+                    /*Process killtask = new Process();
+                    killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
+                    killtask.StartInfo.Arguments = "/f /im Nolja_OpenUp.exe";
+                    try { killtask.Start(); } catch { }*/
+                    //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
+                    Delay(200);
                 }
-                else
+
+                Process[] processifusenjbtmpcht2 = Process.GetProcessesByName("AreaTM_IoT");
+                if (processifusenjbtmpcht2.Length >= 1)
                 {
-                    Form nodp = new nolja_restartinform();
-                    nodp.Show();
-                    sdvxwin.ischeckedupd = true;
-                    this.Close();
+                    for (int i = 0; i < processifusenjbtmpcht2.Length; i++)
+                    {
+                        processifusenjbtmpcht2[i].Kill();
+                    }
+                    /*Process killtask = new Process();
+                    killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
+                    killtask.StartInfo.Arguments = "/f /im AreaTM_IoT.exe";
+                    try { killtask.Start(); } catch { }*/
+                    //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
+                    Delay(200);
                 }
+
+                String N_null;
+                N_null = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=0&game=" + sdvxwin.setgame);
+
+                Process.Start("AreaTM_acbas_updater_0.exe");
+                //Application.ExitThread();
+
+                Application.ExitThread(); //S/W NEW Exit Source
+
+                Process killtask2 = new Process();
+                killtask2.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
+                killtask2.StartInfo.Arguments = "/f /im AutoStartV3.exe";
+                try { killtask2.Start(); } catch { }
+
             }
             catch
             {
                 lbl_status.Text = "다운로드 중 오류 발생! 관리자가 수동으로 업데이트 예정";
                 File.WriteAllText("error_update", "");
                 Delay(2000);
-                //sdvxwin.ActiveForm.Show();
-                //Delay(1000);
-                if (!maintaince_check.ischeckone)
-                {
-                    Process.Start("NOLJA_Restart.exe");
-                    Application.ExitThread();
-                }
-                else
-                {
-                    maintaince_check.ischeckone = true;
-                    this.Close();
-                }
+
+                this.Close();
             }
         }
     }

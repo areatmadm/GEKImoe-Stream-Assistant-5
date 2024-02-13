@@ -15,8 +15,6 @@ using OBSWebsocketDotNet;
 using OBSWebsocketDotNet.Types;
 using System.Diagnostics;
 
-//using nolja_game_set;
-
 using System.IO;
 using CefSharp;
 using CefSharp.WinForms;
@@ -774,31 +772,9 @@ namespace AreaTM_acbas
 
         private void openexplorer_rec_Click(object sender, EventArgs e)
         {
-            /*try
-            {
-                Process.Start(_obs.GetRecordingFolder());
-            }
-            catch
-            {
-                MessageBox.Show("Error");
-            }*/
             Form d = new movefile_form();
             d.Show();
         }
-
-        /*private void btn_itunes_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Process.Start(_obs.GetRecordingFolder());
-            }
-            catch
-            {
-                MessageBox.Show("Error");
-            }
-            Form d = new howtomoveios();
-            d.ShowDialog();
-        }*/
 
         private void NOLJA_Black_Edition()
         {
