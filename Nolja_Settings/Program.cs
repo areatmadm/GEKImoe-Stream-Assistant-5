@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Nolja_Settings
+namespace GEKImoeStreamAssistant5FixReboot
 {
     static class Program
     {

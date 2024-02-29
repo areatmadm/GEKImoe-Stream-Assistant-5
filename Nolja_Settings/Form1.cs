@@ -12,7 +12,7 @@ using System.IO;
 using System.Drawing.Text;
 using System.Net;
 
-namespace Nolja_Settings
+namespace GEKImoeStreamAssistant5FixReboot
 {
     public partial class Nolja_ErrorFix : Form
     {

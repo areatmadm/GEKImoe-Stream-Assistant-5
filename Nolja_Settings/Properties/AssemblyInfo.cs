@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 // 어셈블리에 대한 일반 정보는 다음 특성 집합을 통해 
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
-[assembly: AssemblyTitle("AreaTM Reboot")]
-[assembly: AssemblyDescription("Reboot This Computer")]
+[assembly: AssemblyTitle("GEKImoe Stream Assistant 5 RebootFix")]
+[assembly: AssemblyDescription("Reboot GEKImoe Stream Assistant 5")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("AreaTM GEKImoe")]
-[assembly: AssemblyProduct("AreaTM Reboot")]
-[assembly: AssemblyCopyright("Copyright © 2020-2021 AreaTM GEKImoe")]
-[assembly: AssemblyTrademark("AreaTM GEKImoe")]
+[assembly: AssemblyCompany("AreaTM")]
+[assembly: AssemblyProduct("GEKImoe Stream Assistant 5 RebootFix")]
+[assembly: AssemblyCopyright("Copyright © 2020-2024 AreaTM")]
+[assembly: AssemblyTrademark("AreaTM")]
 [assembly: AssemblyCulture("")]
 
 // ComVisible을 false로 설정하면 이 어셈블리의 형식이 COM 구성 요소에 
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.0")]
-[assembly: AssemblyFileVersion("5.0")]
+[assembly: AssemblyVersion("5.1")]
+[assembly: AssemblyFileVersion("5.1")]
 [assembly: NeutralResourcesLanguage("ko-KR")]
 

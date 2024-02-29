@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Update module of GEKImoe Stream Assistant")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AreaTM")]
-[assembly: AssemblyProduct("GSA AutoUpdater")]
-[assembly: AssemblyCopyright("Copyright © 2019-2024 AreaTM GEKImoe")]
+[assembly: AssemblyProduct("GEKImoe Stream Assistant auto updater - unzip")]
+[assembly: AssemblyCopyright("Copyright © 2019-2024 AreaTM")]
 [assembly: AssemblyTrademark("GEKImoe Stream Assistant")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.2.0.0")]
-[assembly: AssemblyFileVersion("2.2.0.0")]
+[assembly: AssemblyVersion("2.3.0.0")]
+[assembly: AssemblyFileVersion("2.3.0.0")]

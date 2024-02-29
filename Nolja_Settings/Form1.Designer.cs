@@ -1,4 +1,4 @@
-﻿namespace Nolja_Settings
+﻿namespace GEKImoeStreamAssistant5FixReboot
 {
     partial class Nolja_ErrorFix
     {

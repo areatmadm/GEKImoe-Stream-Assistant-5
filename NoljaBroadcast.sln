@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoljaUpdater", "AutoStartOB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoljaPromUpdater", "NoljaPromUpdater\NoljaPromUpdater.csproj", "{1090CB36-25A9-461F-A0E4-12A83ACDED65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nolja_Settings", "Nolja_Settings\Nolja_Settings.csproj", "{FA09B623-9A79-48AB-A8A5-68ADF1B4B5F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GEKImoeStreamAssistant5FixReboot", "Nolja_Settings\GEKImoeStreamAssistant5FixReboot.csproj", "{FA09B623-9A79-48AB-A8A5-68ADF1B4B5F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoStartV3", "AutoStartV2\AutoStartV3.csproj", "{5312DCD1-6257-4CCC-A445-1F8EFD30F8B1}"
 EndProject
