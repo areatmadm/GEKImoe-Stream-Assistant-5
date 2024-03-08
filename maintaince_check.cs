@@ -83,6 +83,50 @@ namespace AreaTM_acbas
             }
         }
 
+        private static string PostHtmlString2(string url, String[] postDataKey, String[] postDataValue) //POST 전송에 필요한 데이터 수집
+        {
+            try
+            {
+
+                String callUrl = url;
+                //String[] data = new String[1];
+
+                String postDataToSend = null;
+                for (int i = 0; i < postDataKey.Length; i++) //값 전달할 key 전달
+                {
+                    if (i > 0) postDataToSend += "&";
+                    postDataToSend += postDataKey[i];
+                    postDataToSend += "=";
+                    postDataToSend += postDataValue[i];
+                }
+
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(callUrl);
+
+                //인코딩 UTF-8
+                byte[] sendData = UTF8Encoding.UTF8.GetBytes(postDataToSend);
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = sendData.Length;
+
+                Stream requestStream = httpWebRequest.GetRequestStream();
+                requestStream.Write(sendData, 0, sendData.Length);
+                requestStream.Close();
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+                String response = streamReader.ReadToEnd();
+
+                streamReader.Close();
+                httpWebResponse.Close();
+
+                return response;
+            }
+            catch
+            {
+                return "__Error__";
+            }
+        }
+
         public maintaince_check()
         {
             InitializeComponent();
@@ -174,6 +218,9 @@ namespace AreaTM_acbas
 
         private void ChkNetStatus()
         {
+            string[] postStringKey;
+            string[] postStringValue;
+
             if (File.Exists("test")) { }
             else
             {
@@ -182,7 +229,14 @@ namespace AreaTM_acbas
                     Thread.Sleep(rechecktime);
                     string getp = "";
                     if (!sdvxwin.isRestreaming_onlyCheckStatus)
-                         getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame + "&mode=0");
+                    {
+                        postStringKey = new string[3]; postStringValue = new string[3]; //보낼 키값 초기화
+                        postStringKey[0] = "mode"; postStringValue[0] = "0"; //mode
+                        postStringKey[1] = "vender"; postStringValue[1] = sdvxwin.vender; // key_vender
+                        postStringKey[2] = "game"; postStringValue[2] = sdvxwin.setgame; //game
+                        getp = PostHtmlString2("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
+                        //getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame + "&mode=0");
+                    }
 
                     if (getp == "Success")
                     {
@@ -191,7 +245,7 @@ namespace AreaTM_acbas
 
                         /*if (sdvxwin.isFinishedTime)
                         {
-                            string getmpp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus/?mode=3&submode=2&game=" + sdvxwin.setgame);
+                            string getmpp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=3&submode=2&game=" + sdvxwin.setgame);
                             if (getmpp == "TodayGameEnded")
                             {
                                 try { sdvxwin._obs.StopStreaming(); } catch { }
@@ -207,8 +261,6 @@ namespace AreaTM_acbas
                         rechecktime = 10000;
                         isnownetconnected = false;
                     }
-
-
                 }
             }
         }
@@ -217,6 +269,9 @@ namespace AreaTM_acbas
 
         private void ChkOBSisFine1()
         {
+            string[] postStringKey;
+            string[] postStringValue;
+
             while (true)
             {
                 if (ppd_e == 3)
@@ -239,7 +294,13 @@ namespace AreaTM_acbas
                     pve += "WshShell.Run strArgs, 0, false";
 
                     string noll;
-                    noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=4&submode=5&game=" + sdvxwin.setgame);
+                    //noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=4&submode=5&game=" + sdvxwin.setgame);
+                    postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
+                    postStringKey[0] = "mode"; postStringValue[0] = "4"; //mode
+                    postStringKey[1] = "submode"; postStringValue[1] = "5"; //mode
+                    postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
+                    postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
+                    noll = PostHtmlString2("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
 
                     File.WriteAllText("restart_pc.bat", pvd);
                     File.WriteAllText("restart_pc.vbs", pve);

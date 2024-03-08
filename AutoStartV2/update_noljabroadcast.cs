@@ -21,6 +21,9 @@ namespace AutoStartV2
         string[] sourceFileURI = new string[3];
         string[] targetpath = new string[3];
 
+        string[] postStringKey;
+        string[] postStringValue;
+
         string vender; //오락실 업체
         private static DateTime Delay(int MS)
         {
@@ -55,6 +58,50 @@ namespace AutoStartV2
             catch
             {
                 return "Error";
+            }
+        }
+
+        private string PostHtmlString(string url, string[] postDataKey, string[] postDataValue) //POST 전송에 필요한 데이터 수집
+        {
+            try
+            {
+
+                String callUrl = url;
+                //String[] data = new String[1];
+
+                String postDataToSend = null;
+                for (int i = 0; i < postDataKey.Length; i++) //값 전달할 key 전달
+                {
+                    if (i > 0) postDataToSend += "&";
+                    postDataToSend += postDataKey[i];
+                    postDataToSend += "=";
+                    postDataToSend += postDataValue[i];
+                }
+
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(callUrl);
+
+                //인코딩 UTF-8
+                byte[] sendData = UTF8Encoding.UTF8.GetBytes(postDataToSend);
+                httpWebRequest.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ContentLength = sendData.Length;
+
+                Stream requestStream = httpWebRequest.GetRequestStream();
+                requestStream.Write(sendData, 0, sendData.Length);
+                requestStream.Close();
+
+                HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), Encoding.GetEncoding("UTF-8"));
+                String response = streamReader.ReadToEnd();
+
+                streamReader.Close();
+                httpWebResponse.Close();
+
+                return response;
+            }
+            catch
+            {
+                return "__Error__";
             }
         }
 
@@ -170,7 +217,14 @@ namespace AutoStartV2
                 }
 
                 String N_null;
-                N_null = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=0&game=" + AutoStartV3Main.p);
+                postStringKey = new string[4];
+                postStringValue = new string[4];
+                postStringKey[0] = "vender"; postStringValue[0] = vender; // key_vender
+                postStringKey[1] = "game"; postStringValue[1] = AutoStartV3Main.p; //game
+                postStringKey[2] = "mode"; postStringValue[2] = "3"; //mode
+                postStringKey[3] = "submode"; postStringValue[3] = "1"; //submode
+                //N_null = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?mode=4&submode=0&game=" + AutoStartV3Main.p + "&vender=" + vender);
+                N_null = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
 
                 Process.Start("AreaTM_acbas_updater_0.exe");
                 //Application.ExitThread();
