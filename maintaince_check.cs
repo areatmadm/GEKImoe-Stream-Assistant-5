@@ -28,9 +28,6 @@ namespace AreaTM_acbas
         public static int value_min = 0;
         public static int value_sec = 0;
 
-        string[] postStringKey;
-        string[] postStringValue;
-
         int ppd_e = 0;
 
         bool isnownetconnected = true;
@@ -63,6 +60,27 @@ namespace AreaTM_acbas
             }
 
             return DateTime.Now;
+        }
+
+        private string GetHtmlString(string url)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
+                string strHtml = reader.ReadToEnd();
+
+                reader.Close();
+                response.Close();
+
+                return strHtml;
+            }
+            catch
+            {
+                return "Error";
+            }
         }
 
         public maintaince_check()
@@ -164,14 +182,7 @@ namespace AreaTM_acbas
                     Thread.Sleep(rechecktime);
                     string getp = "";
                     if (!sdvxwin.isRestreaming_onlyCheckStatus)
-                    {
-                        postStringKey = new string[3]; postStringValue = new string[3]; //보낼 키값 초기화
-                        postStringKey[0] = "mode"; postStringValue[0] = "0"; //mode
-                        postStringKey[1] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
-                        postStringKey[2] = "game"; postStringValue[3] = sdvxwin.setgame; //game
-                        getp = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
-                        //getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame + "&mode=0");
-                    }
+                         getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame + "&mode=0");
 
                     if (getp == "Success")
                     {
@@ -228,12 +239,7 @@ namespace AreaTM_acbas
                     pve += "WshShell.Run strArgs, 0, false";
 
                     string noll;
-                    postStringKey = new string[4]; postStringValue = new string[4]; //보낼 키값 초기화
-                    postStringKey[0] = "mode"; postStringValue[0] = "4"; //mode
-                    postStringKey[1] = "submode"; postStringValue[1] = "5"; //mode
-                    postStringKey[2] = "vender"; postStringValue[2] = sdvxwin.vender; // key_vender
-                    postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
-                    noll = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
+                    noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=4&submode=5&game=" + sdvxwin.setgame);
 
                     File.WriteAllText("restart_pc.bat", pvd);
                     File.WriteAllText("restart_pc.vbs", pve);
@@ -456,14 +462,14 @@ namespace AreaTM_acbas
             string getp = "";
             if (!isopen)
             {
-                getp = Program.GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance_old.php?ngame=" + sdvxwin.setgame +
+                getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance_old.php?ngame=" + sdvxwin.setgame +
                     "&build=" + sdvxwin.nolja_build);
             }
             //https://nolja.bizotoge.areatm.com/public/maintance_old.php?ngame=0_sega_maimaidx
             if (getp == "1")
             {
                 isopen = true;
-                string url_g = Program.GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
+                string url_g = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
                 Form openform = new maintance_win(url_g);
                 openform.Show();
 
@@ -475,7 +481,7 @@ namespace AreaTM_acbas
             {
                 if (!File.Exists("error_update"))
                 {
-                    getp = Program.GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + sdvxwin.nolja_partnum + "?mod=1&ver=" + sdvxwin.nolja_build);
+                    getp = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + sdvxwin.nolja_partnum + "?mod=1&ver=" + sdvxwin.nolja_build);
                     if (getp == "1")
                     {
                         VIDEO_on.isupdate = true;
@@ -508,7 +514,7 @@ namespace AreaTM_acbas
 
             if (!isupd) //AreaTM IoT
             {
-                getp = Program.GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/areatm_iot?game=" + sdvxwin.setgame +
+                getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/areatm_iot?game=" + sdvxwin.setgame +
                     "&mode=1");
 
                 if (getp == "1" && !sdvxwin.AreaTM_IoT)
