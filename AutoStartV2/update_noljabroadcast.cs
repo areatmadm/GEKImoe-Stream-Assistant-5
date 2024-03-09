@@ -232,7 +232,8 @@ namespace AutoStartV2
                 Application.ExitThread(); //S/W NEW Exit Source
 
                 Process killtask2 = new Process();
-                killtask2.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
+                killtask2.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+                killtask2.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
                 killtask2.StartInfo.Arguments = "/f /im AutoStartV3.exe";
                 try { killtask2.Start(); } catch { }
                 

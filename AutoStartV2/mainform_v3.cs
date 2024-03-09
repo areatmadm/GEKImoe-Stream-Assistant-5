@@ -129,7 +129,7 @@ namespace AutoStartV2
 
         private void AutoStartV3Main_Load(object sender, EventArgs e)
         {
-            string pvd = "taskkill /f /im explorer.exe";
+            /*string pvd = "taskkill /f /im explorer.exe";
 
             string pve = "";
             pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
@@ -143,7 +143,15 @@ namespace AutoStartV2
             Process.Start("start.vbs");
             Delay(1500);
             File.Delete("imshi.bat");
-            File.Delete("start.vbs");
+            File.Delete("start.vbs");*/
+            //vbs 지원 종료로 인한 코드 주석화(아래 코드가 안정적일 경우 주석 코드 삭제 요망)
+
+            //vbs(Vivid BAD SQUAD)를 대체할 신규 코드 작성
+            Process killtask1 = new Process();
+            killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Minimized; //일단 창 생성 없이 구동
+            killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+            killtask1.StartInfo.Arguments = "/f /im explorer.exe";
+            try { killtask1.Start(); } catch { }
 
             Delay(1000);//임시
 
@@ -151,8 +159,6 @@ namespace AutoStartV2
             {
                 font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothicBold.otf");
                 font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothic.otf");
-                //font_3_0_s.AddFontFile(@"font_3.0\kakao\KakaoBold.ttf");
-                //font_3_0_s.AddFontFile(@"font_3.0\kakao\KakaoRegular.ttf");
 
                 lbl_information.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
                 lbl_name.Font = new Font(font_3_0_s.Families[0], 24f, FontStyle.Bold);
@@ -162,7 +168,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.11_A_20240308";
+            lbl_nowver.Text = "5.11_B_20240310";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -212,19 +218,19 @@ namespace AutoStartV2
 
             if (File.Exists("restart_pc.bat"))
             {
-                pg.Text = "불필요한 파일 삭제 중(A)...";
+                pg.Text = language_.ko_kr_DELETE_UNUSED + "(A)...";
                 File.Delete("restart_pc.bat");
                 Delay(800);
             }
             if (File.Exists("restart_pc.vbs"))
             {
-                pg.Text = "불필요한 파일 삭제 중(B)...";
+                pg.Text = language_.ko_kr_DELETE_UNUSED + "(B)...";
                 File.Delete("restart_pc.vbs");
                 Delay(800);
             }
             if (File.Exists("upd_version")) //2024.03부터 삭제
             {
-                pg.Text = "불필요한 파일 삭제 중(C)...";
+                pg.Text = language_.ko_kr_DELETE_UNUSED + "(C)...";
                 File.Delete("upd_version");
                 Delay(800);
             }
@@ -585,9 +591,9 @@ namespace AutoStartV2
                     //CamPatcher
                     if (File.Exists(@"WebCameraConfig\cam_sett.cfg"))
                     {
-                        pg.Text = language_.ko_kr_WEBCAM_NJ2Pmai;
+                        pg.Text = language_.ko_kr_WEBCAM_autosetup;
 
-                        pve = "";
+                        /*pve = "";
                         pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
                         pve += "Dim strArgs" + "\r\n";
 
@@ -599,6 +605,15 @@ namespace AutoStartV2
                         File.WriteAllText("start.vbs", pve);
                         Delay(500);
                         Process.Start("start.vbs");
+                        Delay(2000);*/
+                        //vbs 지원 종료로 인한 주석화(아래 코드가 안정적일 경우, 이후 업데이트에서 해당 코드 삭제)
+
+                        //vbs(Vivid BAD SQUAD 아님) 지원종료로 인해 다른 방식으로 구현
+                        Process runCamSett = new Process(); //새로운 Process 생성
+                        runCamSett.StartInfo.WindowStyle = ProcessWindowStyle.Minimized; //일단 창 생성 없이 구동
+                        runCamSett.StartInfo.FileName = "restore.bat"; //WebCameraConfig\restore.bat
+                        runCamSett.StartInfo.WorkingDirectory = "WebCameraConfig"; //실행 자체가 그 폴더에 있는 cam_sett.cfg 파일을 필요로 함
+                        runCamSett.Start(); //PROFIT!!
                         Delay(2000);
                     }
 
@@ -666,7 +681,7 @@ namespace AutoStartV2
                 }
 
                 //Royal SangGu maimaiDX & CHUNITHM CamPatcher
-                if (vender == "SANGGU")
+                /*if (vender == "SANGGU")
                 {
                     pg.Text = language_.ko_kr_WEBCAM_autosetup;
 
@@ -685,7 +700,27 @@ namespace AutoStartV2
                     Delay(2000);
                     Process.Start("start.vbs"); //간혹 저장값을 못 불러오는 경우가 있어 한번 더 실행
                     Delay(2000);
-                }
+                }*/
+
+                /*if (File.Exists(@"WebCameraConfig\cam_sett.cfg"))
+                {
+                    pg.Text = language_.ko_kr_WEBCAM_autosetup;
+
+                    pve = "";
+                    pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
+                    pve += "Dim strArgs" + "\r\n";
+
+                    pve += "strArgs = \"WebCameraConfig" + @"\" + "restore.bat\"" + "\r\n";
+
+                    pve += "WshShell.Run strArgs, 0, false";
+
+                    File.WriteAllText("start.vbs", pve);
+                    Delay(500);
+                    Process.Start("start.vbs");
+                    Delay(2000);
+                    Process.Start("start.vbs"); //간혹 저장값을 못 불러오는 경우가 있어 한번 더 실행
+                    Delay(2000);
+                }*/
 
                 _obs.Disconnect();
             }
@@ -697,8 +732,8 @@ namespace AutoStartV2
 
             pg.Text = language_.ko_kr_DONE + " " + language_.ko_kr_NOWLOADING;
 
-            //Windows Explorer 실행
-            pvd = "explorer.exe";
+            //Windows Explorer 실행(구)
+            /*pvd = "explorer.exe";
 
             pve = "";
             pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
@@ -712,8 +747,10 @@ namespace AutoStartV2
             Process.Start("start.vbs");
             Delay(1500);
             File.Delete("imshi.bat");
-            File.Delete("start.vbs");
-            //Windows Explorer 실행 종료
+            File.Delete("start.vbs");*/
+            //Windows Explorer 실행 종료(구)
+            
+            Process.Start("explorer.exe"); //Windows Explorer 실행(신) - vbs(Vivid Bad SQUAD 아님) 지원 종료에 따른 신규 작성
 
             Delay(4000);
 

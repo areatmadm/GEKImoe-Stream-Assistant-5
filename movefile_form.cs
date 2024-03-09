@@ -44,19 +44,8 @@ namespace AreaTM_acbas
 
         private void movefile_form_Load(object sender, EventArgs e)
         {
-            //Edge → Firefox → Whale → Chrome
-            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                sec = "--inprivate ";
-            }
-            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                sec = "--inprivate ";
-            }
-
-            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
+            //Firefox → Edge → Whale → Chrome
+            if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
                 sec = "-private ";
@@ -65,6 +54,17 @@ namespace AreaTM_acbas
             {
                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                 sec = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
             }
 
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
@@ -92,6 +92,15 @@ namespace AreaTM_acbas
 
             this.Font = new Font(sdvxwin.font_5_0_r.Families[0], 14f);
             lbl_name.Font = new Font(sdvxwin.font_5_0_b.Families[0], 20f);
+
+            if (!File.Exists(@"C:\Program Files\FileZilla FTP Client\filezilla.exe") && !File.Exists(@"C:\Program Files(x86)\FileZilla FTP Client\filezilla.exe"))
+            { //FileZilla 있는지 없는지 여부
+                btn_ftp.Enabled = false;
+            }
+            if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1028.9986.0_x64__nzyj5cx40ttqa\AppleDevices.exe"))
+            { //Apple Devices Manager가 있는지 없는지 여부
+                btn_ios.Enabled = false;
+            }
         }
 
         private void btn_usb_normal_Click(object sender, EventArgs e)
@@ -102,7 +111,8 @@ namespace AreaTM_acbas
 
         private void btn_ios_Click(object sender, EventArgs e)
         {
-            Form d = new getuse_GEKImoe_Stream_safe();
+            //Form d = new getuse_GEKImoe_Stream_safe();
+            Form d = new howtomoveios();
             d.Show();
             this.Close();
         }
@@ -168,7 +178,7 @@ namespace AreaTM_acbas
 
         private void btn_ndrive_Click(object sender, EventArgs e)
         {
-            pm = "https://cloud.naver.com";
+            pm = "https://ndrive.naver.com";
             SetChromeURL();
             pm = "";
             chr.Start();

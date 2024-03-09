@@ -36,7 +36,11 @@ namespace AreaTM_acbas
         private void howtomoveios_Load(object sender, EventArgs e)
         {
             NOLJA_BlackEdition();
-            Process.Start(@"iTunes.lnk");
+            try { Process.Start(sdvxwin._obs.GetRecordingFolder()); } catch { }
+            
+            Process newAppleDevice = new Process();
+            newAppleDevice.StartInfo.FileName = @"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1028.9986.0_x64__nzyj5cx40ttqa\AppleDevices.exe";
+            try { newAppleDevice.Start(); } catch {  }
         }
 
         private void NOLJA_BlackEdition()
@@ -46,12 +50,12 @@ namespace AreaTM_acbas
 
         private void howtomoveios_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Process[] processifusenjbtmpcht = Process.GetProcessesByName("iTunes");
+            Process[] processifusenjbtmpcht = Process.GetProcessesByName("AppleDevices");
             if (processifusenjbtmpcht.Length >= 1)
             {
                 Process killtask = new Process();
-                killtask.StartInfo.FileName = @"C:\Windows\SysWOW64\taskkill.exe";
-                killtask.StartInfo.Arguments = "/f /im iTunes.exe";
+                killtask.StartInfo.FileName = @"C:\Windows\system32\AppleDevices.exe";
+                killtask.StartInfo.Arguments = "/f /im AppleDevices.exe";
                 try { killtask.Start(); } catch { }
                 //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
             }

@@ -1177,18 +1177,7 @@ namespace AreaTM_acbas
             moveWebPage = "https://pages.areatm.com/gekimoe_stream_assistant-5/updatelog/" + Program.acbas_build + "/ko"; //웹페이지를 업데이트 페이지로 설정
 
             //Edge → Firefox → Whale → Chrome 순으로 시크릿모드로 실행하기
-            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
-            {
-                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
-            }
-            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
-            {
-                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
-            }
-
-            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
+            if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
                 privatePageMode = "-private ";
@@ -1197,6 +1186,17 @@ namespace AreaTM_acbas
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                 privatePageMode = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
             }
 
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) //Naver Whale 구.32비트

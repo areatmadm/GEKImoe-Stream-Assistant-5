@@ -13,9 +13,9 @@ namespace AutoStartV2
         //-----Korean : ko-kr-----START
         public static string ko_kr_DONOTDISTURB = "이 창이 닫히기 전까지 절대로 PC를 조작하지 마시오.";
 
-        public static string ko_kr_ERRORACCURED_msgbox = "에러가 발생하여 스트리밍PC 부팅이 불가합니다." + "\r\n" + "매장 관리자나 soruto@kakao.com으로 문의 바랍니다.";
-        public static string ko_kr_ERRORACCURED_msgbox_1 = "에러가 발생하여 스트리밍PC가 원활하게 작동하지 않을 수 있습니다." + "\r\n" + "매장 관리자나 soruto@kakao.com으로 문의 바랍니다.";
-        public static string ko_kr_ERRORACCURED_msgbox_OBSnotfound = "OBS Studio 설치 위치를 찾지 못했습니다." + "\r\n" + "해당 소프트웨어는 OBS Studio를 보조하는 어시스턴트이며, 반드시 OBS Studio가 설치되어 있어야 합니다." + "\r\n\r\n" + "문의사항 또는 도움요청 필요 시 soruto@kakao.com으로 메일 보내주시기 바랍니다.";
+        public static string ko_kr_ERRORACCURED_msgbox = "에러가 발생하여 스트리밍PC 부팅이 불가합니다." + "\r\n" + "매장 관리자나 areatmadm@areatm.com, 070-8018-6973 또는 아레아티엠 홈페이지(https://areatm.com) → 오른쪽 하단 채팅상담으로 문의 바랍니다.";
+        public static string ko_kr_ERRORACCURED_msgbox_1 = "에러가 발생하여 스트리밍PC가 원활하게 작동하지 않을 수 있습니다." + "\r\n" + "매장 관리자나 areatmadm@areatm.com 또는 으로 문의 바랍니다.";
+        public static string ko_kr_ERRORACCURED_msgbox_OBSnotfound = "OBS Studio 설치 위치를 찾지 못했습니다." + "\r\n" + "해당 소프트웨어는 OBS Studio를 보조하는 어시스턴트이며, 반드시 OBS Studio가 설치되어 있어야 합니다." + "\r\n\r\n" + "문의사항 또는 도움요청 필요 시 areatmadm@areatm.com, 070-8018-6973 또는 아레아티엠 홈페이지(https://areatm.com) → 오른쪽 하단 채팅상담으로 보내주시기 바랍니다.";
         public static string ko_kr_BOOTING = "방송PC를 준비하고 있습니다...";
 
         public static string ko_kr_NOWLOADING = "잠시만 기다려주세요...";
@@ -23,7 +23,7 @@ namespace AutoStartV2
 
         public static string ko_kr_CHECKUPDATE = "[업데이트 체크] ";
         public static string ko_kr_CHECKUPDATE_GET = "업데이트 확인을 위한 정보 가져오는 중...";
-        public static string ko_kr_CHECKUPDATE_GET_READY = "게키모에 스트리밍 어시스턴트 업데이트 확인 준비 중...";
+        public static string ko_kr_CHECKUPDATE_GET_READY = "GEKImoe Stream Assistant 5 업데이트 확인 준비 중...";
         public static string ko_kr_CHECKUPDATE_CHECK = "서버에서 업데이트 확인 중...";
         public static string ko_kr_CHECKUPDATE_DO = "업데이트를 진행합니다";
         public static string ko_kr_CHECKUPDATE_NONE = "업데이트가 존재하지 않습니다.";
@@ -52,9 +52,11 @@ namespace AutoStartV2
         public static string ko_kr_WEBCAM_NJ2Pmai = "2P 웹캠 초기화 중...";
         public static string ko_kr_WEBCAM_autosetup = "웹캠 설정 저장값 불러오는 중...";
 
-        public static string ko_kr_DONE_ = "아케이드 스트리밍 시스템 시작";
+        public static string ko_kr_DONE_ = "GEKImoe Stream Assistant 5 시스템 시작";
 
-        public static string ko_kr_ERROR_needreboot = "실행 불가 : PC를 리부팅하여 주세요";
+        public static string ko_kr_ERROR_needreboot = "실행 불가 : PC 리부팅 요망";
+
+        public static string ko_kr_DELETE_UNUSED = "불필요한 파일 삭제 중";
 
         //-----English-United Status : en-us-----START
         public static string en_us_DONOTDISTURB = "Do NOT distrub this computer before this window is closing.";
