@@ -216,13 +216,13 @@ namespace AutoStartV2
             pg.Text = language_.ko_kr_NOWLOADING;
             Delay(500);
 
-            if (File.Exists("restart_pc.bat"))
+            if (File.Exists("restart_pc.bat")) //2024.04부터 삭제
             {
                 pg.Text = language_.ko_kr_DELETE_UNUSED + "(A)...";
                 File.Delete("restart_pc.bat");
                 Delay(800);
             }
-            if (File.Exists("restart_pc.vbs"))
+            if (File.Exists("restart_pc.vbs")) //2024.04부터 삭제
             {
                 pg.Text = language_.ko_kr_DELETE_UNUSED + "(B)...";
                 File.Delete("restart_pc.vbs");
@@ -732,24 +732,6 @@ namespace AutoStartV2
 
             pg.Text = language_.ko_kr_DONE + " " + language_.ko_kr_NOWLOADING;
 
-            //Windows Explorer 실행(구)
-            /*pvd = "explorer.exe";
-
-            pve = "";
-            pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
-            pve += "Dim strArgs" + "\r\n";
-            pve += "strArgs = \"imshi.bat\"" + "\r\n";
-            pve += "WshShell.Run strArgs, 0, false";
-
-            File.WriteAllText("imshi.bat", pvd);
-            File.WriteAllText("start.vbs", pve);
-            Delay(500);
-            Process.Start("start.vbs");
-            Delay(1500);
-            File.Delete("imshi.bat");
-            File.Delete("start.vbs");*/
-            //Windows Explorer 실행 종료(구)
-            
             Process.Start("explorer.exe"); //Windows Explorer 실행(신) - vbs(Vivid Bad SQUAD 아님) 지원 종료에 따른 신규 작성
 
             Delay(4000);
@@ -757,7 +739,7 @@ namespace AutoStartV2
             pg.Text = language_.ko_kr_DONE_;
             if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
             else if(vender_swdf == "full") { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
-            else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.channel.io로 문의 요망"); }
+            else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.com → 오른쪽 하단 채팅상담으로 문의 요망"); }
 
             Delay(400);
 

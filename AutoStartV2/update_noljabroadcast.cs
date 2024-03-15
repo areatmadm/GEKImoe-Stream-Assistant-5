@@ -147,37 +147,10 @@ namespace AutoStartV2
 
             try
             {
-                //NOLJA_Game_Set newnoj = new NOLJA_Game_Set();
-                //string usrid = newnoj.setgame_dll(4326);
-                //string pwd = newnoj.setgame_dll(4635);
-
-                //Uri sourceFileUri = new Uri(sourceFileURI[0]);
-                /*FtpWebRequest ftpWebRequest = WebRequest.Create(sourceFileUri) as FtpWebRequest;
-                ftpWebRequest.Credentials = new NetworkCredential(usrid, pwd);
-                ftpWebRequest.Method = WebRequestMethods.Ftp.DownloadFile;
-                FtpWebResponse ftpWebResponse = ftpWebRequest.GetResponse() as FtpWebResponse;
-                Stream sourceStream = ftpWebResponse.GetResponseStream();
-                FileStream targetFileStream = new FileStream(targetpath[0], FileMode.Create, FileAccess.Write);
-
-                byte[] bufferByteArray = new byte[1024];
-                while (true)
-                {
-                    int byteCount = sourceStream.Read(bufferByteArray, 0, bufferByteArray.Length);
-
-                    if (byteCount == 0)
-                    {
-                        break;
-                    }
-                    targetFileStream.Write(bufferByteArray, 0, byteCount);
-                }
-
-                targetFileStream.Close();
-                sourceStream.Close();*/
-
                 try
                 {
-                    WebClient mywebClient = new WebClient();
-                    mywebClient.DownloadFile(sourceFileURI[0], targetpath[0]);
+                    WebClient mywebClient = new WebClient(); //Cloudflare R2에 접근할 개체 생성
+                    mywebClient.DownloadFile(sourceFileURI[0], targetpath[0]); //R2에 접근해 업데이트 다운로드
                 }
                 catch { return; }
 
@@ -216,6 +189,7 @@ namespace AutoStartV2
                     Delay(200);
                 }
 
+                //상태 페이지에 Now update status로 변경작업 처리
                 String N_null;
                 postStringKey = new string[4];
                 postStringValue = new string[4];
@@ -240,7 +214,8 @@ namespace AutoStartV2
             }
             catch
             {
-                lbl_status.Text = "다운로드 중 오류 발생! 관리자가 수동으로 업데이트 예정";
+                lbl_status.Text = "다운로드 중 오류 발생! 관리자에게 리포트가 전달되며, 수동 업데이트 예정";
+
                 File.WriteAllText("error_update", "");
                 Delay(2000);
 

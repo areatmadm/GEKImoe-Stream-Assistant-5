@@ -88,7 +88,7 @@ namespace AreaTM_acbas
         //0: INFORM & RE-Set, 1: NO-Inform & RE-Set, 2: INFORM & 12Min Set
 
         //NOLJA maimaiDX Cam Initialized status
-        public static bool CamInitialized = false;
+        //public static bool CamInitialized = false;
 
         int opd = 0;
 
@@ -216,7 +216,7 @@ namespace AreaTM_acbas
             BeginInvoke((MethodInvoker)delegate
             {
                 //tbSceneCol.Text = _obs.GetCurrentSceneCollection();
-                if(!CamInitialized)
+                /*if(!CamInitialized)
                 {
                     Form camchange_maimai2p = new camchange_maimai2p();
                     try { camchange_maimai2p.Show(); } catch { }
@@ -224,7 +224,7 @@ namespace AreaTM_acbas
 
                     //1P, 2P 모두 캠 초기화가 완료되었을때 더이상 해당 작업 수행 안함
                     //if (_obs.GetCurrentSceneCollection() == "maimaiDX_1P2P") CamInitialized = true;
-                }
+                }*/
             });
         }
 
@@ -566,12 +566,8 @@ namespace AreaTM_acbas
 
             if (isUpdateLogWindowShow) //업데이트 로그를 표시해야 할 때
             {
-                UpdateLogShow(); //업데이트 로그를 띄우기 위해 인터넷 창 표시
+                UpdateLogShow_legacy(); //업데이트 로그를 띄우기 위해 인터넷 창 표시
             }
-
-
-            //NOLJA_Game_Set setgame_newget = new NOLJA_Game_Set();
-            //setgame = setgame_newget.setgame_dll();
 
             //if (setgame == "0_sega_maimaidx" || setgame == "6_andamiro_pumpitup") btn_personal.Enabled = true;
             //else btn_personal.Enabled = false;
@@ -1168,7 +1164,7 @@ namespace AreaTM_acbas
             browserProcess_cardMove.Start(); //브라우저 시작
         }
 
-        private void UpdateLogShow() //업데이트 로그를 웹 브라우저에서 표시해주기
+        private void UpdateLogShow_legacy() //업데이트 로그를 웹 브라우저에서 표시해주기
         {
             Process browserProcess_updateLogShow = new Process(); //Edge/Firefox/NaverWhale/Chrome 열기 위한 프로세스 선언
             string moveWebPage = ""; //이동할 웹페이지 주소

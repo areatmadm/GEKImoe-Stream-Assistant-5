@@ -135,10 +135,6 @@ namespace AreaTM_acbas
                 OpenFolder();
                 this.Close();
             }
-            else
-            {
-                MessageBox.Show("Error");
-            }
         }
 
         private void btn_close_Click(object sender, EventArgs e)
