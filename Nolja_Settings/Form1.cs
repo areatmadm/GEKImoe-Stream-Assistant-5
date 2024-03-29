@@ -184,9 +184,10 @@ namespace GEKImoeStreamAssistant5FixReboot
 
             if (qtemp < 0)
             {
-                label1.Text = "재부팅을 진행합니다...";
+                label1.Text = "재시작을 진행합니다...";
                 timer1.Enabled = false;
                 Delay(2000);
+                //if(File.Exists(Path.GetFullPath))
                 //Process.Start(@"nolja_reboot.vbs");
             }
 
