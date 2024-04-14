@@ -56,17 +56,6 @@ namespace AreaTM_acbas
                 sec = "-private ";
             }
 
-            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                sec = "--inprivate ";
-            }
-            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                sec = "--inprivate ";
-            }
-
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
@@ -87,6 +76,17 @@ namespace AreaTM_acbas
             {
                 chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                 sec = "--incognito ";
+            }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                sec = "--inprivate ";
             }
             else { }
 

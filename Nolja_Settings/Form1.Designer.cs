@@ -69,7 +69,7 @@
             this.btn_fix.Name = "btn_fix";
             this.btn_fix.Size = new System.Drawing.Size(366, 81);
             this.btn_fix.TabIndex = 1;
-            this.btn_fix.Text = "에러 픽스 또는 리방작업 시작";
+            this.btn_fix.Text = "에러 픽스 후 리방작업 시작";
             this.btn_fix.UseVisualStyleBackColor = true;
             this.btn_fix.EnabledChanged += new System.EventHandler(this.btn_fix_EnabledChanged);
             this.btn_fix.Click += new System.EventHandler(this.btn_fix_Click);

@@ -106,13 +106,13 @@ namespace AreaTM_acbas
                 ExitThread = true;
                 return;
             }
-            /*else if (buildVersion < 17763) //Windows 10 1809 미만일 경우 실행 차단
+            else if (buildVersion < 17763) //Windows 10 1809 미만일 경우 실행 차단
             {
                 MessageBox.Show("GEKImoe Stream Assistant supports Windows 10(over than 1809) and Windows 11." + "\r\n\r\n" + "Please run Windows Update to update build over than 1809 first and re-launch this assistant.");
                 isAvailableOS = false;
                 ExitThread = true;
                 return;
-            }*/
+            }
             else if(buildVersion < 19044) //Windows 10 21H2 미만일 경우 사전 경고(지원 종료 예정)
             {
                 isAvailableOS = false;
@@ -127,7 +127,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.19_A";
-        public static long acbas_build = 202403151659;
+        public static long acbas_build = 202404031129;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";

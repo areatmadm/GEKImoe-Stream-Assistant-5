@@ -129,6 +129,12 @@ namespace AutoStartV2
 
         private void AutoStartV3Main_Load(object sender, EventArgs e)
         {
+            //20240403 Windows 7, 8, 8.1 구동 제한
+            OperatingSystem os = Environment.OSVersion;
+            int majorVersion = os.Version.Major;//메이저
+            int minorVersion = os.Version.Minor;//마이너
+            int buildVersion = os.Version.Build;//빌드
+
             /*string pvd = "taskkill /f /im explorer.exe";
 
             string pve = "";
@@ -146,9 +152,9 @@ namespace AutoStartV2
             File.Delete("start.vbs");*/
             //vbs 지원 종료로 인한 코드 주석화(아래 코드가 안정적일 경우 주석 코드 삭제 요망)
 
-            //vbs(Vivid BAD SQUAD)를 대체할 신규 코드 작성
+            //vbs(Vivid BAD SQUAD 아님)를 대체할 신규 코드 작성
             Process killtask1 = new Process();
-            killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Minimized; //일단 창 생성 없이 구동
+            killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
             killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
             killtask1.StartInfo.Arguments = "/f /im explorer.exe";
             try { killtask1.Start(); } catch { }

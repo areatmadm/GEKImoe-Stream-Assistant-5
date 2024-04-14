@@ -16,7 +16,17 @@ namespace GEKImoeStreamAssistant5FixReboot
 {
     public partial class Nolja_ErrorFix : Form
     {
-        int quick = 30;
+        PrivateFontCollection font_3_0_s = new PrivateFontCollection();
+        string fix_nfd;
+
+        //보안 강화에 POST 전송으로 암호화 통신 적용
+        string[] postStringKey = new string[10];
+        string[] postStringValue = new string[10];
+
+        //강제종료를 위한 Process 정보 사전 입력
+        string[] exitProcesses = new string[10000];
+
+        int quick = 60;
         int qtemp;
 
         private string GetHtmlString(string url)
@@ -51,6 +61,7 @@ namespace GEKImoeStreamAssistant5FixReboot
                 String postDataToSend = null;
                 for (int i = 0; i < postDataKey.Length; i++) //값 전달할 key 전달
                 {
+                    if (postDataKey[i] == null) { break; }
                     if (i > 0) postDataToSend += "&";
                     postDataToSend += postDataKey[i];
                     postDataToSend += "=";
@@ -106,15 +117,15 @@ namespace GEKImoeStreamAssistant5FixReboot
 
         private void NoljaStreamingSelect_Load(object sender, EventArgs e)
         {
-            PrivateFontCollection font_3_0_s = new PrivateFontCollection();
-            string fix_nfd;
-            //fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Bugfix\", "");
-            fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Debug\", "");
+            fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Bugfix\", "");
+            //fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Debug\", "");
             //MessageBox.Show(fix_nfd);
             font_3_0_s.AddFontFile(fix_nfd + @"\nanum-barun-gothic\NanumBarunGothicBold.otf");
             font_3_0_s.AddFontFile(fix_nfd + @"\nanum-barun-gothic\NanumBarunGothic.otf");
 
             this.Font = new Font(font_3_0_s.Families[0], 18f, FontStyle.Bold);
+            btn_exit.Font = new Font(font_3_0_s.Families[0], 18f, FontStyle.Bold);
+            btn_fix.Font = new Font(font_3_0_s.Families[0], 18f, FontStyle.Bold);
             label1.Font = new Font(font_3_0_s.Families[0], 14f);
             lbl_name.Font = new Font(font_3_0_s.Families[0], 22f, FontStyle.Bold);
 
@@ -129,9 +140,55 @@ namespace GEKImoeStreamAssistant5FixReboot
             btn_fix.Enabled = false;
             btn_exit.Enabled = false;
 
-            //Process.Start("nolja_fix_pp.vbs"); //SW 강종 코드
-            Delay(6000);
+            //Process.Start("nolja_fix_pp.vbs"); //(구)SW 강종 코드
 
+            //신 SW 강종 코드 start
+            exitProcesses[0] = "explorer"; //Windows 탐색기
+            exitProcesses[1] = "obs64"; //OBS
+
+            //GEKImoe Stream Assistant 5 찾기 시작
+            exitProcesses[2] = "AreaTM_acbas"; //Full버전일 경우
+            exitProcesses[3] = "GEKImoeStreamAssistant5Lite"; //Lite버전일 경우
+            exitProcesses[4] = "SangguGSA5"; //구. 로얄게임장 전용
+            exitProcesses[5] = "GAMED_BCAS"; //(주)대왕산업 계열 고객사 전용
+            //GEKImoe Stream Assistant 5 찾기 끝
+
+            //Internet Browser 시작
+            exitProcesses[6] = "chrome"; //Google Chrome
+            exitProcesses[7] = "msedge"; //Microsoft Edge
+            exitProcesses[8] = "firefox"; //Mozilla Firefox
+            exitProcesses[9] = "whale"; //Naver Whale
+            //Internet Browser 끝
+
+            //Apple 시작
+            exitProcesses[10] = "iTunes"; //iTunes
+            exitProcesses[11] = "AppleDevices"; //Apple 기기
+            //Apple 끝
+
+            //GEKImoe Stream AI 시작
+            exitProcesses[12] = "GEKImoeStreamAI";
+            //GEKImoe Stream AI 끝
+
+            //아레아티엠 오락실 방송 어시스턴트(v4) IoT 시작
+            exitProcesses[13] = @"AreaTM_IoT";
+            //아레아티엠 오락실 방송 어시스턴트(v4) IoT 끝
+
+
+            Process killProcess = new Process(); //taskkill.exe 구동을 위한 Process 함수 생성
+            killProcess.StartInfo.FileName = @"C:\Windows\System32\taskkill.exe"; //taskkill 경로 작성
+            killProcess.StartInfo.Arguments = @"/f";
+            killProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //cmd창 숨겨보기
+            for(int i=0; i<exitProcesses.Length; i++) //여러 프로그램들을 동시에 강종하기 위한 Process 수집
+            {
+                if (exitProcesses[i] == null) { /*MessageBox.Show(i + "");*/ break; } //null값 추출
+                Process[] ifUsingProcess = Process.GetProcessesByName(exitProcesses[i]); //프로세스가 실행 중인지 찾기
+                if(ifUsingProcess.Length >= 1) { killProcess.StartInfo.Arguments += @" /im " + exitProcesses[i] + ".exe"; } //미리 입력된 Process 입력
+            }
+            killProcess.Start(); //KILL
+
+            //신 SW 강종 코드 end
+            Delay(6000);
+            
             string noll;
             string setgame = "";
             string vender = "";
@@ -150,20 +207,30 @@ namespace GEKImoeStreamAssistant5FixReboot
             if (File.Exists(Path.GetFullPath("vender.txt").Replace(@"Bugfix\", ""))) vender = File.ReadAllText(Path.GetFullPath("vender.txt").Replace(@"Bugfix\", ""));
             else vender = "NOLJA";
 
-            if (File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자는 독자적인 도메인 이용
+            //구형 GET방식 데이터 전송 시작
+            /*if (File.Exists(Path.GetFullPath("nolja_game_set.txt").Replace(@"Bugfix\", ""))) //놀자는 독자적인 도메인 이용
             {
                 noll = GetHtmlString("https://nolja.bizotoge.areatm.com/public/serverstatus?mode=4&submode=5&game=" + setgame);
             }
             else // 그 외에는 표준규격 사용
             {
                 noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + vender + "mode=4&submode=5&game=" + setgame);
-            }
-            
+            }*/
+            //구형 GET방식 데이터 전송 끝
+            //신형 POST방식 데이터 전송 시작
+            postStringKey[0] = "vender"; postStringValue[0] = vender; //game
+            postStringKey[1] = "mode"; postStringValue[1] = "4"; //game
+            postStringKey[2] = "submode"; postStringValue[2] = "5"; //postkey_vender
+            postStringKey[3] = "game"; postStringValue[3] = setgame; //game
+
+            noll = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+            //신형 POST방식 데이터 전송 끝
+
             Delay(1000);
 
             lbl_name.Text = "GEKImoe Stream Assistant 재시작 요청됨";
             timer1.Enabled = true;
-            label1.Text = "30초 후 스트리밍을 재시작합니다.";
+            label1.Text = "30초 후 GEKImoe Stream Assistant를 재시작합니다.";
         }
 
         private void btn_exit_Click(object sender, EventArgs e)
@@ -175,20 +242,30 @@ namespace GEKImoeStreamAssistant5FixReboot
         {
             quick--;
             qtemp = quick / 2;
+            label1.Font = new Font(font_3_0_s.Families[0], 14f);
 
-            if (qtemp >= 60)
+            /*if (qtemp >= 60)
             {
-                label1.Text = (qtemp / 60) + "분 " + (qtemp % 60) + "초 후 재시작합니다.";
+                label1.Text = (qtemp / 60) + "분 " + (qtemp % 60) + "초 후 GEKImoe Stream Assistant를 재시작합니다.";
             }
-            else label1.Text = qtemp + "초 후 재시작합니다.";
+            else */
+            label1.Text = qtemp + "초 후 GEKImoe Stream Assistant를 재시작합니다.";
+            //label1.Font = new Font(font_3_0_s.Families[0], 14f);
 
             if (qtemp < 0)
             {
                 label1.Text = "재시작을 진행합니다...";
                 timer1.Enabled = false;
                 Delay(2000);
-                //if(File.Exists(Path.GetFullPath))
+                if(File.Exists(Path.GetFullPath("AutoStartV3.exe").Replace(@"Bugfix\", ""))){ //AutoStartV3 재실행
+                    Process startV3 = new Process();
+                    startV3.StartInfo.FileName = Path.GetFullPath("AutoStartV3.exe").Replace(@"Bugfix\", ""); //경로를 찾아 AutoStartV3.exe를 시작 파일로 설정
+                    startV3.StartInfo.WorkingDirectory = Path.GetFullPath("AutoStartV3.exe").Replace(@"Bugfix\AutoStartV3.exe", ""); //AutoStartV3가 있는 폴더를 시작 경로로 설정
+                    startV3.Start(); //재시작
+                    Application.ExitThread();//Bugfix 종료
+                }
                 //Process.Start(@"nolja_reboot.vbs");
+
             }
 
             //label1.Text = "3분 30초 후 재부팅을 시작합니다.";
