@@ -174,7 +174,7 @@ namespace AutoStartV2
                 pg.Font = new Font(font_3_0_s.Families[0], 15f);
             }
             catch { }
-            lbl_nowver.Text = "5.11_B_20240310";
+            lbl_nowver.Text = "5.11_C_20240415";
 
             lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 

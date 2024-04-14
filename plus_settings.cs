@@ -44,10 +44,10 @@ namespace AreaTM_acbas
 
         private void btn_rebang_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("재부팅을 원할 시 '에러 픽스'를 선택해 주세요. 잘못 눌렀을 시 '방송화면으로 복귀'를 선택해 주세요.");
+            //MessageBox.Show("재부팅을 원할 시 '에러 픽스'를 선택해 주세요. 잘못 눌렀을 시 '방송화면으로 복귀'를 선택해 주세요.");
             ProcessStartInfo rebang = new ProcessStartInfo();
 
-            rebang.FileName = "NoljaBugfix.exe";
+            rebang.FileName = "GEKImoeStreamAssistant5FixReboot.exe";
             rebang.WorkingDirectory = "Bugfix";
 
             Process.Start(rebang);
