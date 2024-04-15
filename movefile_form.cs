@@ -97,7 +97,7 @@ namespace AreaTM_acbas
             { //FileZilla 있는지 없는지 여부
                 btn_ftp.Enabled = false;
             }
-            if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1028.9986.0_x64__nzyj5cx40ttqa\AppleDevices.exe"))
+            if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1030.20993.0_x64__nzyj5cx40ttqa\AppleDevices.exe"))
             { //Apple Devices Manager가 있는지 없는지 여부
                 btn_ios.Enabled = false;
             }

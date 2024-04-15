@@ -39,7 +39,7 @@ namespace AreaTM_acbas
             try { Process.Start(sdvxwin._obs.GetRecordingFolder()); } catch { }
             
             Process newAppleDevice = new Process();
-            newAppleDevice.StartInfo.FileName = @"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1028.9986.0_x64__nzyj5cx40ttqa\AppleDevices.exe";
+            newAppleDevice.StartInfo.FileName = @"C:\Program Files\WindowsApps\AppleInc.AppleDevices_1.1030.20993.0_x64__nzyj5cx40ttqa\AppleDevices.exe";
             try { newAppleDevice.Start(); } catch {  }
         }
 

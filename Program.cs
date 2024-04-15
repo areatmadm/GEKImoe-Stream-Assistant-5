@@ -136,8 +136,8 @@ namespace AreaTM_acbas
 
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.19_A";
-        public static long acbas_build = 202404150039;
+        public static string acbas_ver = "5.19_B";
+        public static long acbas_build = 202404160124;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";
@@ -199,7 +199,7 @@ namespace AreaTM_acbas
                 {
                     var settings = new CefSettings();
                     settings.BrowserSubprocessPath = System.IO.Path.GetFullPath("CefSharp.BrowserSubprocess.exe");
-                    settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:104.0) Gecko/20100101 Firefox/110.0";
+                    settings.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:124.0) Gecko/20100101 Firefox/124.0";
                     settings.CefCommandLineArgs["autoplay-policy"] = "no-user-gesture-required";
                     settings.CefCommandLineArgs["disable-features"] = "HardwareMediaKeyHandling,MediaSessionService";
                     settings.Locale = "KO_KR";
