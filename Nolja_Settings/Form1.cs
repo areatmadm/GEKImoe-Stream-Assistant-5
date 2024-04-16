@@ -223,7 +223,7 @@ namespace GEKImoeStreamAssistant5FixReboot
             postStringKey[2] = "submode"; postStringValue[2] = "5"; //postkey_vender
             postStringKey[3] = "game"; postStringValue[3] = setgame; //game
 
-            noll = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+            noll = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
             //신형 POST방식 데이터 전송 끝
 
             Delay(1000);
