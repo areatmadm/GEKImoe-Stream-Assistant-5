@@ -15,7 +15,7 @@ namespace AreaTM_acbas
     public partial class howtomoveios : Form
     {
         string AppleDeviceVersion_0 = "1.1030.21762.0";
-        string AppleDeviceVersion_1 = "1.1030.21762.0";
+        string AppleDeviceVersion_1 = "1.1030.22273.0";
         //Apple 기기 버전별 경로가 달라 부득이하게 지정
 
         public ChromiumWebBrowser browser;
