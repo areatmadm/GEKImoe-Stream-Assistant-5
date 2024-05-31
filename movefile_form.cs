@@ -17,7 +17,7 @@ namespace AreaTM_acbas
         Process chr = new Process();
         string pm = "";
         string sec = "";
-        string AppleDeviceVersion_0 = "1.1030.21762.0";
+        string AppleDeviceVersion_0 = "1.1030.22273.0";
         string AppleDeviceVersion_1 = "1.1030.22273.0";
         //Apple 기기 버전별 경로가 달라 부득이하게 지정
 
