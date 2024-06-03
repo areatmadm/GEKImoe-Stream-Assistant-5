@@ -29,6 +29,9 @@ namespace AutoStartV2
         public static string p; //gamecode
         public static int pc_num; //동일 게임에 여러대 방송PC 운영할 경우, 구분을 위해 필요
         public string gc_name;
+
+        public static bool ExitThread = false; //버전체크 직후인지 확인하는 용도, Windows 빌드 미지원으로 인한 강제종료 여부
+        public static bool isAvailableOS = false; //Windows 빌드 체크 적합성 확인
         //public string game_name;
 
         public static PrivateFontCollection font_3_0_s = new PrivateFontCollection();
@@ -122,6 +125,48 @@ namespace AutoStartV2
             }
         }
 
+        private static void CheckOS()
+        {
+            OperatingSystem os = Environment.OSVersion;
+            int majorVersion = os.Version.Major;//메이저
+            int minorVersion = os.Version.Minor;//마이너
+            int buildVersion = os.Version.Build;//빌드
+
+            if (majorVersion < 10)//Windows 10, Windows 11이 아닐 경우 실행 차단
+            {
+                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10 and Windows 11. Please upgrade this computer first and re-launch this assistant." + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant는 Windows 10과 Windows 11을 지원합니다. 이 컴퓨터를 먼저 업그레이드하고 이 어시스턴트를 다시 실행해 주세요." + "\r\n\r\n" +
+                    "GEKImoe Stream AssistantはWindows 10とWindows 11に対応しています。まずこのコンピューターをアップグレードしてから、このアシスタントを再起動してください。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10和Windows 11。请先升级这台电脑，然后重新启动这个助手。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10和Windows 11。請先升級這台電腦，然後重新啟動這個助手。"
+                    , "Not support OS", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isAvailableOS = false;
+                ExitThread = true;
+                return;
+            }
+            else if (buildVersion < 17763) //Windows 10 1809 미만일 경우 실행 차단
+            { 
+                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10(over than 1809) and Windows 11. Please run Windows Update to update build over than 1809 first and re-launch this assistant." + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant는 Windows 10(1809 이상)과 Windows 11을 지원합니다. 먼저 Windows 업데이트를 실행하여 1809 이상으로 빌드를 업데이트한 후 이 어시스턴트를 다시 실행해 주세요." + "\r\n\r\n" +
+                    "GEKImoe Stream AssistantはWindows 10（1809以上）とWindows 11に対応しています。まずWindows Updateを実行して1809以上にビルドをアップデートしてから、このアシスタントを再起動してください。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10（1809以上版本）和Windows 11。请先运行Windows更新，将系统版本更新到1809以上，然后重新启动这个助手。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10（1809以上版本）和Windows 11。請先執行Windows更新，將系統版本更新到1809以上，然後重新啟動這個助手。"
+                    , "Not support OS", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                isAvailableOS = false;
+                ExitThread = true;
+                return;
+            }
+            else if (buildVersion < 19044) //Windows 10 21H2 미만일 경우 사전 경고(지원 종료 예정)
+            {
+                isAvailableOS = false;
+                return;
+            }
+            else
+            {
+                isAvailableOS = true;
+            }
+        }
+
         public AutoStartV3Main()
         {
             InitializeComponent();
@@ -134,6 +179,9 @@ namespace AutoStartV2
             int majorVersion = os.Version.Major;//메이저
             int minorVersion = os.Version.Minor;//마이너
             int buildVersion = os.Version.Build;//빌드
+
+            //OS VersionCheck
+            CheckOS();
 
             /*string pvd = "taskkill /f /im explorer.exe";
 
@@ -153,69 +201,88 @@ namespace AutoStartV2
             //vbs 지원 종료로 인한 코드 주석화(아래 코드가 안정적일 경우 주석 코드 삭제 요망)
 
             //vbs(Vivid BAD SQUAD 아님)를 대체할 신규 코드 작성
-            Process killtask1 = new Process();
-            killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
-            killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
-            killtask1.StartInfo.Arguments = "/f /im explorer.exe";
-            try { killtask1.Start(); } catch { }
-
-            Delay(1000);//임시
-
-            try
+            if (!ExitThread) //OS 미지원일 경우 강제종료 하면 안됨
             {
-                font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothicBold.otf");
-                font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothic.otf");
-
-                lbl_information.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
-                lbl_name.Font = new Font(font_3_0_s.Families[0], 24f, FontStyle.Bold);
-                lbl_nowver_txt.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
-
-                lbl_nowver.Font = new Font(font_3_0_s.Families[0], 14f);
-                pg.Font = new Font(font_3_0_s.Families[0], 15f);
-            }
-            catch { }
-            lbl_nowver.Text = "5.11_C_20240415";
-
-            lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
-
-            try
-            {
-                //gc_name = "놀자";
-
-                //구형 파일 제거, Ver.5.22에서 삭제 시작
-                if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
-                {
-                    File.Delete(@"nolja_game_set.txt");
-                }
-                else if (File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
-                {
-                    File.Move(@"nolja_game_set.txt", @"game_set.txt");
-                }
-                else if (!File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
-                {
-                    MessageBox.Show("Error", "Error");
-                    Application.ExitThread();
-                }
-                //구형 파일 제거, Ver.5.22에서 삭제 끝
-
-                p = File.ReadAllText(@"game_set.txt");
-                if (File.Exists(@"game_pc_num.txt")) { pc_num = Int32.Parse(File.ReadAllText(@"game_pc_num.txt")); } //PC 여러대 감지되면 구분.
-                //PC 여러대 감지되었다 해도 DB에 반영되어 있지 않으면 0을 제외한 모든 PC는 서버에서 무시 처리될 수도 있음
-                
-                //game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
-            }
-            catch
-            {
-                MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox);
-                this.Close();
+                Process killtask1 = new Process();
+                killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                killtask1.StartInfo.Arguments = "/f /im explorer.exe";
+                try { killtask1.Start(); } catch { }
+                Delay(1000);//임시
             }
 
-            lbl_name.Text = language_.ko_kr_BOOTING;
+            if (!ExitThread)
+            {
+                try
+                {
+                    font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothicBold.otf");
+                    font_3_0_s.AddFontFile(@"font_3.0\nanum-barun-gothic\NanumBarunGothic.otf");
+
+                    lbl_information.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
+                    lbl_name.Font = new Font(font_3_0_s.Families[0], 24f, FontStyle.Bold);
+                    lbl_nowver_txt.Font = new Font(font_3_0_s.Families[0], 15f, FontStyle.Bold);
+
+                    lbl_nowver.Font = new Font(font_3_0_s.Families[0], 14f);
+                    pg.Font = new Font(font_3_0_s.Families[0], 15f);
+                }
+                catch { }
+                lbl_nowver.Text = "5.12_A_20240603";
+
+                lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
+
+                try
+                {
+                    //gc_name = "놀자";
+
+                    //구형 파일 제거, Ver.5.22에서 삭제 시작
+                    if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
+                    {
+                        File.Delete(@"nolja_game_set.txt");
+                    }
+                    else if (File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+                    {
+                        File.Move(@"nolja_game_set.txt", @"game_set.txt");
+                    }
+                    else if (!File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
+                    {
+                        MessageBox.Show("Error", "Error");
+                        Application.ExitThread();
+                    }
+                    //구형 파일 제거, Ver.5.22에서 삭제 끝
+
+                    p = File.ReadAllText(@"game_set.txt");
+                    if (File.Exists(@"game_pc_num.txt")) { pc_num = Int32.Parse(File.ReadAllText(@"game_pc_num.txt")); } //PC 여러대 감지되면 구분.
+                                                                                                                         //PC 여러대 감지되었다 해도 DB에 반영되어 있지 않으면 0을 제외한 모든 PC는 서버에서 무시 처리될 수도 있음
+
+                    //game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
+                }
+                catch
+                {
+                    MessageBox.Show(language_.ko_kr_ERRORACCURED_msgbox);
+                    this.Close();
+                }
+
+                lbl_name.Text = language_.ko_kr_BOOTING;
+            }
             
         }
 
         private void AutoStartV3Main_Activate(object sender, EventArgs e)
         {
+            if (ExitThread)
+            {
+                Application.Exit();
+                //this.Close();
+                return;
+                //this.Close();
+
+                /*Process killtask_D = new Process();
+                killtask_D.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                killtask_D.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                killtask_D.StartInfo.Arguments = "/f /im explorer.exe";
+                try { killtask_D.Start(); } catch { }*/
+            }
+
             string pvd;
             string pve;
 
@@ -616,10 +683,12 @@ namespace AutoStartV2
 
                         //vbs(Vivid BAD SQUAD 아님) 지원종료로 인해 다른 방식으로 구현
                         Process runCamSett = new Process(); //새로운 Process 생성
-                        runCamSett.StartInfo.WindowStyle = ProcessWindowStyle.Minimized; //일단 창 생성 없이 구동
+                        runCamSett.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
                         runCamSett.StartInfo.FileName = "restore.bat"; //WebCameraConfig\restore.bat
                         runCamSett.StartInfo.WorkingDirectory = "WebCameraConfig"; //실행 자체가 그 폴더에 있는 cam_sett.cfg 파일을 필요로 함
                         runCamSett.Start(); //PROFIT!!
+                        Delay(2000);
+                        runCamSett.Start(); //Profit!!(2회 적용시켜 적용이 안되는 현상이 일어나지 않도록 함.)
                         Delay(2000);
                     }
 
