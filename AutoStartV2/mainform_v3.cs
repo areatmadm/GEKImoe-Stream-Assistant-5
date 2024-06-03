@@ -469,7 +469,7 @@ namespace AutoStartV2
 
                 if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("GEKImoeStreamAssistant5Lite.exe"); } //mini플랜 간소화버전 사용
                 else if(vender_swdf == "full") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full플랜 full버전 사용
-                else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.channel.io로 문의 요망"); Process.Start("explorer.exe");  Application.ExitThread(); }
+                else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.com → 채팅상담 으로 문의 요망"); Process.Start("explorer.exe");  Application.ExitThread(); }
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
                 Delay(1600);
