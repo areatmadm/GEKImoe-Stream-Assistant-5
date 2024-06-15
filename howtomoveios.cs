@@ -53,12 +53,9 @@ namespace AreaTM_acbas
             }*/ //old code to find AppleDevices.exe
 
             if (System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe")) //find AppleDecices
-
             {
                 newAppleDevice.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe";
             } //new!! find AppData\local\Microsoft\WindowsApps\
-            /*임시*/
-            else { MessageBox.Show("NONE"); }
             try { newAppleDevice.Start(); } catch {  }
         }
 
