@@ -77,6 +77,12 @@
     <Compile Include="mainform_v3.Designer.cs">
       <DependentUpon>mainform_v3.cs</DependentUpon>
     </Compile>
+    <Compile Include="AI_warning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AI_warning.Designer.cs">
+      <DependentUpon>AI_warning.cs</DependentUpon>
+    </Compile>
     <Compile Include="none.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     </Compile>
     <EmbeddedResource Include="mainform_v3.resx">
       <DependentUpon>mainform_v3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AI_warning.resx">
+      <DependentUpon>AI_warning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="none.resx">
       <DependentUpon>none.cs</DependentUpon>
