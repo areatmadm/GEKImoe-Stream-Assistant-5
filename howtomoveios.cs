@@ -14,8 +14,8 @@ namespace AreaTM_acbas
 {
     public partial class howtomoveios : Form
     {
-        string AppleDeviceVersion_0 = "1.1030.22273.0";
-        string AppleDeviceVersion_1 = "1.1030.22273.0";
+        //string AppleDeviceVersion_0 = "1.1030.22273.0";
+        //string AppleDeviceVersion_1 = "1.1030.22273.0";
         //Apple 기기 버전별 경로가 달라 부득이하게 지정
 
         public ChromiumWebBrowser browser;
@@ -43,14 +43,22 @@ namespace AreaTM_acbas
             try { Process.Start(sdvxwin._obs.GetRecordingFolder()); } catch { }
             
             Process newAppleDevice = new Process();
-            if (System.IO.File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))
+            /*if (System.IO.File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))
             {
                 newAppleDevice.StartInfo.FileName = @"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe";
             }
             else if (System.IO.File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_1 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))
             {
                 newAppleDevice.StartInfo.FileName = @"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_1 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe";
-            }
+            }*/ //old code to find AppleDevices.exe
+
+            if (System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe")) //find AppleDecices
+
+            {
+                newAppleDevice.StartInfo.FileName = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe";
+            } //new!! find AppData\local\Microsoft\WindowsApps\
+            /*임시*/
+            else { MessageBox.Show("NONE"); }
             try { newAppleDevice.Start(); } catch {  }
         }
 
@@ -65,8 +73,9 @@ namespace AreaTM_acbas
             if (processifusenjbtmpcht.Length >= 1)
             {
                 Process killtask = new Process();
-                killtask.StartInfo.FileName = @"C:\Windows\system32\AppleDevices.exe";
+                killtask.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
                 killtask.StartInfo.Arguments = "/f /im AppleDevices.exe";
+                killtask.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 try { killtask.Start(); } catch { }
                 //C:\Windows\SysWOW64\taskkill.exe /f /im Nolja_OpenUp.exe
             }

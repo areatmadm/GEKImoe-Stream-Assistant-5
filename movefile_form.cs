@@ -17,8 +17,8 @@ namespace AreaTM_acbas
         Process chr = new Process();
         string pm = "";
         string sec = "";
-        string AppleDeviceVersion_0 = "1.1030.22273.0";
-        string AppleDeviceVersion_1 = "1.1030.22273.0";
+        //string AppleDeviceVersion_0 = "1.1030.22273.0";
+        //string AppleDeviceVersion_1 = "1.1030.22273.0";
         //Apple 기기 버전별 경로가 달라 부득이하게 지정
 
         private int OpenFolder()
@@ -100,8 +100,9 @@ namespace AreaTM_acbas
             { //FileZilla 있는지 없는지 여부
                 btn_ftp.Enabled = false;
             }
-            if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe")
-                && !File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_1 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))
+            /*if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe")
+                && !File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_1 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))*/ //OldCode
+            if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe")) //NewCode
             { //Apple Devices Manager가 있는지 없는지 여부
                 btn_ios.Enabled = false;
             }
