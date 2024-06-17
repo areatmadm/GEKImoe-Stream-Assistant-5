@@ -1,4 +1,4 @@
-﻿using CefSharp.WinForms;
+﻿/*using CefSharp.WinForms;*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace AreaTM_acbas
         public static int quick = 600;
         int qtemp;
 
-        public ChromiumWebBrowser updinform = new ChromiumWebBrowser();
+        //public ChromiumWebBrowser updinform = new ChromiumWebBrowser();
 
         private string GetHtmlString(string url)
         {
@@ -40,6 +41,18 @@ namespace AreaTM_acbas
             {
                 return "Error";
             }
+        }
+
+        public async void InitBrowser()
+        {
+            await updinform.EnsureCoreWebView2Async();
+
+            updinform.CoreWebView2.Navigate("https://service.stream-assistant-5.gekimoe.areatm.com/public/updatecheck/info");
+            
+
+            updinform.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            updinform.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            updinform.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
         }
 
         private static DateTime Delay(int MS)
@@ -69,7 +82,7 @@ namespace AreaTM_acbas
             btn_update.Font = new Font(sdvxwin.font_5_0_b.Families[0], 18f);
             btn_resettime.Font = new Font(sdvxwin.font_5_0_b.Families[0], 18f);
 
-            updinform.Load("https://nolja.bizotoge.areatm.com/public/updatecheck/info");
+            /*updinform.Load("https://nolja.bizotoge.areatm.com/public/updatecheck/info");
             updinform.Dock = DockStyle.None;
             updinform.Size = browserarea.Size;
             updinform.Location = browserarea.Location;
@@ -80,8 +93,10 @@ namespace AreaTM_acbas
             updinform.MenuHandler = new CustomMenuHandler();
 
             this.Controls.Remove(browserarea);
-            this.Controls.Add(updinform);
-            
+            this.Controls.Add(updinform);*/
+            InitBrowser();
+
+
             timer1.Interval = 1000;
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Enabled = false;

@@ -36,7 +36,8 @@
             this.lbl_timer = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btn_resettime = new System.Windows.Forms.Button();
-            this.browserarea = new System.Windows.Forms.Label();
+            this.updinform = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)(this.updinform)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_blank_0
@@ -51,7 +52,7 @@
             // lbl_name
             // 
             this.lbl_name.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lbl_name.Font = new System.Drawing.Font("카카오 Bold", 25F);
+            this.lbl_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
             this.lbl_name.Location = new System.Drawing.Point(0, 16);
             this.lbl_name.Name = "lbl_name";
             this.lbl_name.Size = new System.Drawing.Size(545, 44);
@@ -66,7 +67,7 @@
             this.btn_update.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(215)))), ((int)(((byte)(108)))));
             this.btn_update.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))), ((int)(((byte)(158)))));
             this.btn_update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_update.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.btn_update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.btn_update.Location = new System.Drawing.Point(12, 344);
             this.btn_update.Name = "btn_update";
@@ -96,7 +97,7 @@
             this.btn_resettime.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(100)))), ((int)(((byte)(192)))));
             this.btn_resettime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.btn_resettime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_resettime.Font = new System.Drawing.Font("카카오 Bold", 18F);
+            this.btn_resettime.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F);
             this.btn_resettime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.btn_resettime.Location = new System.Drawing.Point(319, 344);
             this.btn_resettime.Name = "btn_resettime";
@@ -106,14 +107,16 @@
             this.btn_resettime.UseVisualStyleBackColor = true;
             this.btn_resettime.Click += new System.EventHandler(this.btn_resettime_Click);
             // 
-            // browserarea
+            // updinform
             // 
-            this.browserarea.Location = new System.Drawing.Point(12, 127);
-            this.browserarea.Name = "browserarea";
-            this.browserarea.Size = new System.Drawing.Size(521, 207);
-            this.browserarea.TabIndex = 5;
-            this.browserarea.Text = "BROWSERAREA";
-            this.browserarea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.updinform.AllowExternalDrop = true;
+            this.updinform.CreationProperties = null;
+            this.updinform.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.updinform.Location = new System.Drawing.Point(12, 127);
+            this.updinform.Name = "updinform";
+            this.updinform.Size = new System.Drawing.Size(521, 207);
+            this.updinform.TabIndex = 6;
+            this.updinform.ZoomFactor = 1D;
             // 
             // nolja_restartinform
             // 
@@ -121,13 +124,13 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(545, 399);
             this.ControlBox = false;
-            this.Controls.Add(this.browserarea);
+            this.Controls.Add(this.updinform);
             this.Controls.Add(this.btn_resettime);
             this.Controls.Add(this.lbl_timer);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.lbl_name);
             this.Controls.Add(this.lbl_blank_0);
-            this.Font = new System.Drawing.Font("카카오 Regular", 15F);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -139,6 +142,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.nolja_restartinform_FormClosing);
             this.Load += new System.EventHandler(this.nolja_restartinform_Load);
             this.Shown += new System.EventHandler(this.nolja_restartinform_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.updinform)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,6 +155,6 @@
         private System.Windows.Forms.Label lbl_timer;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btn_resettime;
-        private System.Windows.Forms.Label browserarea;
+        private Microsoft.Web.WebView2.WinForms.WebView2 updinform;
     }
 }

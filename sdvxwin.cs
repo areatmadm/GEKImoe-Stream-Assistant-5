@@ -16,9 +16,9 @@ using OBSWebsocketDotNet.Types;
 using System.Diagnostics;
 
 using System.IO;
-using CefSharp;
+/*using CefSharp;
 using CefSharp.WinForms;
-using CefSharp.SchemeHandler;
+using CefSharp.SchemeHandler;*/
 
 using System.Net;
 
@@ -44,7 +44,7 @@ namespace AreaTM_acbas
 
         //NOLJA Broadcast Ver.3.0 Alpha_Test
         //public static bool testver_3 = false;
-        public static ChromiumWebBrowser ytvideo = new ChromiumWebBrowser();
+        /*public static ChromiumWebBrowser ytvideo = new ChromiumWebBrowser();*/
 
         //public static GeckoWebBrowser ytvideo_2 = new GeckoWebBrowser();
         //promotion video deleted

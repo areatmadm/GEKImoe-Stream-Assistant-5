@@ -29,7 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(howtomoveios));
+            this.browser = new Microsoft.Web.WebView2.WinForms.WebView2();
+            ((System.ComponentModel.ISupportInitialize)(this.browser)).BeginInit();
             this.SuspendLayout();
+            // 
+            // browser
+            // 
+            this.browser.AllowExternalDrop = true;
+            this.browser.CreationProperties = null;
+            this.browser.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.browser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browser.Location = new System.Drawing.Point(0, 0);
+            this.browser.Name = "browser";
+            this.browser.Size = new System.Drawing.Size(1044, 638);
+            this.browser.Source = new System.Uri("about:blank", System.UriKind.Absolute);
+            this.browser.TabIndex = 0;
+            this.browser.ZoomFactor = 1D;
             // 
             // howtomoveios
             // 
@@ -37,7 +52,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1044, 611);
+            this.ClientSize = new System.Drawing.Size(1044, 638);
+            this.Controls.Add(this.browser);
             this.Font = new System.Drawing.Font("나눔고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -52,10 +68,13 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.howtomoveios_FormClosing);
             this.Load += new System.EventHandler(this.howtomoveios_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.browser)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Microsoft.Web.WebView2.WinForms.WebView2 browser;
     }
 }

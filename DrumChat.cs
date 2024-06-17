@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
+//using CefSharp;
+//using CefSharp.WinForms;
 
 using System.IO;
 
@@ -18,12 +18,12 @@ namespace AreaTM_acbas
     {
         //string setgame;
         //string livechat;
-        public static ChromiumWebBrowser browser;
+        //public static ChromiumWebBrowser browser;
         public static bool isRestarted = false;
 
         int pTime = 300;
 
-        public void InitBrowser()
+        /*public void InitBrowser()
         {
             //이미 크로미움은 메인 폼에서 오픈했으므로 추가로 호출하지 않는다.
 
@@ -46,7 +46,7 @@ namespace AreaTM_acbas
                 txt_onelinetext.Visible = false;
                 btn_ok.Visible = false;
             }
-        }
+        }*/
 
         public void ReloadStatus(bool okayd)
         {
@@ -80,7 +80,7 @@ namespace AreaTM_acbas
             //livechat = File.ReadAllText(@"ResourceFiles\" + setgame + @"\url.otogeonpf");
 
             InitializeComponent();
-            InitBrowser();
+            /*InitBrowser();*/
             
         }
 
@@ -100,7 +100,7 @@ namespace AreaTM_acbas
 
         private void chatreload_Click(object sender, EventArgs e)
         {
-            browser.Load("https://nolja.bizotoge.areatm.com/public/newchat/" + sdvxwin.setgame);
+            /*browser.Load("https://nolja.bizotoge.areatm.com/public/newchat/" + sdvxwin.setgame);*/
         }
 
         private void NOLJA_BlackEdition()
@@ -132,12 +132,12 @@ namespace AreaTM_acbas
         public void gono()
         {
             //browser.Load("https://nolja.bizotoge.areatm.com/public/newchat/" + sdvxwin.setgame);
-            browser.Load("https://geki.moe/nolja/chatnotice/");
+            /*browser.Load("https://geki.moe/nolja/chatnotice/");*/
         }
 
         public void godo()
         {
-            browser.Load("https://nolja.bizotoge.areatm.com/public/newchat/" + sdvxwin.setgame);
+            /*browser.Load("https://nolja.bizotoge.areatm.com/public/newchat/" + sdvxwin.setgame);*/
 
         }
 

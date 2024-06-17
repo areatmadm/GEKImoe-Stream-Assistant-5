@@ -1,4 +1,4 @@
-﻿using CefSharp.WinForms;
+﻿/*using CefSharp.WinForms;*/
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -137,7 +137,7 @@ namespace AreaTM_acbas
         private static string appGUID = "areatmgekimoestreamassistant";
 
         public static string acbas_ver = "5.20_A";
-        public static long acbas_build = 202405311414;
+        public static long acbas_build = 202406171637;
         public static string acbas_partnum = "v5_5";
 
         //public static string ad_servercountry = "KR";
@@ -195,7 +195,7 @@ namespace AreaTM_acbas
                 //HiDPI support(Deleted)
                 //CefSharp.Cef.EnableHighDPISupport();
 
-                if (!ExitThread)
+                /*if (!ExitThread)
                 {
                     var settings = new CefSettings();
                     settings.BrowserSubprocessPath = System.IO.Path.GetFullPath("CefSharp.BrowserSubprocess.exe");
@@ -205,7 +205,7 @@ namespace AreaTM_acbas
                     settings.Locale = "KO_KR";
                     settings.CachePath = System.IO.Path.GetFullPath("cache_drumchat");
                     CefSharp.Cef.Initialize(settings);
-                }
+                }*/
 
                 string thisprogram = "SDVX";
                 //SDVX: Sound Voltex

@@ -8,7 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using CefSharp.WinForms;
+/*using CefSharp.WinForms;*/
+using Microsoft.Web.WebView2.WinForms;
+using Microsoft.Web.WebView2.Core;
+/*using CefSharp.WinForms.Internals;*/
+using WebSocketSharp;
 
 namespace AreaTM_acbas
 {
@@ -18,8 +22,8 @@ namespace AreaTM_acbas
         //string AppleDeviceVersion_1 = "1.1030.22273.0";
         //Apple 기기 버전별 경로가 달라 부득이하게 지정
 
-        public ChromiumWebBrowser browser;
-        public void InitBrowser()
+        //public ChromiumWebBrowser browser;
+        /*public void InitBrowser()
         {
             browser = new ChromiumWebBrowser("https://geki.moe/nolja/iTunes");
             //browser = new ChromiumWebBrowser("chrome://version");
@@ -29,6 +33,26 @@ namespace AreaTM_acbas
 
             browser.MenuHandler = new CustomMenuHandler();
             browser.Dock = DockStyle.Fill;
+        }*/ //Old CefSharp
+        
+        //public CefSharp browser;
+        public async void InitBrowser()
+        {
+            //browser = new ChromiumWebBrowser("chrome://version");
+
+            //LifespanHandler life = new LifespanHandler();
+            //browser.LifeSpanHandler = life;
+            await browser.EnsureCoreWebView2Async();
+            //browser.NavigateToString("https://geki.moe/nolja/iTunes");
+            browser.CoreWebView2.Navigate("https://geki.moe/nolja/iTunes");
+
+            browser.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            browser.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            browser.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+
+            //browser.MenuHandler = new CustomMenuHandler();
+            //Controls.Add(browser);
+            //browser.Dock = DockStyle.Fill;
         }
 
         public howtomoveios()

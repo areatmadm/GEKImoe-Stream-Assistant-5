@@ -1,4 +1,4 @@
-﻿using CefSharp.WinForms;
+﻿//using CefSharp.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,41 +17,35 @@ namespace AreaTM_acbas
     public partial class maintance_win : Form
     {
         string url;
-        public ChromiumWebBrowser browser;
+        //public ChromiumWebBrowser browser;
 
-        private string GetHtmlString(string url)
-        {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-                StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.Default);
-                string strHtml = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-
-                return strHtml;
-            }
-            catch
-            {
-                return "Error";
-            }
-        }
-
-        public void InitBrowser()
+        public async void InitBrowser()
         {
             //string url = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
 
-            browser = new ChromiumWebBrowser(url);
+            /*browser = new ChromiumWebBrowser(url);
             //browser = new ChromiumWebBrowser("chrome://version");
             this.Controls.Add(browser);
             LifespanHandler life = new LifespanHandler();
             browser.LifeSpanHandler = life;
 
             browser.MenuHandler = new CustomMenuHandler();
-            browser.Dock = DockStyle.Fill;
+            browser.Dock = DockStyle.Fill;*/
+
+            await browser.EnsureCoreWebView2Async();
+
+            if (url == null) //일반적인 전체공지라면
+            {
+                browser.CoreWebView2.Navigate("https://service.stream-assistant-5.gekimoe.areatm.com/public/maintance?ngame=" + sdvxwin.setgame + "&build=" + sdvxwin.nolja_build);
+            }
+            else //그게 아니면
+            {
+                browser.CoreWebView2.Navigate(url);
+            }
+
+            browser.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            browser.CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+            browser.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
         }
         
         public maintance_win(string url_g)
