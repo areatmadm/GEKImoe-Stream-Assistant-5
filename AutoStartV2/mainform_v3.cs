@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.12_A_20240615";
+                lbl_nowver.Text = "5.12_A_20240701";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -255,6 +255,45 @@ namespace AutoStartV2
                                                                                                                          //PC 여러대 감지되었다 해도 DB에 반영되어 있지 않으면 0을 제외한 모든 PC는 서버에서 무시 처리될 수도 있음
 
                     //game_name = File.ReadAllText(@"ResourceFiles\" + p + @"\gamename.otogeonpf");
+
+                    //구형 파일 제거, Ver.5.24에서 삭제 시작
+                    if (Directory.Exists(@"cache_drumchat")){ //cefsharp cache delete
+                        string path = Directory.GetCurrentDirectory() + @"\cache_drumchat";
+                        Directory.Delete(path, true);
+                    }
+
+                    //cefsharp library delete start
+                    if (Directory.Exists(@"locales")) { //locales directory delete
+                        string path = Directory.GetCurrentDirectory() + @"\locales";
+                        Directory.Delete(path, true); //all files of cefsharp locales delete
+                    }
+                    if (File.Exists(@"CefSharp.BrowserSubprocess.Core.dll")) { File.Delete(@"CefSharp.BrowserSubprocess.Core.dll"); }
+                    if (File.Exists(@"CefSharp.BrowserSubprocess.exe")) { File.Delete(@"CefSharp.BrowserSubprocess.exe"); }
+                    if (File.Exists(@"CefSharp.Core.dll")) { File.Delete(@"CefSharp.Core.dll"); }
+                    if (File.Exists(@"CefSharp.Core.Runtime.xml")) { File.Delete(@"CefSharp.Core.Runtime.xml"); }
+                    if (File.Exists(@"CefSharp.Core.xml")) { File.Delete(@"CefSharp.Core.xml"); }
+                    if (File.Exists(@"CefSharp.dll")) { File.Delete(@"CefSharp.dll"); }
+                    if (File.Exists(@"CefSharp.WinForms.dll")) { File.Delete(@"CefSharp.WinForms.dll"); }
+                    if (File.Exists(@"CefSharp.WinForms.XML")) { File.Delete(@"CefSharp.WinForms.XML"); }
+                    if (File.Exists(@"CefSharp.XML")) { File.Delete(@"CefSharp.XML"); }
+                    if (File.Exists(@"chrome_100_percent.pak")) { File.Delete(@"chrome_100_percent.pak"); }
+                    if (File.Exists(@"chrome_200_percent.pak")) { File.Delete(@"chrome_200_percent.pak"); }
+                    if (File.Exists(@"chrome_elf.dll")) { File.Delete(@"chrome_elf.dll"); }
+                    if (File.Exists(@"d3dcompiler_47.dll")) { File.Delete(@"d3dcompiler_47.dll"); }
+                    if (File.Exists(@"icudtl.dat")) { File.Delete(@"icudtl.dat"); }
+                    if (File.Exists(@"libcef.dll")) { File.Delete(@"libcef.dll"); }
+                    if (File.Exists(@"libEGL.dll")) { File.Delete(@"libEGL.dll"); }
+                    if (File.Exists(@"libGLESv2.dll")) { File.Delete(@"libGLESv2.dll"); }
+                    if (File.Exists(@"LICENSE.txt")) { File.Delete(@"LICENSE.txt"); }
+                    if (File.Exists(@"README_cef.txt")) { File.Delete(@"README_cef.txt"); }
+                    if (File.Exists(@"resources.pak")) { File.Delete(@"resources.pak"); }
+                    if (File.Exists(@"snapshot_blob.bin")) { File.Delete(@"snapshot_blob.bin"); }
+                    if (File.Exists(@"v8_context_snapshot.bin")) { File.Delete(@"v8_context_snapshot.bin"); }
+                    if (File.Exists(@"vk_swiftshader.dll")) { File.Delete(@"vk_swiftshader.dll"); }
+                    if (File.Exists(@"vk_swiftshader_icd.json")) { File.Delete(@"vk_swiftshader_icd.json"); }
+                    if (File.Exists(@"vulkan-1.dll")) { File.Delete(@"vulkan-1.dll"); }
+                    //cefsharp library delete end
+                    //구형 파일 제거, Ver.5.24에서 삭제 끝
                 }
                 catch
                 {
