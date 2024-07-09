@@ -108,11 +108,11 @@ namespace AreaTM_acbas
         private void timer1_Tick(object sender, EventArgs e)
         {
             //float dbget = sdvxwin._obs.GetVolume("마이크", true).Volume;
-            /*string tmp_x = X_Cursor;
+            string tmp_x = X_Cursor;
             string tmp_y = Y_Cursor;
 
-            X_Cursor = Cursor.Position.X.ToString();
-            Y_Cursor = Cursor.Position.Y.ToString();*/
+            X_Cursor = System.Windows.Forms.Cursor.Position.X.ToString();
+            Y_Cursor = System.Windows.Forms.Cursor.Position.Y.ToString();
 
             if ((!ispushedkeyboard && !isMouseMoved && !isclicked && !isupdate && !ismute && !rec && !plive && !isUsing && !isgo) || (!isupdate && sdvxwin.banneduser))
             {
