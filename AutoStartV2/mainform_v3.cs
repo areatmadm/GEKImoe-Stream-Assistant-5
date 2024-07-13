@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.12_A_20240709";
+                lbl_nowver.Text = "5.12_B_20240713";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -849,6 +849,21 @@ namespace AutoStartV2
             Process.Start("explorer.exe"); //Windows Explorer 실행(신) - vbs(Vivid Bad SQUAD 아님) 지원 종료에 따른 신규 작성
 
             Delay(4000);
+
+            pg.Text = "Time Check... Please Wait...";
+            int calcTime;
+            DateTime currentTime = DateTime.Now;//현재시간 불러오기
+
+            //시간 계산
+            calcTime = 105600 - ((currentTime.Hour*3600) + (currentTime.Minute*60) + currentTime.Second);
+            Delay(300);
+
+            pg.Text = "Auto reboot enable... Please Wait...";
+            Process rebootAutoTime = new Process();//05:20 자동 재부팅
+            rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
+            rebootAutoTime.StartInfo.Arguments = "-r -t " + calcTime;
+            rebootAutoTime.Start();
+            Delay(300);
 
             pg.Text = language_.ko_kr_DONE_;
             if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
