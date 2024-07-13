@@ -40,7 +40,7 @@ namespace AutoStartV2
 
         protected OBSWebsocket _obs;
 
-        Process[] killProcess;
+        //Process[] killProcess;
 
         string[] postStringKey;
         string[] postStringValue;
