@@ -112,7 +112,7 @@ namespace AreaTM_acbas
                 timer1.Enabled = false;
                 try { sdvxwin._obs.Disconnect(); } catch { } //연결해제 확실히 확인하는 용도
 
-                string pvd = "taskkill /f /im obs64.exe";
+                /*string pvd = "taskkill /f /im obs64.exe";
 
                 string pve = "";
                 pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
@@ -127,9 +127,49 @@ namespace AreaTM_acbas
                 Thread.Sleep(1500);
                 File.Delete("obs_taskkill.bat");
                 File.Delete("start_killobs.vbs");
-                Process.Start(Path.GetFullPath(@"autoobs.lnk"));
+                Process.Start(Path.GetFullPath(@"autoobs.lnk"));*/
 
-                Thread.Sleep(30000);
+                //OBS 강제 종료(프로세스 유지 여부 확인)
+                Process killtask1 = new Process();
+                killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                killtask1.StartInfo.Arguments = "/f /im obs64.exe";
+                try { killtask1.Start(); } catch { }
+
+                Thread.Sleep(1500);
+
+                //OBS 다시 시작
+                Process findOBS = new Process();
+                if (File.Exists(@"C:\Program Files\obs-studio\bin\64bit\obs64.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\64bit\obs64.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files\obs-studio\bin\64bit\";
+                    findOBS.Start();
+                }
+                else if (File.Exists(@"C:\Program Files\obs-studio\bin\32bit\obs32.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files\obs-studio\bin\32bit\obs32.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files\obs-studio\bin\32bit\";
+                    findOBS.Start();
+                }
+                else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\64bit\obs64.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files (x86)\obs-studio\bin\64bit\";
+                    findOBS.Start();
+                }
+                else if (File.Exists(@"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe"))
+                {
+                    findOBS.StartInfo.FileName = @"C:\Program Files (x86)\obs-studio\bin\32bit\obs32.exe";
+                    findOBS.StartInfo.WorkingDirectory = @"C:\Program Files (x86)\obs-studio\bin\32bit\";
+                    findOBS.Start();
+                }
+                else
+                {
+                    
+                }
+
+                Thread.Sleep(15000);
                 if (File.Exists("test")) sdvxwin._obs.Connect("ws://127.0.0.1:7849", "noljabroadcastpc");
                 else sdvxwin._obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
 
