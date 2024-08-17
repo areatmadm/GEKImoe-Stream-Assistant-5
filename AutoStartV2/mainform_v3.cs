@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.12_C_20240714";
+                lbl_nowver.Text = "5.12_D_20240818";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -864,6 +864,7 @@ namespace AutoStartV2
             Process rebootAutoTime = new Process();//05:20 자동 재부팅
             rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
             rebootAutoTime.StartInfo.Arguments = "-r -t " + calcTime;
+            rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             rebootAutoTime.Start();
             Delay(300);
 
