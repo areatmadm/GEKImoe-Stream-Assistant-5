@@ -171,6 +171,10 @@ namespace AreaTM_acbas
             OBSStatus1.SetApartmentState(ApartmentState.STA);
             OBSStatus1.Start();
 
+            Thread tChkTimeAndReboot = new Thread(ChkTimeAndReboot);
+            tChkTimeAndReboot.SetApartmentState(ApartmentState.STA);
+            tChkTimeAndReboot.Start();
+
             // FFmpeg 잘 실행중인지 체크하는 별도 스레드 생성
             /*Thread ffmpegStatus1 = new Thread(chkFFmpegisFine1);
             ffmpegStatus1.SetApartmentState(ApartmentState.STA);
@@ -517,6 +521,30 @@ namespace AreaTM_acbas
                      //MessageBox.Show(Convert.ToInt32(level) + "");
                  }));
         } */
+
+        private void ChkTimeAndReboot()//리부팅 시간 되었을 때 강제 리부팅 조치하도록 함
+        {
+            if((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 20) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 58)) 
+            { //매일 05:20 ~ 06:58 리부팅 강제 시간
+                Process rebootAutoTime = new Process();//05:20 자동 재부팅
+                rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
+                rebootAutoTime.StartInfo.Arguments = "-r -t 10";
+                rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                rebootAutoTime.Start();
+
+                Delay(100);
+                Process killOBS = new Process();//GEKImoe Stream Assistant 강제 종료
+                killOBS.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                killOBS.StartInfo.Arguments = "/f /im AreaTM_acbas.exe";
+                killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                killOBS.Start();
+
+                //OBS 강제 종료
+                killOBS.StartInfo.Arguments = "/f /im obs64.exe";
+                killOBS.Start();
+            }
+            Delay(1000);
+        }
 
         private void MTick()
         {

@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.12_D_20240818";
+                lbl_nowver.Text = "5.12_E_20240822";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -293,6 +293,8 @@ namespace AutoStartV2
                     if (File.Exists(@"vk_swiftshader_icd.json")) { File.Delete(@"vk_swiftshader_icd.json"); }
                     if (File.Exists(@"vulkan-1.dll")) { File.Delete(@"vulkan-1.dll"); }
                     //cefsharp library delete end
+
+                    if (File.Exists(@"autoobs.lnk")) { File.Delete(@"autoobs.lnk"); } //autoobs.lnk 제거 (더이상 미사용)
                     //구형 파일 제거, Ver.5.24에서 삭제 끝
                 }
                 catch
@@ -850,7 +852,7 @@ namespace AutoStartV2
 
             Delay(4000);
 
-            pg.Text = "Time Check... Please Wait...";
+            /*pg.Text = "Time Check... Please Wait...";
             int calcTime;
             DateTime currentTime = DateTime.Now;//현재시간 불러오기
 
@@ -866,7 +868,7 @@ namespace AutoStartV2
             rebootAutoTime.StartInfo.Arguments = "-r -t " + calcTime;
             rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             rebootAutoTime.Start();
-            Delay(300);
+            Delay(300);*/
 
             pg.Text = language_.ko_kr_DONE_;
             if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
