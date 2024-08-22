@@ -112,24 +112,8 @@ namespace AreaTM_acbas
                 timer1.Enabled = false;
                 try { sdvxwin._obs.Disconnect(); } catch { } //연결해제 확실히 확인하는 용도
 
-                /*string pvd = "taskkill /f /im obs64.exe";
-
-                string pve = "";
-                pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
-                pve += "Dim strArgs" + "\r\n";
-                pve += "strArgs = \"obs_taskkill.bat\"" + "\r\n";
-                pve += "WshShell.Run strArgs, 0, false";
-
-                File.WriteAllText("obs_taskkill.bat", pvd);
-                File.WriteAllText("start_killobs.vbs", pve);
-                Thread.Sleep(500);
-                Process.Start("start_killobs.vbs");
-                Thread.Sleep(1500);
-                File.Delete("obs_taskkill.bat");
-                File.Delete("start_killobs.vbs");
-                Process.Start(Path.GetFullPath(@"autoobs.lnk"));*/
-
                 //OBS 강제 종료(프로세스 유지 여부 확인)
+                Thread.Sleep(500); //정상 종료 했는데 강제종료 판단 방지를 위함.
                 Process killtask1 = new Process();
                 killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
                 killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
@@ -137,6 +121,12 @@ namespace AreaTM_acbas
                 try { killtask1.Start(); } catch { }
 
                 Thread.Sleep(1500);
+
+                //안전모드 활성화 여부 확인 후 활성화 되어있다면 안전 모드 제외
+                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode")) //Find safemode enable status
+                {
+                    try { File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode"); } catch { }//do not run safe mode
+                }
 
                 //OBS 다시 시작
                 Process findOBS = new Process();
@@ -169,7 +159,8 @@ namespace AreaTM_acbas
                     
                 }
 
-                Thread.Sleep(15000);
+                //10초 대기 후 다시 접속
+                Thread.Sleep(10000);
                 if (File.Exists("test")) sdvxwin._obs.Connect("ws://127.0.0.1:7849", "noljabroadcastpc");
                 else sdvxwin._obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
 
