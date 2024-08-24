@@ -524,26 +524,33 @@ namespace AreaTM_acbas
 
         private void ChkTimeAndReboot()//리부팅 시간 되었을 때 강제 리부팅 조치하도록 함
         {
-            if((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 20) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 58)) 
-            { //매일 05:20 ~ 06:58 리부팅 강제 시간
-                Process rebootAutoTime = new Process();//05:20 자동 재부팅
-                rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
-                rebootAutoTime.StartInfo.Arguments = "-r -t 10";
-                rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                rebootAutoTime.Start();
+            while (true)
+            {
+                if ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 15) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 58))
+                { //매일 05:20 ~ 06:58 리부팅 강제 시간
+                    Process rebootAutoTime = new Process();//05:15 재부팅 안내, 05:20 자동 재부팅
+                    rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
+                    rebootAutoTime.StartInfo.Arguments = "-r -t 300 /c " + "\"GEKImoe Stream Assistant 5 is now maintenance 05:05 to 06:58. Streaming PC is now going on reboot after 5 minuites.\"";
+                    rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    rebootAutoTime.Start();
 
-                Delay(100);
-                Process killOBS = new Process();//GEKImoe Stream Assistant 강제 종료
-                killOBS.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
-                killOBS.StartInfo.Arguments = "/f /im AreaTM_acbas.exe";
-                killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                killOBS.Start();
+                    Thread.Sleep(100);
+                    Process killOBS = new Process();//GEKImoe Stream Assistant 강제 종료
+                    killOBS.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                    killOBS.StartInfo.Arguments = "/f /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
+                    killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    killOBS.Start();
 
-                //OBS 강제 종료
-                killOBS.StartInfo.Arguments = "/f /im obs64.exe";
-                killOBS.Start();
+                    //OBS 강제 종료
+                    killOBS.StartInfo.Arguments = "/f /im obs64.exe";
+                    killOBS.Start();
+
+                    //Chrome, Edge, Firefox, Whale 강제 종료
+                    killOBS.StartInfo.Arguments = "/f /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
+                    killOBS.Start();
+                }
+                Thread.Sleep(1000);
             }
-            Delay(1000);
         }
 
         private void MTick()
