@@ -535,18 +535,20 @@ namespace AreaTM_acbas
                     rebootAutoTime.Start();
 
                     Thread.Sleep(100);
+
                     Process killOBS = new Process();//GEKImoe Stream Assistant 강제 종료
                     killOBS.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
-                    killOBS.StartInfo.Arguments = "/f /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
-                    killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    killOBS.Start();
 
                     //OBS 강제 종료
                     killOBS.StartInfo.Arguments = "/f /im obs64.exe";
-                    killOBS.Start();
+                    //killOBS.Start();
 
                     //Chrome, Edge, Firefox, Whale 강제 종료
-                    killOBS.StartInfo.Arguments = "/f /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
+                    killOBS.StartInfo.Arguments += " /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
+                    //killOBS.Start();
+
+                    killOBS.StartInfo.Arguments += " /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
+                    killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     killOBS.Start();
                 }
                 Thread.Sleep(1000);
