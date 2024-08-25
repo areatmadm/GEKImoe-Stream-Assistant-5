@@ -526,11 +526,11 @@ namespace AreaTM_acbas
         {
             while (true)
             {
-                if ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 15) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 58))
+                if ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 10) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 58))
                 { //매일 05:20 ~ 06:58 리부팅 강제 시간
-                    Process rebootAutoTime = new Process();//05:15 재부팅 안내, 05:20 자동 재부팅
+                    Process rebootAutoTime = new Process();//05:10 재부팅 안내, 05:20 자동 재부팅
                     rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
-                    rebootAutoTime.StartInfo.Arguments = "-r -t 300 /c " + "\"GEKImoe Stream Assistant 5 is now maintenance 05:05 to 06:58. Streaming PC is now going on reboot after 5 minuites.\"";
+                    rebootAutoTime.StartInfo.Arguments = "-r -t 600 /c " + "\"GEKImoe Stream Assistant 5 is now maintenance 05:05 to 06:58. Streaming PC is now going on reboot after 10 minuites.(Inform time: " + System.DateTime.Now.Hour + " : " + System.DateTime.Now.Minute + " : " + System.DateTime.Now.Second + ")\"";
                     rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     rebootAutoTime.Start();
 
@@ -543,15 +543,15 @@ namespace AreaTM_acbas
                     killOBS.StartInfo.Arguments = "/f /im obs64.exe";
                     //killOBS.Start();
 
-                    //Chrome, Edge, Firefox, Whale 강제 종료
-                    killOBS.StartInfo.Arguments += " /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
+                    //Chrome, Edge, Firefox, Whale 강제 종료 (일시 중단)
+                    //killOBS.StartInfo.Arguments += " /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
                     //killOBS.Start();
 
                     killOBS.StartInfo.Arguments += " /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
                     killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     killOBS.Start();
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
             }
         }
 
