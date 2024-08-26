@@ -530,7 +530,7 @@ namespace AreaTM_acbas
                 { //매일 05:20 ~ 06:58 리부팅 강제 시간
                     Process rebootAutoTime = new Process();//05:10 재부팅 안내, 05:20 자동 재부팅
                     rebootAutoTime.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
-                    rebootAutoTime.StartInfo.Arguments = "-r -t 600 /c " + "\"GEKImoe Stream Assistant 5 is now maintenance 05:05 to 06:58. Streaming PC is now going on reboot after 10 minuites.(Inform time: " + System.DateTime.Now.Hour + " : " + System.DateTime.Now.Minute + " : " + System.DateTime.Now.Second + ")\"";
+                    rebootAutoTime.StartInfo.Arguments = "-r -t 600 /c " + "\"GEKImoe Stream Assistant 5 is going on maintenance 05:05 to 06:58. Streaming PC will reboot after 10 minuites.(Inform time: " + System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute + ":" + System.DateTime.Now.Second + ")\"";
                     rebootAutoTime.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     rebootAutoTime.Start();
 

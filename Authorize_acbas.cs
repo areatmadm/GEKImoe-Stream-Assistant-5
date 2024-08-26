@@ -167,6 +167,7 @@ namespace AreaTM_acbas
                         {
                             rsp_0 = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue); //보내기
                             if(rsp_0 == "Success") { break; }
+                            else if(rsp_0 == "NoService") { MessageBox.Show("Now, service is going on maintenance."); }
                             else { Delay(2000); }
                         }
                         //신 POST Code 끝
