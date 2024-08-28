@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.12_E_20240822";
+                lbl_nowver.Text = "5.13_A_20240829";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -401,6 +401,13 @@ namespace AutoStartV2
                 */
                 //public(v1) 구형 방식 인증 끝
 
+                //05:10 ~ 06:59 인증 금지
+                while ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 10) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 59))
+                {
+                    pg.Text = "GEKImoe Stream Assistant 5 is now maintenance... Run automatically when finished maintenance";
+                }
+
+                pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
                 //v2 보안 강화 인증 시작
                 while (true)
                 {
