@@ -405,6 +405,7 @@ namespace AutoStartV2
                 while ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 10) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 59))
                 {
                     pg.Text = "GEKImoe Stream Assistant 5 is now maintenance... Run automatically when finished maintenance";
+                    Delay(500);
                 }
 
                 pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
