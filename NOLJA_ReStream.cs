@@ -164,6 +164,8 @@ namespace AreaTM_acbas
                 if (File.Exists("test")) sdvxwin._obs.Connect("ws://127.0.0.1:7849", "noljabroadcastpc");
                 else sdvxwin._obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
 
+                if (sdvxwin._obs.GetStreamingStatus().IsStreaming) { sdvxwin.isNowStream = true; } //streaming check
+
                 timer1.Enabled = true;
             }
 
