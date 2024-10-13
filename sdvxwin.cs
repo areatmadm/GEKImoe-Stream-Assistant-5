@@ -90,6 +90,9 @@ namespace AreaTM_acbas
         //NOLJA maimaiDX Cam Initialized status
         //public static bool CamInitialized = false;
 
+        //Streaming status
+        public static bool isNowStream = false;
+
         int opd = 0;
 
         //int chk_highlight_beta = 0;
@@ -124,7 +127,7 @@ namespace AreaTM_acbas
             _obs.TransitionChanged += onTransitionChange;
             _obs.TransitionDurationChanged += onTransitionDurationChange;
 
-            //_obs.StreamingStateChanged += onStreamingStateChange;
+            _obs.StreamingStateChanged += onStreamingStateChange;
             _obs.RecordingStateChanged += onRecordingStateChange;
 
             _obs.StreamStatus += onStreamData;
@@ -271,6 +274,7 @@ namespace AreaTM_acbas
 
                 case OutputState.Started:
                     state = "Stop streaming";
+                    isNowStream = true;
                     BeginInvoke((MethodInvoker)delegate
                     {
                         //gbStatus.Enabled = true;
@@ -283,6 +287,7 @@ namespace AreaTM_acbas
 
                 case OutputState.Stopped:
                     state = "Start streaming";
+                    isNowStream = false;
                     BeginInvoke((MethodInvoker)delegate
                     {
                         //gbStatus.Enabled = false;
@@ -406,6 +411,9 @@ namespace AreaTM_acbas
 
                     //Main Build ONLY
                     else _obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
+
+                    //streaming check
+                    if (_obs.GetStreamingStatus().IsStreaming) { isNowStream = true; }
                 }
                 catch (AuthFailureException)
                 {

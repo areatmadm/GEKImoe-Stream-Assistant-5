@@ -242,7 +242,7 @@ namespace AreaTM_acbas
                     thisWindowShowed = true;
                 }
 
-                lbl_restartInfo.Text = "리방 진행 중입니다...";
+                lbl_restartInfo.Text = "리방 시작 중입니다...";
                 now = 0;
                 npow = 0;
                 npow2 = 0;
@@ -270,7 +270,7 @@ namespace AreaTM_acbas
         {
             btn_goReStream.Enabled = false;
             btn_seelate.Enabled = false;
-            lbl_restartInfo.Text = "리방 진행 중입니다...";
+            lbl_restartInfo.Text = "리방 시작 중입니다...";
 
             isRestarting = true;
         }
@@ -283,14 +283,22 @@ namespace AreaTM_acbas
                 sdvxwin._obs.StopStreaming();
                 sdvxwin.isRestreaming_onlyCheckStatus = true;
                 Thread.Sleep(200);
-                
-                if(!File.Exists("test")) getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
-                            "&mode=4&submode=4");
             }
             catch { }
-
             this.TopMost = false; //일시적으로 맨 위로 해제
-            Thread.Sleep(60000); //60초 뒤 다시 방송 시작
+            while (true) //방송이 제대로 꺼졌는지 확인하는 스크립트
+            {
+                if (!sdvxwin.isNowStream) { break; }
+                else { Thread.Sleep(100); }
+            }
+            lbl_restartInfo.Text = "리방 진행 중입니다...";
+            if (!File.Exists("test"))
+            {
+                getp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame +
+                        "&mode=4&submode=4");
+                //GSA 서버로 리방 사실을 전송
+            }
+            Thread.Sleep(50000); //50초 뒤 다시 방송 시작
 
             VIDEO_on.isWakeOn = true; // 리방 오류 방지 기능으로 작동
 
