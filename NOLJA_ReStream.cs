@@ -300,11 +300,11 @@ namespace AreaTM_acbas
                         "&mode=4&submode=4");
                 //GSA 서버로 리방 사실을 전송
             }
-            Thread.Sleep(50000); //50초 뒤 다시 방송 시작
+            Thread.Sleep(45000); //45초 뒤 다시 방송 시작
 
             VIDEO_on.isWakeOn = true; // 리방 오류 방지 기능으로 작동
 
-            try { sdvxwin._obs.StartStreaming(); } catch { } // 스트리밍 다시 시작
+            try { lbl_restartInfo.Text = "Restart streaming..."; sdvxwin._obs.StartStreaming(); } catch { } // 스트리밍 다시 시작
 
             Thread.Sleep(1100);
 
