@@ -373,6 +373,7 @@
     <None Include="res\gitadora_drum_qr.png" />
     <None Include="res\transparent.png" />
     <None Include="aast_d.png" />
+    <None Include="aast_e.png" />
     <Content Include="areatm_arcade_stream_new_icon_250.ico" />
     <None Include="AutoStartV2\aast_d.png" />
     <Content Include="res\nolja_plive_window.png" />
