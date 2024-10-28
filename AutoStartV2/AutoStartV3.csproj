@@ -145,6 +145,7 @@
     <Content Include="areatm_arcade_stream_new_icon_gray.ico" />
     <Content Include="chinatsu_64.ico" />
     <Content Include="nolja_broadcast.png" />
+    <None Include="Resources\aast_e1.png" />
     <Content Include="salt.ico" />
   </ItemGroup>
   <ItemGroup>
