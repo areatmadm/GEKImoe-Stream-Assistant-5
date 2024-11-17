@@ -420,7 +420,8 @@ namespace AutoStartV2
                     postStringKey[0] = "vender"; postStringValue[0] = vender; //postkey_vender
                     postStringKey[1] = "game"; postStringValue[1] = p; //game
 
-                    get_auth = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                    //get_auth = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                    get_auth = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
 
                     if (get_auth != null && get_auth != "__ERROR__") { break; }
                     else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }

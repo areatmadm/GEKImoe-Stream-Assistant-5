@@ -55,14 +55,6 @@ namespace AreaTM_acbas
 
                 String rsp = "";
 
-                //public(v1) 구형 방식 인증 시작
-                /*if (sdvxwin.vender == "NOLJA") { rsp = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + 
-                    sdvxwin.setgame); } //놀자 인증
-                else {
-                    rsp = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + sdvxwin.vender + "&game=" +
-                    sdvxwin.setgame); } //그외 인증 */
-                //public(v1) 구형 방식 인증 끝
-
                 //v2 보안 강화 인증 시작
                 postStringKey = new string[2];
                 postStringValue = new string[2];
@@ -71,7 +63,8 @@ namespace AreaTM_acbas
                 else { postStringKey[0] = "vender"; postStringValue[0] = sdvxwin.vender; } //그외 vender
                 postStringKey[1] = "game"; postStringValue[1] = sdvxwin.setgame; //game
 
-                rsp = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                //rsp = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                rsp = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
                 //v2 보안 강화 인증 끝
 
                 if (rsp == "Authorized")
@@ -83,19 +76,14 @@ namespace AreaTM_acbas
                     string vender_swdf; //Software Devide Form
                     while (true)
                     {
-                        //구 GET Code(비활성화) 시작
-                        /*if (sdvxwin.vender == "NOLJA") { vender_swdf = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
-                        else { vender_swdf = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?mode=1&vender=" + sdvxwin.vender + "&game=" + sdvxwin.setgame); }
-                        */
-                        //구 GET Code(비활성화) 끝
-
                         //신 POST Code 시작
                         postStringKey = new string[3]; postStringValue = new string[3]; //보낼 키값 초기화
                         postStringKey[0] = "mode"; postStringValue[0] = "1"; //mode
                         postStringKey[1] = "vender"; postStringValue[1] = sdvxwin.vender; //key_vender
                         postStringKey[2] = "game"; postStringValue[2] = sdvxwin.setgame; //game
 
-                        vender_swdf = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                        //vender_swdf = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                        vender_swdf = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
                         //신 POST Code 끝
 
                         //여기는 "full" 라이선스 입니다!!
