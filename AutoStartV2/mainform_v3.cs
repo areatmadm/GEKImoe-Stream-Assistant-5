@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.13_D_20241119";
+                lbl_nowver.Text = "5.13_E_20241119";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -386,7 +386,7 @@ namespace AutoStartV2
                     postStringKey[1] = "game"; postStringValue[1] = p; //game
 
                     //get_auth = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
-                    get_auth = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
+                    get_auth = PostHtmlString("https://auth.stream-assistant-5.gekimoe.areatm.com/run/v3.0/", postStringKey, postStringValue);
 
                     if (get_auth != null && get_auth != "__ERROR__") { break; }
                     else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
@@ -446,7 +446,7 @@ namespace AutoStartV2
                         postStringKey[2] = "game"; postStringValue[2] = p; //game
 
                         //vender_swdf = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
-                        vender_swdf = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
+                        vender_swdf = PostHtmlString("https://auth.stream-assistant-5.gekimoe.areatm.com/run/v3.0/", postStringKey, postStringValue);
 
                         if (vender_swdf != null && vender_swdf != "__Error__") { break; }
                         else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
