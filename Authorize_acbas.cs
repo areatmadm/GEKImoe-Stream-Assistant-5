@@ -64,7 +64,7 @@ namespace AreaTM_acbas
                 postStringKey[1] = "game"; postStringValue[1] = sdvxwin.setgame; //game
 
                 //rsp = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
-                rsp = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
+                rsp = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
                 //v2 보안 강화 인증 끝
 
                 if (rsp == "Authorized")
@@ -83,7 +83,7 @@ namespace AreaTM_acbas
                         postStringKey[2] = "game"; postStringValue[2] = sdvxwin.setgame; //game
 
                         //vender_swdf = Program.PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
-                        vender_swdf = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
+                        vender_swdf = Program.PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
                         //신 POST Code 끝
 
                         //여기는 "full" 라이선스 입니다!!

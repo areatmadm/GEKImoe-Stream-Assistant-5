@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.13_C_20241118";
+                lbl_nowver.Text = "5.13_D_20241119";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -365,41 +365,6 @@ namespace AutoStartV2
             {
                 pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
                 string get_auth;
-                //public(v1) 구형 방식 인증 시작
-                /*
-                if (!File.Exists("vender.txt"))
-                {
-                    // 라이선스 체크 프로세싱(놀자)
-                    vender = "NOLJA";
-                    while (true)
-                    {
-                        get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
-                        if (get_auth != null) { break; } //서버 통신 확인
-                        else
-                        {
-                            pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요...";
-                            Delay(10000);
-                            pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중...";
-                        }
-                    }
-                }
-                else
-                {
-                    // 라이선스 체크 프로세싱(표준)
-                    vender = File.ReadAllText("vender.txt");
-                    if (vender == "NOLJA") // 놀자 프로세싱 변경 가능성 열어두기
-                    {
-                        get_auth = GetHtmlString("https://nolja.bizotoge.areatm.com/public/checklicense?vender=NOLJA&game=" + p);
-                        if(get_auth != null) { break; } //서버 통신 확인
-                        else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
-                    }
-                    else
-                    {
-                        get_auth = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/checklicense?vender=" + vender + "&game=" + p);
-                    }
-                }
-                */
-                //public(v1) 구형 방식 인증 끝
 
                 //05:10 ~ 06:59 인증 금지
                 while ((System.DateTime.Now.Hour == 5 && System.DateTime.Now.Minute >= 10) || (System.DateTime.Now.Hour == 6 && System.DateTime.Now.Minute <= 59))
@@ -421,7 +386,9 @@ namespace AutoStartV2
                     postStringKey[1] = "game"; postStringValue[1] = p; //game
 
                     //get_auth = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
-                    get_auth = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run", postStringKey, postStringValue);
+                    get_auth = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
+
+                    MessageBox.Show(get_auth);
 
                     if (get_auth != null && get_auth != "__ERROR__") { break; }
                     else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "GEKImoe Stream Assistant 5 인증서버에서 인증을 받는 중..."; }
@@ -480,7 +447,8 @@ namespace AutoStartV2
                         postStringKey[1] = "vender"; postStringValue[1] = vender; // key_vender
                         postStringKey[2] = "game"; postStringValue[2] = p; //game
 
-                        vender_swdf = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                        //vender_swdf = PostHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/v2/checklicense/", postStringKey, postStringValue);
+                        vender_swdf = PostHtmlString("https://gekimoestreamassistant5-auth.areatm.com/run/v3.0/", postStringKey, postStringValue);
 
                         if (vender_swdf != null && vender_swdf != "__Error__") { break; }
                         else { pg.Text = "서버 문제로 10초 후 다시 시도합니다. 잠시만 기다려 주세요..."; Delay(10000); pg.Text = "서버에서 추가 정보를 불러오는 중..."; }
