@@ -45,6 +45,11 @@ namespace AutoStartV2
         string[] postStringKey;
         string[] postStringValue;
 
+        static OperatingSystem os = Environment.OSVersion; //운영체제 세팅
+        static int majorVersion = os.Version.Major;//메이저
+        static int minorVersion = os.Version.Minor;//마이너
+        static int buildVersion = os.Version.Build;//빌드
+
         private static DateTime Delay(int MS)
         {
             DateTime ThisMoment = DateTime.Now;
@@ -127,11 +132,6 @@ namespace AutoStartV2
 
         private static void CheckOS()
         {
-            OperatingSystem os = Environment.OSVersion;
-            int majorVersion = os.Version.Major;//메이저
-            int minorVersion = os.Version.Minor;//마이너
-            int buildVersion = os.Version.Build;//빌드
-
             if (majorVersion < 10)//Windows 10, Windows 11이 아닐 경우 실행 차단
             {
                 MessageBox.Show("GEKImoe Stream Assistant supports Windows 10 and Windows 11. Please upgrade this computer first and re-launch this assistant." + "\r\n\r\n" +
@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.13_E_20241119";
+                lbl_nowver.Text = "5.13_F_20241126";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -504,7 +504,28 @@ namespace AutoStartV2
 
                 pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_CHECK;
                 string getp;
-                getp = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + acbas_partnum + "?mod=1&ver=" + acbas_build);
+                //구 GET 방식의 update check 시작
+                //getp = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + acbas_partnum + "?mod=1&ver=" + acbas_build);
+                //getp = GetHtmlString("https://update-check.stream-assistant-5.gekimoe.areatm.com/" + acbas_partnum + "?mod=1&ver=" + acbas_build);
+                //구 GET 방식의 update check 끝
+
+                //신 POST 방식의 update check 시작
+
+                //postStringKey, postStringeValue 초기화
+                postStringKey = new string[4];
+                postStringValue = new string[4];
+
+                //값 지정
+                postStringKey[0] = "mod"; postStringValue[0] = "1"; //mode이나, 업데이트가 있는지 체크하기 위한 용도의 모드는 1임.
+                postStringKey[1] = "ver"; postStringValue[1] = acbas_build.ToString(); //수집한 빌드 넘버를 ver쪽의 메모리로 저장
+
+                //Windows 버전, Windows 빌드 값 지정
+                postStringKey[2] = "winver"; postStringValue[2] = majorVersion.ToString(); //Windows 버전 수집
+                postStringKey[3] = "winbuild"; postStringValue[3] = buildVersion.ToString(); //Windows 빌드 수집
+
+                //POST로 전달
+                getp = PostHtmlString("https://update-check.stream-assistant-5.gekimoe.areatm.com/" + acbas_partnum + "/", postStringKey, postStringValue);
+                //신 POST 방식의 update check 끝
                 Delay(1200);
                 if (getp == "1")
                 {
