@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Drawing.Text;
 using System.Net;
+using OBSWebsocketDotNet;
 
 namespace GEKImoeStreamAssistant5FixReboot
 {
@@ -26,8 +27,20 @@ namespace GEKImoeStreamAssistant5FixReboot
         //강제종료를 위한 Process 정보 사전 입력
         string[] exitProcesses = new string[10000];
 
+        public static OBSWebsocket _obs;
+
+        //Streaming status
+        public static bool isNowStream = false;
+
+        public static string setgame; //현재 게임 확인
+        public static string vender; //업소 확인
+
         int quick = 60;
         int qtemp;
+
+        int fixPhase = 0;
+        //fixPhase 0 : camera fixing(change scene profile)
+        //fixPhase 1 : restarting OBS with restart GEKImoe Stream Assistant 5 or GEKImoe Stream Assistant NT
 
         private string GetHtmlString(string url)
         {
@@ -113,10 +126,61 @@ namespace GEKImoeStreamAssistant5FixReboot
         public Nolja_ErrorFix()
         {
             InitializeComponent();
+
+            _obs = new OBSWebsocket();
+
+            _obs.Connected += onConnect;
+            _obs.Disconnected += onDisconnect;
+        }
+
+        private void onConnect(object sender, EventArgs e)
+        {
+
+        }
+
+        private void onDisconnect(object sender, EventArgs e)
+        {
+            _obs.Disconnect();
+        }
+
+        private bool ConnectToServer()
+        {
+            if (!_obs.IsConnected)
+            {
+                try
+                {
+                    //Test Build ONLY
+                    if (File.Exists("test")) _obs.Connect("ws://127.0.0.1:7849", "noljabroadcastpc");
+
+                    //Main Build ONLY
+                    else _obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
+
+                    //streaming check
+                    if (_obs.GetStreamingStatus().IsStreaming) { isNowStream = true; }
+                }
+                catch (AuthFailureException)
+                {
+                    MessageBox.Show("Authentication failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                catch (ErrorResponseException ex)
+                {
+                    MessageBox.Show("Connect failed : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+                //_obs.Disconnect();
+            }
         }
 
         private void NoljaStreamingSelect_Load(object sender, EventArgs e)
         {
+
+
             fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Bugfix\", "");
             //fix_nfd = System.IO.Path.GetFullPath("font_3.0").Replace(@"Debug\", "");
             //MessageBox.Show(fix_nfd);

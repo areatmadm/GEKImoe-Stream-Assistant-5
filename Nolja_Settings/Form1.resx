@@ -118,11 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>에러 발생 또는 리방시에만 해당 프로그램을 통해 에러픽스를 작동하세요.
+    <value>에러 발생 또는 카메라 재설정시에만 해당 프로그램을 통해 에러픽스를 작동하세요.
 
 에러가 발생하였다면(예: 녹화 정지를 해도 녹화가 작동이 되지 않음, 하이라이트 저장이 되지 않음, 방송이 표시되지 않음 등) 해당 프로그램을 가동하여 주세요.
+카메라 패치를 먼저 실행하며, 카메라 패치 중 이상이 발견되었을 경우 알아서 OBS 및 GEKImoe Stream을 다시 시작합니다.
 
-가동 후 취소가 불가능하며 30초 후 GEKImoe Stream Assistant가 재실행됩니다. 해당 프로그램을 잘못 실행했을 경우 "어시스턴트로 복귀"를 눌러 주세요.</value>
+만약 카메라 패치를 성공했어도 추가적인 이상현상을 잡을 경우 에러픽스를 가동해 주세요.</value>
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

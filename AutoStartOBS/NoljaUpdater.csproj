@@ -81,8 +81,8 @@
     <Reference Include="obs-websocket-dotnet">
       <HintPath>..\obs-websocket-dotnet\bin\Debug\obs-websocket-dotnet.dll</HintPath>
     </Reference>
-    <Reference Include="SevenZipSharp, Version=1.0.19.0, Culture=neutral, PublicKeyToken=c8ff6ba0184838bb, processorArchitecture=MSIL">
-      <HintPath>..\noljabroadcast\packages\SevenZipSharp.Net45.1.0.19\lib\net45\SevenZipSharp.dll</HintPath>
+    <Reference Include="SevenZipSharp">
+      <HintPath>..\bin\Release\SevenZipSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

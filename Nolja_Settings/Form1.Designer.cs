@@ -43,9 +43,9 @@
             this.lbl_name.Font = new System.Drawing.Font("나눔바른고딕OTF", 22F, System.Drawing.FontStyle.Bold);
             this.lbl_name.Location = new System.Drawing.Point(12, 9);
             this.lbl_name.Name = "lbl_name";
-            this.lbl_name.Size = new System.Drawing.Size(312, 34);
+            this.lbl_name.Size = new System.Drawing.Size(411, 34);
             this.lbl_name.TabIndex = 0;
-            this.lbl_name.Text = "문제가 발생하였습니까?";
+            this.lbl_name.Text = "GEKImoe Stream Fixer(Beta)";
             // 
             // label1
             // 
@@ -69,7 +69,7 @@
             this.btn_fix.Name = "btn_fix";
             this.btn_fix.Size = new System.Drawing.Size(366, 81);
             this.btn_fix.TabIndex = 1;
-            this.btn_fix.Text = "에러 픽스 후 리방작업 시작";
+            this.btn_fix.Text = "카메라 패치";
             this.btn_fix.UseVisualStyleBackColor = true;
             this.btn_fix.EnabledChanged += new System.EventHandler(this.btn_fix_EnabledChanged);
             this.btn_fix.Click += new System.EventHandler(this.btn_fix_Click);
