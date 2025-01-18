@@ -203,6 +203,7 @@ namespace GEKImoeStreamAssistant5FixReboot
         {
             btn_fix.Enabled = false;
             btn_exit.Enabled = false;
+            button1.Enabled = false;
 
             //Process.Start("nolja_fix_pp.vbs"); //(구)SW 강종 코드
 
@@ -215,19 +216,19 @@ namespace GEKImoeStreamAssistant5FixReboot
             exitProcesses[3] = "GEKImoeStreamAssistant5Lite"; //Lite버전일 경우
             exitProcesses[4] = "SangguGSA5"; //구. 로얄게임장 전용
             exitProcesses[5] = "GAMED_BCAS"; //(주)대왕산업 계열 고객사 전용
-            //GEKImoe Stream Assistant 5 찾기 끝
+                                             //GEKImoe Stream Assistant 5 찾기 끝
 
             //Internet Browser 시작
             exitProcesses[6] = "chrome"; //Google Chrome
             exitProcesses[7] = "msedge"; //Microsoft Edge
             exitProcesses[8] = "firefox"; //Mozilla Firefox
             exitProcesses[9] = "whale"; //Naver Whale
-            //Internet Browser 끝
+                                        //Internet Browser 끝
 
             //Apple 시작
             exitProcesses[10] = "iTunes"; //iTunes
             exitProcesses[11] = "AppleDevices"; //Apple 기기
-            //Apple 끝
+                                                //Apple 끝
 
             //GEKImoe Stream AI 시작
             exitProcesses[12] = "GEKImoeStreamAI";
@@ -242,17 +243,17 @@ namespace GEKImoeStreamAssistant5FixReboot
             killProcess.StartInfo.FileName = @"C:\Windows\System32\taskkill.exe"; //taskkill 경로 작성
             killProcess.StartInfo.Arguments = @"/f";
             killProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //cmd창 숨겨보기
-            for(int i=0; i<exitProcesses.Length; i++) //여러 프로그램들을 동시에 강종하기 위한 Process 수집
+            for (int i = 0; i < exitProcesses.Length; i++) //여러 프로그램들을 동시에 강종하기 위한 Process 수집
             {
                 if (exitProcesses[i] == null) { /*MessageBox.Show(i + "");*/ break; } //null값 추출
                 Process[] ifUsingProcess = Process.GetProcessesByName(exitProcesses[i]); //프로세스가 실행 중인지 찾기
-                if(ifUsingProcess.Length >= 1) { killProcess.StartInfo.Arguments += @" /im " + exitProcesses[i] + ".exe"; } //미리 입력된 Process 입력
+                if (ifUsingProcess.Length >= 1) { killProcess.StartInfo.Arguments += @" /im " + exitProcesses[i] + ".exe"; } //미리 입력된 Process 입력
             }
             killProcess.Start(); //KILL
 
             //신 SW 강종 코드 end
             Delay(6000);
-            
+
             string noll;
             string setgame = "";
             string vender = "";
@@ -345,6 +346,46 @@ namespace GEKImoeStreamAssistant5FixReboot
         {
             if (btn_exit.Enabled) btn_exit.BackColor = Color.FromArgb(32, 32, 32);
             else btn_exit.BackColor = Color.FromArgb(200, 200, 200);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            btn_fix.Enabled = false;
+            btn_exit.Enabled = false;
+            button1.Enabled = false;
+
+            //campatch
+            try
+            {
+                ConnectToServer();
+
+                String nowSceneName = _obs.GetCurrentSceneCollection(); //현재 장면 모음 이름 가져오기
+                _obs.SetCurrentSceneCollection("patchcam"); //patchcam 전환
+
+                Delay(7000);
+                _obs.SetCurrentSceneCollection(nowSceneName); // 원복
+
+                
+                if (File.Exists(@"WebCameraConfig\cam_sett.cfg"))
+                {
+                    Delay(5000);
+
+                    Process runCamSett = new Process(); //새로운 Process 생성
+                    runCamSett.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                    runCamSett.StartInfo.FileName = "restore.bat"; //WebCameraConfig\restore.bat
+                    runCamSett.StartInfo.WorkingDirectory = "WebCameraConfig"; //실행 자체가 그 폴더에 있는 cam_sett.cfg 파일을 필요로 함
+                    runCamSett.Start(); //PROFIT!!
+                    Delay(2000);
+                    runCamSett.Start(); //Profit!!(2회 적용시켜 적용이 안되는 현상이 일어나지 않도록 함.)
+                }
+            }
+            catch { }
+
+
+            Delay(2000);
+            btn_fix.Enabled = true;
+            btn_exit.Enabled = true;
+            button1.Enabled = true;
         }
     }
 }

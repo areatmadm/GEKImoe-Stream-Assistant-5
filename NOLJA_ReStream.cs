@@ -165,6 +165,7 @@ namespace AreaTM_acbas
                 else sdvxwin._obs.Connect("ws://127.0.0.1:4444", "noljabroadcastpc");
 
                 if (sdvxwin._obs.GetStreamingStatus().IsStreaming) { sdvxwin.isNowStream = true; } //streaming check
+                else sdvxwin.isNowStream = false;
 
                 timer1.Enabled = true;
             }
@@ -300,7 +301,7 @@ namespace AreaTM_acbas
                         "&mode=4&submode=4");
                 //GSA 서버로 리방 사실을 전송
             }
-            Thread.Sleep(45000); //45초 뒤 다시 방송 시작
+            Thread.Sleep(55000); //55초 뒤 다시 방송 시작
 
             VIDEO_on.isWakeOn = true; // 리방 오류 방지 기능으로 작동
 

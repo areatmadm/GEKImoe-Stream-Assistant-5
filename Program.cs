@@ -111,13 +111,13 @@ namespace AreaTM_acbas
                 ExitThread = true;
                 return;
             }
-            else if (buildVersion < 17763) //Windows 10 1809 미만일 경우 실행 차단
+            else if (buildVersion < 19044) //Windows 10 21H2 미만일 경우 실행 차단
             {
-                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10(over than 1809) and Windows 11. Please run Windows Update to update build over than 1809 first and re-launch this assistant." + "\r\n\r\n" +
-                    "GEKImoe Stream Assistant는 Windows 10(1809 이상)과 Windows 11을 지원합니다. 먼저 Windows 업데이트를 실행하여 1809 이상으로 빌드를 업데이트한 후 이 어시스턴트를 다시 실행해 주세요." + "\r\n\r\n" +
-                    "GEKImoe Stream AssistantはWindows 10（1809以上）とWindows 11に対応しています。まずWindows Updateを実行して1809以上にビルドをアップデートしてから、このアシスタントを再起動してください。" + "\r\n\r\n" +
-                    "GEKImoe Stream Assistant支持Windows 10（1809以上版本）和Windows 11。请先运行Windows更新，将系统版本更新到1809以上，然后重新启动这个助手。" + "\r\n\r\n" +
-                    "GEKImoe Stream Assistant支持Windows 10（1809以上版本）和Windows 11。請先執行Windows更新，將系統版本更新到1809以上，然後重新啟動這個助手。"
+                MessageBox.Show("GEKImoe Stream Assistant supports Windows 10(over than 21H2) and Windows 11. Please run Windows Update to update build over than 21H2 first and re-launch this assistant." + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant는 Windows 10(21H2 이상)과 Windows 11을 지원합니다. 먼저 Windows 업데이트를 실행하여 21H2 이상으로 빌드를 업데이트한 후 이 어시스턴트를 다시 실행해 주세요." + "\r\n\r\n" +
+                    "GEKImoe Stream AssistantはWindows 10（21H2以上）とWindows 11に対応しています。まずWindows Updateを実行して21H2以上にビルドをアップデートしてから、このアシスタントを再起動してください。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10（21H2以上版本）和Windows 11。请先运行Windows更新，将系统版本更新到21H2以上，然后重新启动这个助手。" + "\r\n\r\n" +
+                    "GEKImoe Stream Assistant支持Windows 10（21H2以上版本）和Windows 11。請先執行Windows更新，將系統版本更新到21H2以上，然後重新啟動這個助手。"
                     , "Not support OS", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 isAvailableOS = false;
                 ExitThread = true;
@@ -128,6 +128,7 @@ namespace AreaTM_acbas
                 isAvailableOS = false;
                 return;
             }
+
             else
             {
                 isAvailableOS = true;
@@ -136,8 +137,8 @@ namespace AreaTM_acbas
 
         private static string appGUID = "areatmgekimoestreamassistant";
 
-        public static string acbas_ver = "5.21_G";
-        public static long acbas_build = 202411260320;
+        public static string acbas_ver = "5.22_A";
+        public static long acbas_build = 202501190419;
         public static string acbas_partnum = "v5_7";
 
         //public static string ad_servercountry = "KR";

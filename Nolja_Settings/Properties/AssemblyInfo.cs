@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AreaTM")]
 [assembly: AssemblyProduct("GEKImoe Stream Assistant 5 RebootFix")]
-[assembly: AssemblyCopyright("Copyright © 2020-2024 AreaTM")]
+[assembly: AssemblyCopyright("© 2029-2025 AreaTM")]
 [assembly: AssemblyTrademark("AreaTM")]
 [assembly: AssemblyCulture("")]
 
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.3")]
-[assembly: AssemblyFileVersion("5.3")]
+[assembly: AssemblyVersion("5.4")]
+[assembly: AssemblyFileVersion("5.4")]
 [assembly: NeutralResourcesLanguage("ko-KR")]
 

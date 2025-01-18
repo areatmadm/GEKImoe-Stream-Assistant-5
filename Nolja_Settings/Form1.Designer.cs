@@ -35,6 +35,7 @@
             this.btn_fix = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl_name
@@ -67,9 +68,9 @@
             this.btn_fix.Font = new System.Drawing.Font("나눔바른고딕OTF", 18F, System.Drawing.FontStyle.Bold);
             this.btn_fix.Location = new System.Drawing.Point(12, 266);
             this.btn_fix.Name = "btn_fix";
-            this.btn_fix.Size = new System.Drawing.Size(366, 81);
+            this.btn_fix.Size = new System.Drawing.Size(182, 81);
             this.btn_fix.TabIndex = 1;
-            this.btn_fix.Text = "카메라 패치";
+            this.btn_fix.Text = "에러픽스";
             this.btn_fix.UseVisualStyleBackColor = true;
             this.btn_fix.EnabledChanged += new System.EventHandler(this.btn_fix_EnabledChanged);
             this.btn_fix.Click += new System.EventHandler(this.btn_fix_Click);
@@ -96,11 +97,29 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.FlatAppearance.BorderSize = 4;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Teal;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("나눔바른고딕OTF", 18F, System.Drawing.FontStyle.Bold);
+            this.button1.Location = new System.Drawing.Point(200, 266);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(178, 81);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "카메라 패치";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Nolja_ErrorFix
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(709, 362);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_fix);
             this.Controls.Add(this.label1);
@@ -125,6 +144,7 @@
         private System.Windows.Forms.Button btn_fix;
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
