@@ -192,6 +192,7 @@ namespace GEKImoeStreamAssistant5FixReboot
             btn_fix.Font = new Font(font_3_0_s.Families[0], 18f, FontStyle.Bold);
             label1.Font = new Font(font_3_0_s.Families[0], 14f);
             lbl_name.Font = new Font(font_3_0_s.Families[0], 22f, FontStyle.Bold);
+            button1.Font = new Font(font_3_0_s.Families[0], 18f, FontStyle.Bold);
 
             //timer1 = new System.Windows.Forms.Timer();
             timer1.Interval = 1000;

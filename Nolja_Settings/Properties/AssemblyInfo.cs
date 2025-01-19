@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // 어셈블리에 대한 일반 정보는 다음 특성 집합을 통해 
 // 제어됩니다. 어셈블리와 관련된 정보를 수정하려면
 // 이러한 특성 값을 변경하세요.
-[assembly: AssemblyTitle("GEKImoe Stream Assistant 5 RebootFix")]
-[assembly: AssemblyDescription("Reboot GEKImoe Stream Assistant 5")]
+[assembly: AssemblyTitle("GEKImoe Stream Fixer")]
+[assembly: AssemblyDescription("GEKImoe Stream Fixer")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AreaTM")]
-[assembly: AssemblyProduct("GEKImoe Stream Assistant 5 RebootFix")]
+[assembly: AssemblyProduct("GEKImoe Stream Fixer")]
 [assembly: AssemblyCopyright("© 2029-2025 AreaTM")]
 [assembly: AssemblyTrademark("AreaTM")]
 [assembly: AssemblyCulture("")]
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // 모든 값을 지정하거나 아래와 같이 '*'를 사용하여 빌드 번호 및 수정 번호가 자동으로
 // 지정되도록 할 수 있습니다.
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("5.4")]
-[assembly: AssemblyFileVersion("5.4")]
+[assembly: AssemblyVersion("5.5")]
+[assembly: AssemblyFileVersion("5.5")]
 [assembly: NeutralResourcesLanguage("ko-KR")]
 
