@@ -80,7 +80,7 @@
             this.btn_rebang.Name = "btn_rebang";
             this.btn_rebang.Size = new System.Drawing.Size(130, 30);
             this.btn_rebang.TabIndex = 3;
-            this.btn_rebang.Text = "에러픽스 | 재부팅";
+            this.btn_rebang.Text = "에러픽스 | 캠조정";
             this.btn_rebang.UseVisualStyleBackColor = true;
             this.btn_rebang.Click += new System.EventHandler(this.btn_rebang_Click);
             // 

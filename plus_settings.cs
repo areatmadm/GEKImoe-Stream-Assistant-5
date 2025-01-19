@@ -48,7 +48,7 @@ namespace AreaTM_acbas
             ProcessStartInfo rebang = new ProcessStartInfo();
 
             rebang.FileName = "GEKImoeStreamAssistant5FixReboot.exe";
-            rebang.WorkingDirectory = "Bugfix";
+            //rebang.WorkingDirectory = "Bugfix";
 
             Process.Start(rebang);
         }
