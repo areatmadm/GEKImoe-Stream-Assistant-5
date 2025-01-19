@@ -46,9 +46,9 @@ namespace AutoStartV2
         string[] postStringValue;
 
         static OperatingSystem os = Environment.OSVersion; //운영체제 세팅
-        static int majorVersion = os.Version.Major;//메이저
-        static int minorVersion = os.Version.Minor;//마이너
-        static int buildVersion = os.Version.Build;//빌드
+        public static int majorVersion = os.Version.Major;//메이저
+        public static int minorVersion = os.Version.Minor;//마이너
+        public static int buildVersion = os.Version.Build;//빌드
 
         private static DateTime Delay(int MS)
         {
@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.14_A_20250119";
+                lbl_nowver.Text = "5.14_B_20250119";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 

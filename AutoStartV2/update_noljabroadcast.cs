@@ -131,8 +131,28 @@ namespace AutoStartV2
 
             string downver;
             lbl_status.Text = "업데이트 정보를 받는 중...";
-            downver = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + AutoStartV3Main.acbas_partnum + "?ver=" + AutoStartV3Main.acbas_build);
-            
+            //구 GET 방식의 update version check 시작
+            //downver = GetHtmlString("https://streamassistant.sv.gekimoe.areatm.com/updatecheck/" + AutoStartV3Main.acbas_partnum + "?ver=" + AutoStartV3Main.acbas_build);
+            //구 GET 방식의 update version check 끝
+
+            //신 POST 방식의 update version check 시작
+
+            //postStringKey, postStringeValue 초기화
+            postStringKey = new string[4];
+            postStringValue = new string[4];
+
+            //값 지정
+            //postStringKey[0] = "mod"; postStringValue[0] = "1"; //mode이나, 업데이트가 있는지 체크하기 위한 용도의 모드는 1임.
+            postStringKey[0] = "ver"; postStringValue[0] = AutoStartV3Main.acbas_build.ToString(); //수집한 빌드 넘버를 ver쪽의 메모리로 저장
+
+            //Windows 버전, Windows 빌드 값 지정
+            postStringKey[1] = "winver"; postStringValue[1] = AutoStartV3Main.majorVersion.ToString(); //Windows 버전 수집
+            postStringKey[2] = "winbuild"; postStringValue[2] = AutoStartV3Main.buildVersion.ToString(); //Windows 빌드 수집
+
+            //POST로 전달
+            downver = PostHtmlString("https://update-check.stream-assistant-5.gekimoe.areatm.com/" + AutoStartV3Main.acbas_partnum + "/", postStringKey, postStringValue);
+            //신 POST 방식의 update check 끝
+
 
             Delay(3000);
             //sourceFileURI[0] = "https://update.streamassistant.sv.gekimoe.areatm.com/sa/" + AutoStartV3Main.acbas_partnum + "/" + downver + ".7z";
