@@ -113,6 +113,9 @@ namespace AreaTM_acbas
         //버전 업 확인, 확인될 경우 업데이트 로그 표시, 기본값은 false
         public static bool isUpdateLogWindowShow = false;
 
+        //Google Chrome 이외의 브라우저가 설치되어 있지 않았을 경우, 여기값이 true. 기본값은 false.
+        public static bool isGoogleChromeisOnlyAvailableinThisComputer = false;
+
         public sdvxwin()
         {
             InitializeComponent();
@@ -567,7 +570,7 @@ namespace AreaTM_acbas
 
             if (!isCheckedGenuine)
             {
-                MessageBox.Show("아레아티엠의 인증을 받지 않은 오락실입니다." + "\r\n" + "문의 SMS: 070-8018-6973", "아레아티엠 GEKImoe Stream Assistant 인증");
+                MessageBox.Show("아레아티엠의 인증을 받지 않은 오락실입니다." + "\r\n" + "영업팀 문의: 070-8018-6973", "아레아티엠 GEKImoe Stream Assistant 인증");
                 Application.ExitThread();
                 return;
             }

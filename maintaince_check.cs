@@ -175,6 +175,10 @@ namespace AreaTM_acbas
             tChkTimeAndReboot.SetApartmentState(ApartmentState.STA);
             tChkTimeAndReboot.Start();
 
+            Thread tcheckBrowserProcess = new Thread(checkBrowserProcess);
+            tcheckBrowserProcess.SetApartmentState(ApartmentState.STA);
+            tcheckBrowserProcess.Start();
+
             // FFmpeg 잘 실행중인지 체크하는 별도 스레드 생성
             /*Thread ffmpegStatus1 = new Thread(chkFFmpegisFine1);
             ffmpegStatus1.SetApartmentState(ApartmentState.STA);
@@ -282,7 +286,7 @@ namespace AreaTM_acbas
                 {
                     sdvxwin.nowRebooting = true;
 
-                    string pvd;
+                    /*string pvd;
                     pvd = "taskkill /f /im obs64.exe" + "\r\n";
                     pvd += "taskkill /f /im AreaTM_acbas.exe" + "\r\n";
                     pvd += "taskkill /f /im AreaTM_IoT.exe" + "\r\n";
@@ -295,7 +299,13 @@ namespace AreaTM_acbas
                     pve += "Set WshShell = CreateObject (\"WScript.shell\")" + "\r\n";
                     pve += "Dim strArgs" + "\r\n";
                     pve += "strArgs = \"restart_pc.bat\"" + "\r\n";
-                    pve += "WshShell.Run strArgs, 0, false";
+                    pve += "WshShell.Run strArgs, 0, false";*/
+
+                    Process killtask1 = new Process();
+                    killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                    killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                    killtask1.StartInfo.Arguments = "/f /im chrome.exe /im obs64.exe /im AreaTM_IoT.exe /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe /im whale.exe /im itunes.exe /im AppleDevices.exe /im Firefox.exe /im msedge.exe"; //우선 강제종료부터 시행
+                    try { killtask1.Start(); } catch { }
 
                     string noll;
                     //noll = GetHtmlString("https://service.stream-assistant-5.gekimoe.areatm.com/public/serverstatus?vender=" + sdvxwin.vender + "&mode=4&submode=5&game=" + sdvxwin.setgame);
@@ -306,15 +316,15 @@ namespace AreaTM_acbas
                     postStringKey[3] = "game"; postStringValue[3] = sdvxwin.setgame; //game
                     noll = PostHtmlString2("https://service.stream-assistant-5.gekimoe.areatm.com/v2/serverstatus/v1/", postStringKey, postStringValue);
 
-                    File.WriteAllText("restart_pc.bat", pvd);
-                    File.WriteAllText("restart_pc.vbs", pve);
+                    //File.WriteAllText("restart_pc.bat", pvd);
+                    //File.WriteAllText("restart_pc.vbs", pve);
                     Thread.Sleep(500);
-                    Process.Start("restart_pc.vbs");
+                    //Process.Start("restart_pc.vbs");
 
-                    //Process rebooting = new Process();
-                    //rebooting.StartInfo.FileName = @"C:\Windows\SysWOW64\shutdown.exe";
-                    //rebooting.StartInfo.Arguments = "-r -t 0";
-                    //try { rebooting.Start(); } catch { }
+                    Process rebooting = new Process();
+                    rebooting.StartInfo.FileName = @"C:\Windows\system32\shutdown.exe";
+                    rebooting.StartInfo.Arguments = "-r -t 0";
+                    try { rebooting.Start(); } catch { }
                     ppd_e = 0;
                 }
 
@@ -547,13 +557,93 @@ namespace AreaTM_acbas
                     //killOBS.StartInfo.Arguments += " /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
                     //killOBS.Start();
 
-                    killOBS.StartInfo.Arguments += " /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
+                    killOBS.StartInfo.Arguments += " /im chrome.exe /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
                     killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     killOBS.Start();
                 }
                 Thread.Sleep(500);
             }
         }
+
+        private void checkBrowserProcess() //Google Chrome 차단용
+        {
+            while (true)
+            {
+                if (sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer)
+                {
+                    break;
+                }
+                Process[] ProcessifUseGC = Process.GetProcessesByName("chrome"); //Google Chrome이 실행 중인지 체크
+                if (ProcessifUseGC.Length > 0) //Google Chrome이 감지된 경우
+                {
+                    Process killtask1 = new Process();
+                    killtask1.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //일단 창 생성 없이 구동
+                    killtask1.StartInfo.FileName = @"C:\Windows\system32\taskkill.exe";
+                    killtask1.StartInfo.Arguments = "/f /im chrome.exe"; //우선 강제종료부터 시행
+                    try { killtask1.Start(); } catch { }
+
+                    Process chr = new Process();
+                    string pm = ""; //redirection address
+
+                    //success to launch Firefox or Chromium browser except Google Chrome, redirect to https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df
+                    //Firefox → Whale → Edge → Chrome
+                    if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+                    else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+
+                    else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+                    else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+
+                    else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+                    else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                    }
+
+
+                    //if not, redirect to https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4
+                    //This code will except in 2025.5.2 22:00(2025.5.3 patch)
+                    else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4";
+                        sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
+                    }
+                    else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
+                    {
+                        chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                        pm = "https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4";
+                        sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
+                    }
+
+                    chr.StartInfo.Arguments = " " + pm; //주소 같이 반영
+                    chr.Start(); //대체 브라우저(없으면 Chrome) 시작
+                }
+
+                Thread.Sleep(1000);
+            }
+        }
+
 
         private void MTick()
         {

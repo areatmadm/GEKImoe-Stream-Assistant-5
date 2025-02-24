@@ -226,30 +226,12 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.14_B_20250119";
+                lbl_nowver.Text = "5.15_A_20250225";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
                 try
                 {
-                    //gc_name = "놀자";
-
-                    //구형 파일 제거, Ver.5.22에서 삭제 시작
-                    if (File.Exists(@"nolja_game_set.txt") && File.Exists(@"game_set.txt"))
-                    {
-                        File.Delete(@"nolja_game_set.txt");
-                    }
-                    else if (File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
-                    {
-                        File.Move(@"nolja_game_set.txt", @"game_set.txt");
-                    }
-                    else if (!File.Exists(@"nolja_game_set.txt") && !File.Exists(@"game_set.txt"))
-                    {
-                        MessageBox.Show("Error", "Error");
-                        Application.ExitThread();
-                    }
-                    //구형 파일 제거, Ver.5.22에서 삭제 끝
-
                     p = File.ReadAllText(@"game_set.txt");
                     if (File.Exists(@"game_pc_num.txt")) { pc_num = Int32.Parse(File.ReadAllText(@"game_pc_num.txt")); } //PC 여러대 감지되면 구분.
                                                                                                                          //PC 여러대 감지되었다 해도 DB에 반영되어 있지 않으면 0을 제외한 모든 PC는 서버에서 무시 처리될 수도 있음
