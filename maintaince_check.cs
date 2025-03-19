@@ -601,7 +601,7 @@ namespace AreaTM_acbas
                             string pm = ""; //redirection address
 
                             //success to launch Firefox or Chromium browser except Google Chrome, redirect to https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df
-                            //Firefox → Whale → Edge → Chrome
+                            //Firefox → Brave → Whale → Edge → Chrome
                             if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -610,6 +610,17 @@ namespace AreaTM_acbas
                             else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                                pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                            }
+
+                            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
+                            {
+                                chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                                pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
+                            }
+                            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
+                            {
+                                chr.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
                                 pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
                             }
 
@@ -677,7 +688,7 @@ namespace AreaTM_acbas
                         if (!sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer)
                         {
                             //load page https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622
-                            //Firefox → Whale → Edge → Chrome
+                            //Firefox → Brave → Whale → Edge → Chrome
                             if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -686,6 +697,17 @@ namespace AreaTM_acbas
                             else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                            }
+
+                            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
+                            {
+                                chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                            }
+                            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
+                            {
+                                chr.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
                                 pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
                             }
 

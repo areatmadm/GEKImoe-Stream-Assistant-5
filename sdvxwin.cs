@@ -21,6 +21,7 @@ using CefSharp.WinForms;
 using CefSharp.SchemeHandler;*/
 
 using System.Net;
+using System.Runtime.ConstrainedExecution;
 
 namespace AreaTM_acbas
 {
@@ -1122,19 +1123,8 @@ namespace AreaTM_acbas
                 return; //아무성과 없이 이 과정 종료시키기
             }
 
-            //Edge → Firefox → Whale → Chrome 순으로 시크릿모드로 실행하기
-            if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
-            {
-                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
-            }
-            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
-            {
-                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
-            }
-
-            else if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
+            // Firefox → Brave → Whale → Edge → Chrome 순으로 시크릿모드로 실행하기
+            if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
                 privatePageMode = "-private ";
@@ -1143,6 +1133,17 @@ namespace AreaTM_acbas
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                 privatePageMode = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
+                privatePageMode = "--incognito ";
             }
 
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) //Naver Whale 구.32비트
@@ -1156,15 +1157,29 @@ namespace AreaTM_acbas
                 privatePageMode = "--incognito ";
             }
 
+            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
+            {
+                browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                privatePageMode = "--inprivate ";
+            }
+
+            //제발 V8엔진에 이상한짓 하는 구글크롬 쓰지마!!!!!!
             else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) //크롬 구.32비트
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
                 privatePageMode = "--incognito ";
+                isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
             else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                 privatePageMode = "--incognito ";
+                isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
             else
             {
@@ -1183,48 +1198,64 @@ namespace AreaTM_acbas
 
             moveWebPage = "https://pages.areatm.com/gekimoe_stream_assistant-5/updatelog/" + Program.acbas_build + "/ko"; //웹페이지를 업데이트 페이지로 설정
 
-            // Firefox → Whale → Chrome → Edge 순으로 시크릿모드로 실행하기
+            // Firefox → Brave → Whale → Edge → Chrome 순으로 시크릿모드로 실행하기
             if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe")) //Firefox
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-                privatePageMode = "-private ";
+                //privatePageMode = "-private ";
             }
             else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe")) //Firefox(구 32비트)
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-                privatePageMode = "-private ";
+                //privatePageMode = "-private ";
+            }
+
+            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                //privatePageMode = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
+                //privatePageMode = "--incognito ";
             }
 
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe")) //Naver Whale 구.32비트
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
-                privatePageMode = "--incognito ";
+                //privatePageMode = "--incognito ";
             }
             else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe")) //Naver Whale
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
-                privatePageMode = "--incognito ";
+                //privatePageMode = "--incognito ";
             }
 
-            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) //크롬 구.32비트
-            {
-                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-                privatePageMode = "--incognito ";
-            }
-            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
-            {
-                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-                privatePageMode = "--incognito ";
-            }
             else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")) //32bit Edge 또는 32bit 시절에 설치된 64bit Edge
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
+                //privatePageMode = "--inprivate ";
             }
             else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe")) //32bit Edge, 64bit Edge
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                privatePageMode = "--inprivate ";
+                //privatePageMode = "--inprivate ";
+            }
+
+
+            //제발 V8엔진에 이상한짓 하는 구글크롬 쓰지마!!!!!!
+            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")) //크롬 구.32비트
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                //privatePageMode = "--incognito ";
+                isGoogleChromeisOnlyAvailableinThisComputer = true;
+            }
+            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
+            {
+                browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                //privatePageMode = "--incognito ";
+                isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
 
             else

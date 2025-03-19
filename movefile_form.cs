@@ -47,7 +47,7 @@ namespace AreaTM_acbas
 
         private void movefile_form_Load(object sender, EventArgs e)
         {
-            //Firefox → Edge → Whale → Chrome
+            //Firefox → Brave → Edge → Whale → Chrome
             if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
@@ -57,6 +57,17 @@ namespace AreaTM_acbas
             {
                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
                 sec = "-private ";
+            }
+
+            else if(File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                sec = "--incognito ";
+            }
+            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
+                sec = "--incognito ";
             }
 
             else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
@@ -70,17 +81,6 @@ namespace AreaTM_acbas
                 sec = "--incognito ";
             }
 
-            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-                sec = "--incognito ";
-            }
-            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
-            {
-                chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-                sec = "--incognito ";
-            }
-
             else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
@@ -91,6 +91,20 @@ namespace AreaTM_acbas
                 chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
                 sec = "--inprivate ";
             }
+
+            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                sec = "--incognito ";
+                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
+            }
+            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
+            {
+                chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                sec = "--incognito ";
+                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
+            }
+
             else { }
 
             this.Font = new Font(sdvxwin.font_5_0_r.Families[0], 14f);
