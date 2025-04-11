@@ -115,7 +115,7 @@ namespace AreaTM_acbas
         public static bool isUpdateLogWindowShow = false;
 
         //Google Chrome 이외의 브라우저가 설치되어 있지 않았을 경우, 여기값이 true. 기본값은 false.
-        public static bool isGoogleChromeisOnlyAvailableinThisComputer = false;
+        //public static bool isGoogleChromeisOnlyAvailableinThisComputer = false;
 
         public sdvxwin()
         {
@@ -1173,13 +1173,13 @@ namespace AreaTM_acbas
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
                 privatePageMode = "--incognito ";
-                isGoogleChromeisOnlyAvailableinThisComputer = true;
+                //isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
             else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
             {
                 browserProcess_cardMove.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                 privatePageMode = "--incognito ";
-                isGoogleChromeisOnlyAvailableinThisComputer = true;
+                //isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
             else
             {
@@ -1249,13 +1249,13 @@ namespace AreaTM_acbas
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
                 //privatePageMode = "--incognito ";
-                isGoogleChromeisOnlyAvailableinThisComputer = true;
+                //isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
             else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe")) //크롬
             {
                 browserProcess_updateLogShow.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                 //privatePageMode = "--incognito ";
-                isGoogleChromeisOnlyAvailableinThisComputer = true;
+                //isGoogleChromeisOnlyAvailableinThisComputer = true;
             }
 
             else

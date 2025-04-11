@@ -175,9 +175,9 @@ namespace AreaTM_acbas
             tChkTimeAndReboot.SetApartmentState(ApartmentState.STA);
             tChkTimeAndReboot.Start();
 
-            Thread tcheckBrowserProcess = new Thread(checkBrowserProcess);
+            /*Thread tcheckBrowserProcess = new Thread(checkBrowserProcess);
             tcheckBrowserProcess.SetApartmentState(ApartmentState.STA);
-            tcheckBrowserProcess.Start();
+            tcheckBrowserProcess.Start();*/
 
             // FFmpeg 잘 실행중인지 체크하는 별도 스레드 생성
             /*Thread ffmpegStatus1 = new Thread(chkFFmpegisFine1);
@@ -557,7 +557,7 @@ namespace AreaTM_acbas
                     //killOBS.StartInfo.Arguments += " /im chrome.exe /im msedge.exe /im firefox.exe /im whale.exe";
                     //killOBS.Start();
 
-                    killOBS.StartInfo.Arguments += " /im chrome.exe /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
+                    killOBS.StartInfo.Arguments += " /im AreaTM_acbas.exe /im GEKImoeStreamAssistant5Lite.exe";
                     killOBS.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     killOBS.Start();
                 }
@@ -567,20 +567,20 @@ namespace AreaTM_acbas
 
         private void checkBrowserProcess() //Google Chrome 차단용
         {
-            int timerGCnotAvailablePopUp = 0; //대체 브라우저 팝업 안내 딜레이(120초)
+            //int timerGCnotAvailablePopUp = 0; //대체 브라우저 팝업 안내 딜레이(120초)
             int timerDsCnotAvailablePopUp = 0; //디스코드 차단 팝업 안내 딜레이(120초)
 
             while (true)
             {
                 //대체 브라우저 팝업 안내 딜레이 카운트
-                if (timerGCnotAvailablePopUp > 0) timerGCnotAvailablePopUp--;
-                else if (timerGCnotAvailablePopUp < 0) timerGCnotAvailablePopUp = 0;
+                //if (timerGCnotAvailablePopUp > 0) timerGCnotAvailablePopUp--;
+                //else if (timerGCnotAvailablePopUp < 0) timerGCnotAvailablePopUp = 0;
 
                 //디스코드 차단 팝업 안내 딜레이 카운트
                 if (timerDsCnotAvailablePopUp > 0) timerDsCnotAvailablePopUp--;
                 else if (timerDsCnotAvailablePopUp < 0) timerDsCnotAvailablePopUp = 0;
 
-                if (sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer) //크롬밖에 못 쓰는 경우가 생겼을 때
+                /*if (sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer) //크롬밖에 못 쓰는 경우가 생겼을 때
                 {
                     //그럴 때는 Chrome 프로세스 체크를 하지 않기.
                 }
@@ -646,20 +646,15 @@ namespace AreaTM_acbas
                                 pm = "https://pages.areatm.com/1a4833bc-b886-8078-85f0-d7dd9e2021df";
                             }
 
-
-                            //if not, redirect to https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4
-                            //This code will except in 2025.5.2 22:00(2025.5.3 patch)
                             else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
                                 pm = "https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4";
-                                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
                             }
                             else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
                             {
                                 chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                                 pm = "https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4";
-                                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
                             }
 
                             chr.StartInfo.Arguments = " " + pm; //주소 같이 반영
@@ -668,7 +663,7 @@ namespace AreaTM_acbas
                             timerGCnotAvailablePopUp = 120; //120초동안은 강종만 되고 다시 재실행 안되게 세팅
                         }
                     }
-                }
+                }*/
 
                 Process[] ProcessifUseDsC = Process.GetProcessesByName("discord"); //Discord가 실행 중인지 체크
                 if (ProcessifUseDsC.Length > 0) //Discord가 감지된 경우
@@ -685,97 +680,75 @@ namespace AreaTM_acbas
                         string pm = ""; //redirection address
                         bool GCpopupShown = true;
 
-                        if (!sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer)
+                        
+                        //load page https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622
+                        //Firefox → Brave → Whale → Edge → Chrome
+                        if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
                         {
-                            //load page https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622
-                            //Firefox → Brave → Whale → Edge → Chrome
-                            if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-                            else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-
-                            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-                            else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-
-                            else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-                            else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-
-                            else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-                            else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-
-                            //if not, redirect to https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4
-                            //This code will except in 2025.5.2 22:00(2025.5.3 patch)
-                            else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
-                                GCpopupShown = false;
-                            }
-                            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true;
-                                GCpopupShown = false;
-                            }
+                            chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+                        else if (File.Exists(@"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
                         }
 
-                        else
+                        else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x64)
                         {
-                            //if not, redirect to https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4
-                            //This code will except in 2025.5.2 22:00(2025.5.3 patch)
-                            if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
-                            else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
-                            {
-                                chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-                                pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
-                            }
+                            chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+                        else if (File.Exists(@"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe")) //brave(x32)
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+
+                        else if (File.Exists(@"C:\Program Files\Naver\Naver Whale\Application\whale.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files\Naver\Naver Whale\Application\whale.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+                        else if (File.Exists(@"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files (x86)\Naver\Naver Whale\Application\whale.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+
+                        else if (File.Exists(@"C:\Program Files\Microsoft\Edge\Application\msedge.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files\Microsoft\Edge\Application\msedge.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+                        else if (File.Exists(@"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+
+                        //if not, redirect to https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4
+                        //This code will except in 2025.5.2 22:00(2025.5.3 patch)
+                        else if (File.Exists(@"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
+                        }
+                        else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
+                        {
+                            chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+                            pm = "https://pages.areatm.com/1a6833bc-b886-80e5-a978-e97b7edf6622";
                         }
 
 
                         chr.StartInfo.Arguments = " " + pm; //주소 같이 반영
-                        chr.Start(); //브라우저(없으면 Chrome) 시작
+                        chr.Start(); //브라우저 시작
 
-                        if (!GCpopupShown)
+                        /*if (!GCpopupShown)
                         {
                             chr.StartInfo.Arguments = " https://pages.areatm.com/1a4833bc-b886-8022-aa01-f06fa44063a4"; //주소 같이 반영
-                            chr.Start(); //브라우저(없으면 Chrome) 시작
-                        }
+                            chr.Start(); //브라우저 시작
+                        }*/
 
                         timerDsCnotAvailablePopUp = 120; //120초동안은 강종만 되고 다시 재실행 안되게 세팅
                     }

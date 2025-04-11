@@ -96,13 +96,13 @@ namespace AreaTM_acbas
             {
                 chr.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
                 sec = "--incognito ";
-                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
+                //sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
             }
             else if (File.Exists(@"C:\Program Files\Google\Chrome\Application\chrome.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
                 sec = "--incognito ";
-                sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
+                //sdvxwin.isGoogleChromeisOnlyAvailableinThisComputer = true; //크롬제발좀지워라!!
             }
 
             else { }
