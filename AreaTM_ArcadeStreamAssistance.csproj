@@ -188,6 +188,12 @@
       <DependentUpon>getuse_GEKImoe_Stream_safe.cs</DependentUpon>
     </Compile>
     <Compile Include="language_.cs" />
+    <Compile Include="movefile_form_selectbrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="movefile_form_selectbrowser.designer.cs">
+      <DependentUpon>movefile_form_selectbrowser.cs</DependentUpon>
+    </Compile>
     <Compile Include="NOLJA_ReStream.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="getuse_GEKImoe_Stream_safe.resx">
       <DependentUpon>getuse_GEKImoe_Stream_safe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="movefile_form_selectbrowser.resx">
+      <DependentUpon>movefile_form_selectbrowser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NOLJA_ReStream.resx">
       <DependentUpon>NOLJA_ReStream.cs</DependentUpon>

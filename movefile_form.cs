@@ -35,6 +35,13 @@ namespace AreaTM_acbas
             }
         }
 
+        private void OpenBrowser(string cm)
+        {
+            Form newBrowser = new movefile_form_selectbrowser(cm);
+            newBrowser.Show();
+            this.Close();
+        }
+
         private void SetChromeURL()
         {
             chr.StartInfo.Arguments = sec + pm;
@@ -47,8 +54,9 @@ namespace AreaTM_acbas
 
         private void movefile_form_Load(object sender, EventArgs e)
         {
-            //Firefox → Brave → Edge → Whale → Chrome
-            if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
+            //Firefox → Brave → Whale → Edge → Chrome
+            //Google Chrome will unsupport after 2025.5.2
+            /*if (File.Exists(@"C:\Program Files\Mozilla Firefox\firefox.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
                 sec = "-private ";
@@ -59,7 +67,7 @@ namespace AreaTM_acbas
                 sec = "-private ";
             }
 
-            else if(File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"))
+            else if (File.Exists(@"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"))
             {
                 chr.StartInfo.FileName = @"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe";
                 sec = "--incognito ";
@@ -110,10 +118,10 @@ namespace AreaTM_acbas
             this.Font = new Font(sdvxwin.font_5_0_r.Families[0], 14f);
             lbl_name.Font = new Font(sdvxwin.font_5_0_b.Families[0], 20f);
 
-            if (!File.Exists(@"C:\Program Files\FileZilla FTP Client\filezilla.exe") && !File.Exists(@"C:\Program Files(x86)\FileZilla FTP Client\filezilla.exe"))
+            if(!File.Exists(@"C:\Program Files\FileZilla FTP Client\filezilla.exe") && !File.Exists(@"C:\Program Files(x86)\FileZilla FTP Client\filezilla.exe"))
             { //FileZilla 있는지 없는지 여부
                 btn_ftp.Enabled = false;
-            }
+            }*/
             /*if (!File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_0 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe")
                 && !File.Exists(@"C:\Program Files\WindowsApps\AppleInc.AppleDevices_" + AppleDeviceVersion_1 + @"_x64__nzyj5cx40ttqa\AppleDevices.exe"))*/ //OldCode
             if (!File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\AppData\Local\Microsoft\WindowsApps\AppleInc.AppleDevices_nzyj5cx40ttqa\AppleDevices.exe")) //NewCode
@@ -130,7 +138,6 @@ namespace AreaTM_acbas
 
         private void btn_ios_Click(object sender, EventArgs e)
         {
-            //Form d = new getuse_GEKImoe_Stream_safe();
             Form d = new howtomoveios();
             d.Show();
             this.Close();
@@ -164,80 +171,88 @@ namespace AreaTM_acbas
         private void btn_kakaodrive_Click(object sender, EventArgs e)
         {
             pm = "https://drive.kakao.com";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_icloud_Click(object sender, EventArgs e)
         {
             pm = "https://www.icloud.com";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_onedrive_Click(object sender, EventArgs e)
         {
             pm = "https://onedrive.com";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_ndrive_Click(object sender, EventArgs e)
         {
-            pm = "https://ndrive.naver.com";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            pm = "https://cloud.naver.com";
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_sendanywhere_Click(object sender, EventArgs e)
         {
             pm = "https://send-anywhere.com/ko";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_mega_Click(object sender, EventArgs e)
         {
             pm = "https://mega.nz";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void btn_youtube_Click(object sender, EventArgs e)
         {
             pm = "https://youtube.com/upload";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
 
         private void openWhale_Click(object sender, EventArgs e)
         {
             pm = "";
-            SetChromeURL();
-            pm = "";
-            chr.Start();
-            OpenFolder();
+            //SetChromeURL();
+            //pm = "";
+            //chr.Start();
+            //OpenFolder();
+            OpenBrowser(pm);
             this.Close();
         }
     }
