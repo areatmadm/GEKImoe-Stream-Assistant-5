@@ -82,7 +82,8 @@ namespace AreaTM_acbas
 
         private void btn_close_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            return;
         }
 
         private void movefile_form_selectbrowser_Load(object sender, EventArgs e)
