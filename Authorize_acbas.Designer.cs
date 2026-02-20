@@ -37,7 +37,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AreaTM_acbas.Properties.Resources.aast_e;
+            this.pictureBox1.Image = global::AreaTM_acbas.Properties.Resources.aast_f;
             this.pictureBox1.Location = new System.Drawing.Point(13, 25);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(696, 95);

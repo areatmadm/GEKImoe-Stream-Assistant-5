@@ -226,7 +226,7 @@ namespace AutoStartV2
                     pg.Font = new Font(font_3_0_s.Families[0], 15f);
                 }
                 catch { }
-                lbl_nowver.Text = "5.15_A_20250225";
+                lbl_nowver.Text = "5.16_B_20260219";
 
                 lbl_information.Text = language_.ko_kr_DONOTDISTURB + "\r\n" + language_.en_us_DONOTDISTURB;
 
@@ -465,8 +465,8 @@ namespace AutoStartV2
                 pg.Text = language_.ko_kr_CHECKUPDATE + language_.ko_kr_CHECKUPDATE_GET + "(1 / 3)";
                 Process acbas_get_version = new Process();
 
-                if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("GEKImoeStreamAssistant5Lite.exe"); } //mini플랜 간소화버전 사용
-                else if(vender_swdf == "full") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full플랜 full버전 사용
+                //if(vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("GEKImoeStreamAssistant5Lite.exe"); } //mini플랜 간소화버전 사용
+                if(vender_swdf == "full" || vender_swdf == "mini") { acbas_get_version.StartInfo.FileName = System.IO.Path.GetFullPath("AreaTM_acbas.exe"); } //full플랜 full버전 사용
                 else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.com → 채팅상담 으로 문의 요망"); Process.Start("explorer.exe");  Application.ExitThread(); }
                 acbas_get_version.StartInfo.Arguments = "getver";
                 try { acbas_get_version.Start(); } catch { }
@@ -596,11 +596,20 @@ namespace AutoStartV2
                 //2023.11.15 : OBS 30.0.0 Logic changed - Safety mode disable
                 pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_before;
                 Delay(900);
-                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode")) //Find safemode enable status
+
+                // 2026.2.19 : OBS 32 Logic changed - Enforce Safety mode disable
+                string obsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\";
+
+                // safe_mode(파일) 혹은 .sentinel(폴더)이 존재하는지 확인
+                if (File.Exists(obsPath + "safe_mode") || Directory.Exists(obsPath + ".sentinel"))
                 {
                     pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG_before_delete;
                     Delay(1000);
-                    try { File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode"); } catch { }//do not run safe mode
+
+                    try { File.Delete(obsPath + "safe_mode"); } catch { }
+
+                    // .sentinel이 폴더이므로 내부 파일까지 강제 삭제 (true = recursive)
+                    try { if (Directory.Exists(obsPath + ".sentinel")) Directory.Delete(obsPath + ".sentinel", true); } catch { }
                 }
 
                 pg.Text = "OBS Studio (amd64)" + language_.ko_kr_STARTING_PG;
@@ -849,8 +858,8 @@ namespace AutoStartV2
             Delay(300);*/
 
             pg.Text = language_.ko_kr_DONE_;
-            if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
-            else if(vender_swdf == "full") { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
+            //if(vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"GEKImoeStreamAssistant5Lite.exe")); }
+            if(vender_swdf == "full" || vender_swdf == "mini") { Process.Start(Path.GetFullPath(@"AreaTM_acbas.exe")); }
             else { MessageBox.Show("에러: areatmadm@areatm.com, 070-8018-6973, https://areatm.com → 오른쪽 하단 채팅상담으로 문의 요망"); }
 
             Delay(400);

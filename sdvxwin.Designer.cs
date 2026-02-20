@@ -38,17 +38,14 @@
             this.timer_rec = new System.Windows.Forms.Timer(this.components);
             this.lbl_rectimer = new System.Windows.Forms.Label();
             this.timer_viewer = new System.Windows.Forms.Timer(this.components);
-            this.btn_mute = new System.Windows.Forms.Button();
             this.rec_3mh = new System.Windows.Forms.Button();
             this.btn_more = new System.Windows.Forms.Button();
             this.openexplorer_rec = new System.Windows.Forms.Button();
-            this.btn_ok = new System.Windows.Forms.Button();
-            this.txt_onelinetext = new System.Windows.Forms.TextBox();
-            this.lbl_LINECUSTIOM = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.sdvxpic = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btn_cardmove = new System.Windows.Forms.Button();
+            this.btn_privacy = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sdvxpic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -136,24 +133,6 @@
             // 
             this.timer_viewer.Tick += new System.EventHandler(this.timer_viewer_Tick);
             // 
-            // btn_mute
-            // 
-            this.btn_mute.Enabled = false;
-            this.btn_mute.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btn_mute.FlatAppearance.BorderSize = 3;
-            this.btn_mute.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Green;
-            this.btn_mute.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btn_mute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_mute.Font = new System.Drawing.Font("나눔바른고딕OTF", 14F, System.Drawing.FontStyle.Bold);
-            this.btn_mute.Location = new System.Drawing.Point(12, 244);
-            this.btn_mute.Name = "btn_mute";
-            this.btn_mute.Size = new System.Drawing.Size(78, 42);
-            this.btn_mute.TabIndex = 3;
-            this.btn_mute.Text = "음소거";
-            this.btn_mute.UseVisualStyleBackColor = true;
-            this.btn_mute.EnabledChanged += new System.EventHandler(this.btn_mute_EnabledChanged);
-            this.btn_mute.Click += new System.EventHandler(this.btn_openchat_Click);
-            // 
             // rec_3mh
             // 
             this.rec_3mh.Enabled = false;
@@ -163,9 +142,9 @@
             this.rec_3mh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rec_3mh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rec_3mh.Font = new System.Drawing.Font("나눔바른고딕OTF", 14F, System.Drawing.FontStyle.Bold);
-            this.rec_3mh.Location = new System.Drawing.Point(96, 244);
+            this.rec_3mh.Location = new System.Drawing.Point(12, 244);
             this.rec_3mh.Name = "rec_3mh";
-            this.rec_3mh.Size = new System.Drawing.Size(156, 42);
+            this.rec_3mh.Size = new System.Drawing.Size(188, 42);
             this.rec_3mh.TabIndex = 4;
             this.rec_3mh.Text = "하이라이트 저장";
             this.rec_3mh.UseVisualStyleBackColor = true;
@@ -180,9 +159,9 @@
             this.btn_more.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btn_more.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_more.Font = new System.Drawing.Font("나눔바른고딕OTF", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_more.Location = new System.Drawing.Point(206, 292);
+            this.btn_more.Location = new System.Drawing.Point(323, 292);
             this.btn_more.Name = "btn_more";
-            this.btn_more.Size = new System.Drawing.Size(182, 32);
+            this.btn_more.Size = new System.Drawing.Size(65, 32);
             this.btn_more.TabIndex = 7;
             this.btn_more.Text = "더보기";
             this.btn_more.UseVisualStyleBackColor = true;
@@ -197,51 +176,14 @@
             this.openexplorer_rec.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.openexplorer_rec.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.openexplorer_rec.Font = new System.Drawing.Font("나눔바른고딕OTF", 14F, System.Drawing.FontStyle.Bold);
-            this.openexplorer_rec.Location = new System.Drawing.Point(258, 244);
+            this.openexplorer_rec.Location = new System.Drawing.Point(206, 244);
             this.openexplorer_rec.Name = "openexplorer_rec";
-            this.openexplorer_rec.Size = new System.Drawing.Size(130, 42);
+            this.openexplorer_rec.Size = new System.Drawing.Size(182, 42);
             this.openexplorer_rec.TabIndex = 5;
             this.openexplorer_rec.Text = "파일 이동";
             this.openexplorer_rec.UseVisualStyleBackColor = true;
             this.openexplorer_rec.EnabledChanged += new System.EventHandler(this.openexplorer_rec_EnabledChanged);
             this.openexplorer_rec.Click += new System.EventHandler(this.openexplorer_rec_Click);
-            // 
-            // btn_ok
-            // 
-            this.btn_ok.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btn_ok.FlatAppearance.BorderSize = 3;
-            this.btn_ok.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.btn_ok.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btn_ok.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_ok.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btn_ok.Location = new System.Drawing.Point(273, 448);
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.Size = new System.Drawing.Size(42, 32);
-            this.btn_ok.TabIndex = 116;
-            this.btn_ok.Text = "OK";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
-            // 
-            // txt_onelinetext
-            // 
-            this.txt_onelinetext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.txt_onelinetext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txt_onelinetext.ForeColor = System.Drawing.Color.White;
-            this.txt_onelinetext.Location = new System.Drawing.Point(87, 457);
-            this.txt_onelinetext.Name = "txt_onelinetext";
-            this.txt_onelinetext.Size = new System.Drawing.Size(180, 26);
-            this.txt_onelinetext.TabIndex = 115;
-            // 
-            // lbl_LINECUSTIOM
-            // 
-            this.lbl_LINECUSTIOM.AutoSize = true;
-            this.lbl_LINECUSTIOM.BackColor = System.Drawing.Color.Transparent;
-            this.lbl_LINECUSTIOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbl_LINECUSTIOM.Location = new System.Drawing.Point(85, 438);
-            this.lbl_LINECUSTIOM.Name = "lbl_LINECUSTIOM";
-            this.lbl_LINECUSTIOM.Size = new System.Drawing.Size(185, 17);
-            this.lbl_LINECUSTIOM.TabIndex = 114;
-            this.lbl_LINECUSTIOM.Text = "한줄문구 입력 - 방송화면에 반영";
             // 
             // pictureBox1
             // 
@@ -255,6 +197,7 @@
             // 
             // sdvxpic
             // 
+            this.sdvxpic.Image = global::AreaTM_acbas.Properties.Resources.aast_f;
             this.sdvxpic.Location = new System.Drawing.Point(0, 0);
             this.sdvxpic.Name = "sdvxpic";
             this.sdvxpic.Size = new System.Drawing.Size(400, 160);
@@ -283,11 +226,27 @@
             this.btn_cardmove.Location = new System.Drawing.Point(12, 292);
             this.btn_cardmove.Name = "btn_cardmove";
             this.btn_cardmove.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_cardmove.Size = new System.Drawing.Size(188, 32);
+            this.btn_cardmove.Size = new System.Drawing.Size(154, 32);
             this.btn_cardmove.TabIndex = 6;
             this.btn_cardmove.Text = "게임카드 이전하기";
             this.btn_cardmove.UseVisualStyleBackColor = true;
             this.btn_cardmove.Click += new System.EventHandler(this.btn_cardmove_Click);
+            // 
+            // btn_privacy
+            // 
+            this.btn_privacy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_privacy.FlatAppearance.BorderSize = 3;
+            this.btn_privacy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btn_privacy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btn_privacy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_privacy.Font = new System.Drawing.Font("나눔바른고딕OTF", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_privacy.Location = new System.Drawing.Point(172, 292);
+            this.btn_privacy.Name = "btn_privacy";
+            this.btn_privacy.Size = new System.Drawing.Size(145, 32);
+            this.btn_privacy.TabIndex = 117;
+            this.btn_privacy.Text = "프라이버시 모드";
+            this.btn_privacy.UseVisualStyleBackColor = true;
+            this.btn_privacy.Click += new System.EventHandler(this.btn_privacy_Click);
             // 
             // sdvxwin
             // 
@@ -296,14 +255,11 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(400, 920);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_privacy);
             this.Controls.Add(this.btn_cardmove);
-            this.Controls.Add(this.btn_ok);
-            this.Controls.Add(this.txt_onelinetext);
-            this.Controls.Add(this.lbl_LINECUSTIOM);
             this.Controls.Add(this.btn_more);
             this.Controls.Add(this.lbl_linkinfo);
             this.Controls.Add(this.rec_3mh);
-            this.Controls.Add(this.btn_mute);
             this.Controls.Add(this.lbl_rectimer);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbl_version);
@@ -345,14 +301,11 @@
         private System.Windows.Forms.Timer timer_rec;
         private System.Windows.Forms.Label lbl_rectimer;
         private System.Windows.Forms.Timer timer_viewer;
-        private System.Windows.Forms.Button btn_mute;
         private System.Windows.Forms.Button rec_3mh;
         private System.Windows.Forms.Button btn_more;
         private System.Windows.Forms.Button openexplorer_rec;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button btn_ok;
-        private System.Windows.Forms.TextBox txt_onelinetext;
-        private System.Windows.Forms.Label lbl_LINECUSTIOM;
         private System.Windows.Forms.Button btn_cardmove;
+        private System.Windows.Forms.Button btn_privacy;
     }
 }

@@ -31,7 +31,9 @@ namespace AreaTM_acbas
 
         private void howtochat_Load(object sender, EventArgs e)
         {
-            sdname = File.ReadAllText(@"ResourceFiles\" + sdvxwin.setgame + @"\sound_name.txt");
+            //sdname = File.ReadAllText(@"ResourceFiles\" + sdvxwin.setgame + @"\sound_name.txt");
+
+            sdname = "privacymode";
             NOLJA_BlackEdition();
         }
 
@@ -42,7 +44,7 @@ namespace AreaTM_acbas
                 VIDEO_on.ismute = true;
 
                 sdvxwin._obs.SetMute(sdname, true);
-                if (sdvxwin.setgame == "0_sega_maimaidx")
+                /*if (sdvxwin.setgame == "0_sega_maimaidx")
                 {
                     if (sdvxwin._obs.GetCurrentSceneCollection() == "maimaiDX_1P2P") sdvxwin._obs.SetMute("마이크/보조 2", true);
                     
@@ -57,7 +59,7 @@ namespace AreaTM_acbas
                     }
                     else if (sdvxwin._obs.GetCurrentScene().Name == "camoff") sdvxwin._obs.SetCurrentScene("camoff_mute");
                     else sdvxwin._obs.SetCurrentScene("camon_mute");
-                }
+                }*/
                 lbl_whenstop.Text = (quick / 60) + "분 " + (quick % 60) + "초 후 중단됩니다.";
                 mutetimer = new System.Windows.Forms.Timer();
                 mutetimer.Interval = 1000;
@@ -85,7 +87,7 @@ namespace AreaTM_acbas
                 if ((qtemp % 60) != 0) lbl_whenstop.Text = (qtemp / 60) + "분 " + (qtemp % 60) + "초 후 중단됩니다.";
                 else lbl_whenstop.Text = (qtemp / 60) + "분 후 중단됩니다.";
             }
-            else lbl_whenstop.Text = qtemp + "초후 음소거가 중단됩니다.";
+            else lbl_whenstop.Text = qtemp + "초 후 중단됩니다.";
 
             if (qtemp==0)
             {

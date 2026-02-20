@@ -367,7 +367,7 @@ namespace AreaTM_acbas
                     rec_start.Enabled = true;
 
                     rec_start.Enabled = true;
-                    if (chkbeta_mute == 1) btn_mute.Enabled = true;
+                    if (chkbeta_mute == 1) btn_privacy.Enabled = true;
                     //rec_3mh.Enabled = true;
                     //if (!streamstatus) btn_personal.Enabled = true;
                 }
@@ -379,7 +379,7 @@ namespace AreaTM_acbas
 
                     lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_STARTING;
                     rec_start.Enabled = false;
-                    if (chkbeta_mute == 1) btn_mute.Enabled = false;
+                    if (chkbeta_mute == 1) btn_privacy.Enabled = false;
                     //rec_3mh.Enabled = false;
                     //if(!streamstatus) btn_personal.Enabled = false;
                 }
@@ -585,7 +585,7 @@ namespace AreaTM_acbas
             //else btn_personal.Enabled = false;
             //btn_personal.Enabled = true;
 
-            sdvxpic.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/gameservice/logoimg/" + setgame + "/logo.png";
+            //sdvxpic.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/gameservice/logoimg/" + setgame + "/logo.png";
 
             //sdvxpic.Load(@"ResourceFiles\" + setgame + @"\logo.png");
             pictureBox1.ImageLocation = "https://streamassistant.sv.gekimoe.areatm.com/area/" + vender + "/qrcode.png";
@@ -608,7 +608,7 @@ namespace AreaTM_acbas
 
             //if (chk_highlight_beta == 1)
             rec_3mh.Enabled = true;
-            if (chkbeta_mute == 1) btn_mute.Enabled = true;
+            if (chkbeta_mute == 1) btn_privacy.Enabled = true;
 
             //set_handfoot = File.ReadAllText(@"ResourceFiles\" + setgame + @"\handfootinfo.otogeonpf");
             //손캠인지 발캠인지 북캠인지 구분해 주는 기능
@@ -801,7 +801,7 @@ namespace AreaTM_acbas
 
 
             openexplorer_rec.Font = kakao_r_16;
-            btn_mute.Font = kakao_r_16;
+            //btn_mute.Font = kakao_r_16;
             //btn_itunes.Font = kakao_r_16;
 
             rec_3mh.Font = kakao_r_16;
@@ -809,15 +809,15 @@ namespace AreaTM_acbas
             btn_cardmove.Font = kakao_r_12;
             btn_more.Font = kakao_r_12;
 
+            btn_privacy.Font = kakao_r_12;
+
             lbl_linkinfo.Font = new Font(font_5_0_b.Families[0], 17f, FontStyle.Bold);
 
             lbl_rectimer.Font = new Font(font_5_0_r.Families[0], 12f);
             lbl_version.Font = new Font(font_5_0_r.Families[0], 11.25f);
 
             //한줄문구 Font Setting
-            lbl_LINECUSTIOM.Font = new Font(font_5_0_b.Families[0], 10f);
-            txt_onelinetext.Font = new Font(font_5_0_r.Families[0], 12f);
-            btn_ok.Font = new Font(font_5_0_b.Families[0], 10f);
+            //txt_onelinetext.Font = new Font(font_5_0_r.Families[0], 12f);
 
 
             NOLJA_Edition_Statechange();
@@ -828,7 +828,7 @@ namespace AreaTM_acbas
             if (rec_start.Enabled) rec_start.BackColor = nowseason_b_color; else rec_start.BackColor = chinatsu_disabled;
             if (FormsChange.Enabled) FormsChange.BackColor = nowseason_b_color; else FormsChange.BackColor = chinatsu_disabled;
             if (openexplorer_rec.Enabled) openexplorer_rec.BackColor = nowseason_b_color; else openexplorer_rec.BackColor = chinatsu_disabled;
-            if (btn_mute.Enabled) btn_mute.BackColor = nowseason_b_color; else btn_mute.BackColor = chinatsu_disabled;
+            //if (btn_mute.Enabled) btn_mute.BackColor = nowseason_b_color; else btn_mute.BackColor = chinatsu_disabled;
             //if (btn_itunes.Enabled) btn_itunes.BackColor = nowseason_b_color; else btn_itunes.BackColor = chinatsu_disabled;
             //if (updatelog.Enabled) updatelog.BackColor = nowseason_b_color; else updatelog.BackColor = chinatsu_disabled;
             if (rec_3mh.Enabled) rec_3mh.BackColor = nowseason_b_color; else rec_3mh.BackColor = chinatsu_disabled;
@@ -852,8 +852,8 @@ namespace AreaTM_acbas
         }
         private void btn_mute_EnabledChanged(object sender, EventArgs e) //음소거 버튼 상태 변경 시 작동되는 코드
         {
-            if (btn_mute.Enabled) btn_mute.BackColor = nowseason_b_color;
-            else btn_mute.BackColor = chinatsu_disabled;
+            if (btn_privacy.Enabled) btn_privacy.BackColor = nowseason_b_color;
+            else btn_privacy.BackColor = chinatsu_disabled;
         }
         /*private void btn_itunes_EnabledChanged(object sender, EventArgs e) //애플기기로 옮기기 버튼 상태 변경 시 작동되는 코드
         {
@@ -946,7 +946,7 @@ namespace AreaTM_acbas
         {
             //개인방송 설정이 아닌 하이라이트 설정입니다.
             if(setgame != "6_andamiro_pumpitup") FormsChange.Enabled = false;
-            if (chkbeta_mute == 1) btn_mute.Enabled = false;
+            if (chkbeta_mute == 1) btn_privacy.Enabled = false;
             rec_start.Enabled = false; openexplorer_rec.Enabled = false; /*btn_itunes.Enabled = false;*/
             /*updatelog.Enabled = false;*/ rec_3mh.Enabled = false; /*btn_personal.Enabled = false;*/ btn_more.Enabled = false;
             lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_HLSAVE;
@@ -963,7 +963,7 @@ namespace AreaTM_acbas
             Delay(2500);
 
             if (setgame != "6_andamiro_pumpitup") FormsChange.Enabled = true;
-            if (chkbeta_mute == 1) btn_mute.Enabled = true;
+            if (chkbeta_mute == 1) btn_privacy.Enabled = true;
             rec_start.Enabled = true; openexplorer_rec.Enabled = true; /*btn_itunes.Enabled = true;*/
             /*updatelog.Enabled = true;*/ rec_3mh.Enabled = true; /*btn_personal.Enabled = true;*/ btn_more.Enabled = true;
             lbl_rectimer.Text = language_.ko_kr_lbl_rectimer_IDLE;
@@ -1024,9 +1024,9 @@ namespace AreaTM_acbas
                 openexplorer_rec.FlatAppearance.BorderColor = season_btn_1[0];
                 openexplorer_rec.FlatAppearance.MouseDownBackColor = season_btn_1[1];
                 openexplorer_rec.FlatAppearance.MouseOverBackColor = season_btn_1[2];
-                btn_mute.FlatAppearance.BorderColor = season_btn_1[0];
-                btn_mute.FlatAppearance.MouseDownBackColor = season_btn_1[1];
-                btn_mute.FlatAppearance.MouseOverBackColor = season_btn_1[2];
+                btn_privacy.FlatAppearance.BorderColor = season_btn_1[0];
+                btn_privacy.FlatAppearance.MouseDownBackColor = season_btn_1[1];
+                btn_privacy.FlatAppearance.MouseOverBackColor = season_btn_1[2];
                 rec_3mh.FlatAppearance.BorderColor = season_btn_1[0];
                 rec_3mh.FlatAppearance.MouseDownBackColor = season_btn_1[1];
                 rec_3mh.FlatAppearance.MouseOverBackColor = season_btn_1[2];
@@ -1068,11 +1068,11 @@ namespace AreaTM_acbas
         {
             rec_start.Enabled = false;
             FormsChange.Enabled = false;
-            btn_mute.Enabled = false;
+            btn_privacy.Enabled = false;
             rec_3mh.Enabled = false;
         }
 
-        private void btn_ok_Click(object sender, EventArgs e)
+        /*private void btn_ok_Click(object sender, EventArgs e)
         {
             if (txt_onelinetext.Text == null)
             {
@@ -1090,7 +1090,7 @@ namespace AreaTM_acbas
                 File.WriteAllText("_OnelineTXT_", (txt_onelinetext.Text));
                 txt_onelinetext.Text = null;
             }
-        }
+        }*/
 
         private void btn_cardmove_Click(object sender, EventArgs e)
         {
@@ -1266,5 +1266,13 @@ namespace AreaTM_acbas
             browserProcess_updateLogShow.StartInfo.Arguments = privatePageMode + moveWebPage; //브라우저 실행 전 사전값 세팅
             browserProcess_updateLogShow.Start(); //브라우저 시작
         }
+
+        private void btn_privacy_Click(object sender, EventArgs e)
+        {
+            Form MuteWindow = new mutewin();
+            isMuteWindow_opened = true;
+            MuteWindow.ShowDialog();
+        }
+
     }
 }

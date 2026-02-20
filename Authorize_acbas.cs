@@ -93,19 +93,19 @@ namespace AreaTM_acbas
                             Delay(1120);
                             break;
                         }
-                        else if (vender_swdf == "full") //통과
+                        else if (vender_swdf == "full" || vender_swdf == "mini") //통과
                         {
                             lbl_status.Text = "PASS! Please wait...";
                             Delay(1120);
                             break;
                         }
-                        else if (vender_swdf == "mini") //미통과
+                        /*else if (vender_swdf == "mini") //미통과
                         {
                             lbl_status.Text = "FAIL! Please check software license.";
                             sdvxwin.isCheckedGenuine = false;
                             Delay(1120);
                             break;
-                        }
+                        }*/
                         else //인터넷 미 연결 시 또는 서버 맛갔을 때
                         {
                             lbl_status.Text = "Cannot connect server. Try after 10 sec...";

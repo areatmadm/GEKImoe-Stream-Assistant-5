@@ -13,7 +13,7 @@ namespace AreaTM_acbas
         //-----Korean : ko-kr-----START
         //------sdvxwin.cs
         //gekimoe stream assistant name
-        public static string ko_kr_sdvxwin_name = "아레아티엠 게키모에 스트리밍 어시스턴트";
+        public static string ko_kr_sdvxwin_name = "GEKImoe Stream Assistant 5";
 
         //FormsChange Button
         public static string ko_kr_FormsChange = "캠 전환";
