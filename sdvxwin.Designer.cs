@@ -197,7 +197,7 @@
             // 
             // sdvxpic
             // 
-            this.sdvxpic.Image = global::AreaTM_acbas.Properties.Resources.aast_f;
+            this.sdvxpic.Image = global::AreaTM_acbas.Properties.Resources.aast_f1;
             this.sdvxpic.Location = new System.Drawing.Point(0, 0);
             this.sdvxpic.Name = "sdvxpic";
             this.sdvxpic.Size = new System.Drawing.Size(400, 160);

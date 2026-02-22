@@ -384,6 +384,7 @@
     <None Include="aast_d.png" />
     <None Include="aast_e.png" />
     <None Include="aast_f.png" />
+    <None Include="aast_f1.png" />
     <Content Include="areatm_arcade_stream_new_icon_250.ico" />
     <None Include="AutoStartV2\aast_d.png" />
     <Content Include="res\nolja_plive_window.png" />

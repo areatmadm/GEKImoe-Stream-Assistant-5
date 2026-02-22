@@ -136,7 +136,7 @@
   <data name="18" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="aast_f" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\aast_f.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="aast_f1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\aast_f1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

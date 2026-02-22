@@ -91,7 +91,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::AutoStartV3.Properties.Resources.aast_f;
+            this.pictureBox1.Image = global::AutoStartV3.Properties.Resources.aast_f1;
             this.pictureBox1.Location = new System.Drawing.Point(2, 26);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(849, 128);

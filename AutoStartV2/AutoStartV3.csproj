@@ -161,6 +161,7 @@
     <Content Include="chinatsu_64.ico" />
     <Content Include="nolja_broadcast.png" />
     <None Include="Resources\aast_f.png" />
+    <None Include="Resources\aast_f1.png" />
     <Content Include="salt.ico" />
   </ItemGroup>
   <ItemGroup>

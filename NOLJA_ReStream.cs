@@ -123,9 +123,16 @@ namespace AreaTM_acbas
                 Thread.Sleep(1500);
 
                 //안전모드 활성화 여부 확인 후 활성화 되어있다면 안전 모드 제외
-                if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode")) //Find safemode enable status
+                // 2026.2.19 : OBS 32 Logic changed - Enforce Safety mode disable
+                string obsPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\";
+
+                // safe_mode(파일) 혹은 .sentinel(폴더)이 존재하는지 확인
+                if (File.Exists(obsPath + "safe_mode") || Directory.Exists(obsPath + ".sentinel"))
                 {
-                    try { File.Delete(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\obs-studio\safe_mode"); } catch { }//do not run safe mode
+                    try { File.Delete(obsPath + "safe_mode"); } catch { }
+
+                    // .sentinel이 폴더이므로 내부 파일까지 강제 삭제 (true = recursive)
+                    try { if (Directory.Exists(obsPath + ".sentinel")) Directory.Delete(obsPath + ".sentinel", true); } catch { }
                 }
 
                 //OBS 다시 시작
